@@ -2,6 +2,12 @@
     "name": "aahmed/ebay-sdk-php",
     "description": "eBay SDK Compatible with Symfony 5",
     "type": "library",
-    "minimum-stability": "dev",
-    "require": {}
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+      "php": ">=7",
+      "guzzlehttp/guzzle": "~6.0",
+      "guzzlehttp/promises": "^1.1",
+      "guzzlehttp/psr7": "~1.0"
+    }
 }
