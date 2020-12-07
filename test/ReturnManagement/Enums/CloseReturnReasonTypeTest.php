@@ -16,13 +16,13 @@ class CloseReturnReasonTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CloseReturnReasonType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\CloseReturnReasonType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CloseReturnReasonType();
     }
 }

@@ -16,13 +16,13 @@ class SoldOnEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SoldOnEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\SoldOnEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SoldOnEnum();
     }
 }

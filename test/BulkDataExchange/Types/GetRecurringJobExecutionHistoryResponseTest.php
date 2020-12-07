@@ -16,11 +16,6 @@ class GetRecurringJobExecutionHistoryResponseTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetRecurringJobExecutionHistoryResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\GetRecurringJobExecutionHistoryResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetRecurringJobExecutionHistoryResponseTest extends \PHPUnit_Framework_Tes
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetRecurringJobExecutionHistoryResponse();
     }
 }

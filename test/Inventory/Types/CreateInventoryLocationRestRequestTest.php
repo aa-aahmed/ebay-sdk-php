@@ -16,11 +16,6 @@ class CreateInventoryLocationRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateInventoryLocationRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\CreateInventoryLocationRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateInventoryLocationRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsInventoryLocationFull()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\InventoryLocationFull', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateInventoryLocationRestRequest();
     }
 }

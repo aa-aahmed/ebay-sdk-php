@@ -16,13 +16,13 @@ class ProductSortCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProductSortCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\ProductSortCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProductSortCodeType();
     }
 }

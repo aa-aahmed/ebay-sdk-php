@@ -1,13 +1,14 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Services;
 
-use DTS\eBaySDK\Test\TestTraits\ManageEnv;
-use DTS\eBaySDK\Services\BaseService;
 use DTS\eBaySDK\Credentials\Credentials;
 use DTS\eBaySDK\Credentials\CredentialsProvider;
-use DTS\eBaySDK\Test\Mocks\Service;
+use DTS\eBaySDK\Services\BaseService;
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
 use DTS\eBaySDK\Test\Mocks\HttpHandler;
+use DTS\eBaySDK\Test\Mocks\Service;
+use DTS\eBaySDK\Test\TestTraits\ManageEnv;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -19,45 +20,45 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('compressResponse', $d);
         $this->assertEquals([
-            'valid'   => ['bool'],
+            'valid' => ['bool'],
             'default' => false
         ], $d['compressResponse']);
 
         $this->assertArrayHasKey('credentials', $d);
         $this->assertEquals([
-            'valid'   => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
-            'fn'      => 'DTS\eBaySDK\applyCredentials',
+            'valid' => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
+            'fn' => 'DTS\eBaySDK\applyCredentials',
             'default' => [CredentialsProvider::class, 'defaultProvider']
         ], $d['credentials']);
 
         $this->assertArrayHasKey('debug', $d);
         $this->assertEquals([
-            'valid'   => ['bool', 'array'],
-            'fn'      => 'DTS\eBaySDK\applyDebug',
+            'valid' => ['bool', 'array'],
+            'fn' => 'DTS\eBaySDK\applyDebug',
             'default' => false
         ], $d['debug']);
 
         $this->assertArrayHasKey('httpHandler', $d);
         $this->assertEquals([
-            'valid'   => ['callable'],
+            'valid' => ['callable'],
             'default' => 'DTS\eBaySDK\defaultHttpHandler'
         ], $d['httpHandler']);
 
         $this->assertArrayHasKey('httpOptions', $d);
         $this->assertEquals([
-            'valid'   => ['array'],
+            'valid' => ['array'],
             'default' => []
         ], $d['httpOptions']);
 
         $this->assertArrayHasKey('profile', $d);
         $this->assertEquals([
             'valid' => ['string'],
-            'fn'    => 'DTS\eBaySDK\applyProfile',
+            'fn' => 'DTS\eBaySDK\applyProfile',
         ], $d['profile']);
 
         $this->assertArrayHasKey('sandbox', $d);
         $this->assertEquals([
-            'valid'   => ['bool'],
+            'valid' => ['bool'],
             'default' => false
         ], $d['sandbox']);
     }
@@ -133,7 +134,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertContains('fooHdr: foo', $str);
         $this->assertContains('Content-Type: text/xml', $str);
-        $this->assertContains('Content-Length: '.strlen($r->toRequestXml()), $str);
+        $this->assertContains('Content-Length: ' . strlen($r->toRequestXml()), $str);
         $this->assertContains('<?xml version="1.0" encoding="UTF-8"?>', $str);
     }
 
@@ -298,7 +299,7 @@ EOT;
     public function testSetConfigWillThrow()
     {
         $s = new Service([
-            'x'=> 1,
+            'x' => 1,
             'credentials' => [
                 'appId' => '111',
                 'certId' => '222',

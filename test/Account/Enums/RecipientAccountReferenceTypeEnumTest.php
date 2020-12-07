@@ -16,13 +16,13 @@ class RecipientAccountReferenceTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RecipientAccountReferenceTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Enums\RecipientAccountReferenceTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RecipientAccountReferenceTypeEnum();
     }
 }

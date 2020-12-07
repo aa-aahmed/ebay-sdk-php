@@ -16,11 +16,6 @@ class GetListingFeesRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetListingFeesRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\GetListingFeesRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetListingFeesRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsOfferKeysWithId()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\OfferKeysWithId', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetListingFeesRestRequest();
     }
 }

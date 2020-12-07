@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Services;
 
 use DTS\eBaySDK\Services\BaseRestService;
-use DTS\eBaySDK\Test\Mocks\RestService;
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
 use DTS\eBaySDK\Test\Mocks\HttpRestHandler;
+use DTS\eBaySDK\Test\Mocks\RestService;
 
 class RestServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -14,42 +15,42 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('compressResponse', $d);
         $this->assertEquals([
-            'valid'   => ['bool'],
+            'valid' => ['bool'],
             'default' => false
         ], $d['compressResponse']);
 
         $this->assertArrayHasKey('debug', $d);
         $this->assertEquals([
-            'valid'   => ['bool', 'array'],
-            'fn'      => 'DTS\eBaySDK\applyDebug',
+            'valid' => ['bool', 'array'],
+            'fn' => 'DTS\eBaySDK\applyDebug',
             'default' => false
         ], $d['debug']);
 
         $this->assertArrayHasKey('httpHandler', $d);
         $this->assertEquals([
-            'valid'   => ['callable'],
+            'valid' => ['callable'],
             'default' => 'DTS\eBaySDK\defaultHttpHandler'
         ], $d['httpHandler']);
 
         $this->assertArrayHasKey('httpOptions', $d);
         $this->assertEquals([
-            'valid'   => ['array'],
+            'valid' => ['array'],
             'default' => ['http_errors' => false]
         ], $d['httpOptions']);
 
         $this->assertArrayHasKey('requestLanguage', $d);
         $this->assertEquals([
-            'valid'   => ['string']
+            'valid' => ['string']
         ], $d['requestLanguage']);
 
         $this->assertArrayHasKey('responseLanguage', $d);
         $this->assertEquals([
-            'valid'   => ['string']
+            'valid' => ['string']
         ], $d['responseLanguage']);
 
         $this->assertArrayHasKey('sandbox', $d);
         $this->assertEquals([
-            'valid'   => ['bool'],
+            'valid' => ['bool'],
             'default' => false
         ], $d['sandbox']);
     }
@@ -59,7 +60,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
         // By default sandbox will be false.
         $h = new HttpRestHandler();
         $s = new RestService([
-            'httpHandler'   => $h
+            'httpHandler' => $h
         ]);
         $s->foo(new ComplexClass());
 
@@ -71,7 +72,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
         $h = new HttpRestHandler();
         $s = new RestService([
             'sandbox' => true,
-            'httpHandler'   => $h
+            'httpHandler' => $h
         ]);
         $s->foo(new ComplexClass());
 
@@ -85,7 +86,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
             'requestLanguage' => 'en-GB',
             'responseLanguage' => 'en-US',
             'sandbox' => true,
-            'httpHandler'   => $h
+            'httpHandler' => $h
         ]);
         $s->foo(new ComplexClass());
 
@@ -105,7 +106,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
     {
         $h = new HttpRestHandler();
         $s = new RestService([
-            'httpHandler'   => $h
+            'httpHandler' => $h
         ]);
         $r = new ComplexClass();
         $r->foo = 'foo';
@@ -118,7 +119,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
     {
         $h = new HttpRestHandler();
         $s = new RestService([
-            'httpHandler'   => $h
+            'httpHandler' => $h
         ]);
         $s->foo(new ComplexClass());
 
@@ -128,7 +129,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
     public function testResponseIsReturned()
     {
         $s = new RestService([
-            'httpHandler'   => new HttpRestHandler()
+            'httpHandler' => new HttpRestHandler()
         ]);
         $r = $s->foo(new ComplexClass());
 
@@ -144,14 +145,14 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
 
         $s = new RestService([
             'debug' => ['logfn' => $logfn],
-            'httpHandler'   => new HttpRestHandler()
+            'httpHandler' => new HttpRestHandler()
         ]);
         $r = new ComplexClass();
         $r->foo = 'foo';
         $s->foo($r);
 
         $this->assertContains('Content-Type: application/json', $str);
-        $this->assertContains('Content-Length: '.strlen(json_encode($r->toArray())), $str);
+        $this->assertContains('Content-Length: ' . strlen(json_encode($r->toArray())), $str);
         $this->assertContains('{', $str);
         $this->assertContains('}', $str);
     }
@@ -197,7 +198,7 @@ class RestServiceTest extends \PHPUnit_Framework_TestCase
     public function testSetConfigWillThrow()
     {
         $s = new RestService([
-            'x'=> 1
+            'x' => 1
         ]);
 
         $s->setConfig(['sandbox' => -1]);

@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 /**
@@ -14,7 +15,7 @@ trait HttpHeadersTrait
     /**
      * @var array Associative array of lowercase version of header names.
      */
-    private $headerNames  = [];
+    private $headerNames = [];
 
     /**
      * Retrieves all header values.
@@ -61,6 +62,31 @@ trait HttpHeadersTrait
     }
 
     /**
+     * Retrieves a comma-separated string of the values for a single header.
+     *
+     * This method returns all of the header values of the given
+     * case-insensitive header name as a string concatenated together using
+     * a comma.
+     *
+     * NOTE: Not all header values may be appropriately represented using
+     * comma concatenation. For such headers, use getHeader() instead
+     * and supply your own delimiter when concatenating.
+     *
+     * If the header does not appear in the message, this method will return
+     * an empty string.
+     *
+     * @param string $header Case-insensitive header field name.
+     *
+     * @return string A string of values as provided for the given header
+     * concatenated together using a comma. If the header does not appear in
+     * the message, this method will return an empty string.
+     */
+    public function getHeaderLine($header)
+    {
+        return implode(', ', $this->getHeader($header));
+    }
+
+    /**
      * Retrieves a message header value by the given case-insensitive name.
      *
      * This method returns an array of all the header values of the given
@@ -86,31 +112,6 @@ trait HttpHeadersTrait
         $header = $this->headerNames[$header];
 
         return $this->headers[$header];
-    }
-
-    /**
-     * Retrieves a comma-separated string of the values for a single header.
-     *
-     * This method returns all of the header values of the given
-     * case-insensitive header name as a string concatenated together using
-     * a comma.
-     *
-     * NOTE: Not all header values may be appropriately represented using
-     * comma concatenation. For such headers, use getHeader() instead
-     * and supply your own delimiter when concatenating.
-     *
-     * If the header does not appear in the message, this method will return
-     * an empty string.
-     *
-     * @param string $header Case-insensitive header field name.
-     *
-     * @return string A string of values as provided for the given header
-     * concatenated together using a comma. If the header does not appear in
-     * the message, this method will return an empty string.
-     */
-    public function getHeaderLine($header)
-    {
-        return implode(', ', $this->getHeader($header));
     }
 
     /**

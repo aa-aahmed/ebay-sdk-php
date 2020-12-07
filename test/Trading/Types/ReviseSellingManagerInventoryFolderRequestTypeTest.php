@@ -16,11 +16,6 @@ class ReviseSellingManagerInventoryFolderRequestTypeTest extends \PHPUnit_Framew
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReviseSellingManagerInventoryFolderRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ReviseSellingManagerInventoryFolderRequestType', $this->obj);
@@ -29,5 +24,10 @@ class ReviseSellingManagerInventoryFolderRequestTypeTest extends \PHPUnit_Framew
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReviseSellingManagerInventoryFolderRequestType();
     }
 }

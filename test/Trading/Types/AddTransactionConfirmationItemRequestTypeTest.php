@@ -16,11 +16,6 @@ class AddTransactionConfirmationItemRequestTypeTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddTransactionConfirmationItemRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AddTransactionConfirmationItemRequestType', $this->obj);
@@ -29,5 +24,10 @@ class AddTransactionConfirmationItemRequestTypeTest extends \PHPUnit_Framework_T
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddTransactionConfirmationItemRequestType();
     }
 }

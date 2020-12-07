@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\TestTraits;
 
 use DTS\eBaySDK\Credentials\CredentialsProvider;
@@ -13,22 +14,6 @@ trait ManageEnv
     private $home;
     private $homedrive;
     private $homepath;
-
-    private function clearEnv()
-    {
-        putenv(CredentialsProvider::ENV_APP_ID . '=');
-        putenv(CredentialsProvider::ENV_CERT_ID . '=');
-        putenv(CredentialsProvider::ENV_DEV_ID . '=');
-        putenv(CredentialsProvider::ENV_PROFILE . '=');
-
-        $dir = sys_get_temp_dir(). '/.ebay_sdk';
-
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-
-        return $dir;
-    }
 
     public function setUp()
     {
@@ -50,5 +35,21 @@ trait ManageEnv
         putenv('HOME=' . $this->home);
         putenv('HOMEDRIVE=' . $this->homedrive);
         putenv('HOMEPATH=' . $this->homepath);
+    }
+
+    private function clearEnv()
+    {
+        putenv(CredentialsProvider::ENV_APP_ID . '=');
+        putenv(CredentialsProvider::ENV_CERT_ID . '=');
+        putenv(CredentialsProvider::ENV_DEV_ID . '=');
+        putenv(CredentialsProvider::ENV_PROFILE . '=');
+
+        $dir = sys_get_temp_dir() . '/.ebay_sdk';
+
+        if (!is_dir($dir)) {
+            mkdir($dir, 0777, true);
+        }
+
+        return $dir;
     }
 }

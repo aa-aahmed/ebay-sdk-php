@@ -1,5 +1,12 @@
 <?php
+
 namespace DTS\eBaySDK\Parser;
+
+use DateTime;
+use DateTimeZone;
+use Exception;
+use SplStack;
+use stdClass;
 
 /**
  * Responsible for parsing XML and returning a PHP object.
@@ -17,7 +24,7 @@ class XmlParser
     private $rootObject;
 
     /**
-     * @var \SplStack
+     * @var SplStack
      */
     private $metaStack;
 
@@ -28,7 +35,7 @@ class XmlParser
     {
         $this->rootObjectClass = $rootObjectClass;
 
-        $this->metaStack = new \SplStack();
+        $this->metaStack = new SplStack();
     }
 
     /**
@@ -68,6 +75,142 @@ class XmlParser
     }
 
     /**
+     * Looks up the PHP meta data for the element.
+     *
+     * Allow the parser to build the required PHP object for an element.
+     *
+     * @param string $elementName The element name.
+     * @param array $attributes Associative array of the element's attributes.
+     *
+     * @return stdClass
+     * @throws Exception
+     */
+    private function getPhpMeta($elementName, array $attributes)
+    {
+        $meta = new stdClass();
+        $meta->propertyName = '';
+        $meta->phpType = '';
+        $meta->repeatable = false;
+        $meta->attribute = false;
+        $meta->elementName = '';
+        $meta->strData = '';
+
+        if (!$this->metaStack->isEmpty()) {
+            $parentObject = $this->getParentObject();
+            if ($parentObject) {
+                $elementMeta = $parentObject->elementMeta($elementName);
+                if ($elementMeta) {
+                    $meta = $elementMeta;
+                }
+            }
+        } else {
+            $meta->phpType = $this->rootObjectClass;
+        }
+
+        $meta->phpObject = $this->newPhpObject($meta);
+
+        if ($meta->phpObject) {
+            foreach ($attributes as $attribute => $value) {
+                // These attribute will simply not exist in a PHP object.
+                if ('xmlns' === $attribute) {
+                    break;
+                }
+                $attributeMeta = $meta->phpObject->elementMeta($attribute);
+                // Attribute in the XML may not exist as a property name in the class.
+                // This could happen if the SDK is out of date with what eBay return.
+                // It could also happen if eBay return elements that are not mentioned in any WSDL.
+                if ($attributeMeta) {
+                    $attributeMeta->strData = $value;
+                    $meta->phpObject->{$attributeMeta->propertyName} = $this->getValueToAssignToProperty($attributeMeta);
+                }
+            }
+        }
+
+        return $meta;
+    }
+
+    /**
+     * Returns the parent PHP object.
+     *
+     * @return mixed The parent PHP object.
+     */
+    private function getParentObject()
+    {
+        return $this->metaStack->top()->phpObject;
+    }
+
+    /**
+     * Builds the required PHP object.
+     *
+     * @param stdClass $meta The PHP meta data.
+     *
+     * @return mixed A new PHP object or null.
+     */
+    private function newPhpObject(stdClass $meta)
+    {
+        $phpTypes = explode('|', $meta->phpType);
+
+        foreach ($phpTypes as $phpType) {
+            switch ($phpType) {
+                case 'integer':
+                case 'string':
+                case 'double':
+                case 'boolean':
+                case 'DateTime':
+                    break;
+                default:
+                    return $meta->phpType !== '' ? new $phpType() : null;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns a value that will be assigned to an object's property.
+     *
+     * @param stdClass $meta The PHP meta data.
+     *
+     * @return mixed The value to assign.
+     * @throws Exception
+     */
+    private function getValueToAssignToProperty(stdClass $meta)
+    {
+        switch ($meta->phpType) {
+            case 'integer':
+                return (integer)$meta->strData;
+            case 'double':
+                return (double)$meta->strData;
+            case 'boolean':
+                return strtolower($meta->strData) === 'true';
+            case 'DateTime':
+                return new DateTime($meta->strData, new DateTimeZone('UTC'));
+            case 'string':
+            default:
+                return $meta->strData;
+        }
+    }
+
+    /**
+     * Handles element names that may have namespaces in them.
+     *
+     * @param string $name Element name.
+     *
+     * @return string The element name stripped of any namespaces.
+     */
+    private function normalizeElementName($name)
+    {
+        $nsElement = explode('@', $name);
+
+        if (count($nsElement) > 1) {
+            array_shift($nsElement);
+            return $nsElement[0];
+        } else {
+            return $name;
+        }
+    }
+
+    /**
      * Handler for the parser that is called for character data.
      *
      * @param resource $parser Reference to the XML parser calling the handler.
@@ -86,6 +229,7 @@ class XmlParser
      *
      * @param resource $parser Reference to the XML parser calling the handler.
      * @param string $name The name of the element.
+     * @throws Exception
      */
     private function endElement($parser, $name)
     {
@@ -112,123 +256,14 @@ class XmlParser
     }
 
     /**
-     * Handles element names that may have namespaces in them.
-     *
-     * @param string $name Element name.
-     *
-     * @return string The element name stripped of any namespaces.
-     */
-    private function normalizeElementName($name)
-    {
-        $nsElement = explode('@', $name);
-
-        if (count($nsElement) > 1) {
-            array_shift($nsElement);
-            return $nsElement[0];
-        } else {
-            return $name;
-        }
-    }
-
-    /**
-     * Returns the parent PHP object.
-     *
-     * @return mixed The parent PHP object.
-     */
-    private function getParentObject()
-    {
-        return $this->metaStack->top()->phpObject;
-    }
-
-    /**
-     * Looks up the PHP meta data for the element.
-     *
-     * Allow the parser to build the required PHP object for an element.
-     *
-     * @param string $elementName The element name.
-     * @param array $attributes Associative array of the element's attributes.
-     *
-     * @return \stdClass
-     */
-    private function getPhpMeta($elementName, array $attributes)
-    {
-        $meta = new \stdClass();
-        $meta->propertyName = '';
-        $meta->phpType = '';
-        $meta->repeatable = false;
-        $meta->attribute = false;
-        $meta->elementName = '';
-        $meta->strData = '';
-
-        if (!$this->metaStack->isEmpty()) {
-            $parentObject = $this->getParentObject();
-            if ($parentObject) {
-                $elementMeta = $parentObject->elementMeta($elementName);
-                if ($elementMeta) {
-                    $meta = $elementMeta;
-                }
-            }
-        } else {
-            $meta->phpType = $this->rootObjectClass;
-        }
-
-        $meta->phpObject = $this->newPhpObject($meta);
-
-        if ($meta->phpObject) {
-            foreach ($attributes as $attribute => $value) {
-                // These attribute will simply not exist in a PHP object.
-                if ('xmlns' === $attribute) {
-                    continue;
-                }
-                $attributeMeta = $meta->phpObject->elementMeta($attribute);
-                // Attribute in the XML may not exist as a property name in the class.
-                // This could happen if the SDK is out of date with what eBay return.
-                // It could also happen if eBay return elements that are not mentioned in any WSDL.
-                if ($attributeMeta) {
-                    $attributeMeta->strData = $value;
-                    $meta->phpObject->{$attributeMeta->propertyName} = $this->getValueToAssignToProperty($attributeMeta);
-                }
-            }
-        }
-
-        return $meta;
-    }
-
-    /**
-     * Builds the required PHP object.
-     *
-     * @param \stdClass $meta The PHP meta data.
-     *
-     * @return mixed A new PHP object or null.
-     */
-    private function newPhpObject(\stdClass $meta)
-    {
-        $phpTypes = explode('|', $meta->phpType);
-
-        foreach ($phpTypes as $phpType) {
-            switch ($phpType) {
-                case 'integer':
-                case 'string':
-                case 'double':
-                case 'boolean':
-                case 'DateTime':
-                    continue;
-                default:
-                    return $meta->phpType !== '' ? new $phpType() : null;
-            }
-        }
-
-        return null;
-    }
-
-    /**
      * Returns a value that will be assigned to an object's property.
      *
-     * @param \stdClass $meta The PHP meta data.
+     * @param stdClass $meta The PHP meta data.
      *
      * @return mixed The value to assign.
+     * @throws Exception
      */
-    private function getValueToAssign(\stdClass $meta)
+    private function getValueToAssign(stdClass $meta)
     {
         if ($this->isSimplePhpType($meta)) {
             return $this->getValueToAssignToProperty($meta);
@@ -243,11 +278,11 @@ class XmlParser
     /**
      * Determines if the type of the property is simple.
      *
-     * @param \stdClass $meta The PHP meta data.
+     * @param stdClass $meta The PHP meta data.
      *
      * @return bool True if the property type is simple.
      */
-    private function isSimplePhpType(\stdClass $meta)
+    private function isSimplePhpType(stdClass $meta)
     {
         $phpTypes = explode('|', $meta->phpType);
 
@@ -258,7 +293,7 @@ class XmlParser
                 case 'double':
                 case 'boolean':
                 case 'DateTime':
-                    continue;
+                    break;
                 default:
                     return false;
             }
@@ -270,11 +305,11 @@ class XmlParser
     /**
      * Determines if the the property of an object is set by a _value_ property.
      *
-     * @param \stdClass $meta The PHP meta data.
+     * @param stdClass $meta The PHP meta data.
      *
      * @return bool True if the property needs to be set by _value_.
      */
-    private function setByValue(\stdClass $meta)
+    private function setByValue(stdClass $meta)
     {
         return (
             is_subclass_of($meta->phpObject, '\DTS\eBaySDK\Types\Base64BinaryType', false) ||
@@ -289,37 +324,13 @@ class XmlParser
     }
 
     /**
-     * Returns a value that will be assigned to an object's property.
-     *
-     * @param \stdClass $meta The PHP meta data.
-     *
-     * @return mixed The value to assign.
-     */
-    private function getValueToAssignToProperty(\stdClass $meta)
-    {
-        switch ($meta->phpType) {
-            case 'integer':
-                return (integer)$meta->strData;
-            case 'double':
-                return (double)$meta->strData;
-            case 'boolean':
-                return strtolower($meta->strData) === 'true';
-            case 'DateTime':
-                return new \DateTime($meta->strData, new \DateTimeZone('UTC'));
-            case 'string':
-            default:
-                return $meta->strData;
-        }
-    }
-
-    /**
      * Returns a value that will be assigned to an object's _value_ property.
      *
-     * @param \stdClass $meta The PHP meta data.
+     * @param stdClass $meta The PHP meta data.
      *
      * @return mixed The value to assign.
      */
-    private function getValueToAssignToValue(\stdClass $meta)
+    private function getValueToAssignToValue(stdClass $meta)
     {
         if (is_subclass_of($meta->phpObject, '\DTS\eBaySDK\Types\Base64BinaryType', false)) {
             return $meta->strData;

@@ -16,11 +16,6 @@ class GetUserCasesResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetUserCasesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\GetUserCasesResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetUserCasesResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetUserCasesResponse();
     }
 }

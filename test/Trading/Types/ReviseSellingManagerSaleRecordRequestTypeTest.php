@@ -16,11 +16,6 @@ class ReviseSellingManagerSaleRecordRequestTypeTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReviseSellingManagerSaleRecordRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ReviseSellingManagerSaleRecordRequestType', $this->obj);
@@ -29,5 +24,10 @@ class ReviseSellingManagerSaleRecordRequestTypeTest extends \PHPUnit_Framework_T
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReviseSellingManagerSaleRecordRequestType();
     }
 }

@@ -16,11 +16,6 @@ class CreateItemPromotionRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateItemPromotionRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CreateItemPromotionRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class CreateItemPromotionRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateItemPromotionRestResponse();
     }
 }

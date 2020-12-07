@@ -16,11 +16,6 @@ class ItemFeedResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ItemFeedResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feed\Types\ItemFeedResponse', $this->obj);
@@ -29,5 +24,10 @@ class ItemFeedResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ItemFeedResponse();
     }
 }

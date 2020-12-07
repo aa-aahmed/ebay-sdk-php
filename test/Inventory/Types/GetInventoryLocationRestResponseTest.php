@@ -16,11 +16,6 @@ class GetInventoryLocationRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetInventoryLocationRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\GetInventoryLocationRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetInventoryLocationRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsInventoryLocationResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\InventoryLocationResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetInventoryLocationRestResponse();
     }
 }

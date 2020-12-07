@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\OAuth\Types;
 
 use DTS\eBaySDK\OAuth\Types\GetAppTokenRestResponse;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\OAuth\Types\GetAppTokenRestResponse;
 class GetAppTokenRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new GetAppTokenRestResponse();
-    }
 
     public function testCanBeCreated()
     {
@@ -39,5 +35,10 @@ class GetAppTokenRestResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $this->obj->error);
         $this->assertEquals('bar', $this->obj->error_description);
         $this->assertEquals('baz', $this->obj->error_uri);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAppTokenRestResponse();
     }
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
 class RestService extends \DTS\eBaySDK\Test\Mocks\BaseRestService
 {
-    protected static $operations =  [
+    protected static $operations = [
         'foo' => [
             'method' => 'GET',
             'resource' => '',

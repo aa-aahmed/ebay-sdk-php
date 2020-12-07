@@ -16,11 +16,6 @@ class GetInquiryRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetInquiryRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetInquiryRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetInquiryRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsInquiryDetailsResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\InquiryDetailsResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetInquiryRestResponse();
     }
 }

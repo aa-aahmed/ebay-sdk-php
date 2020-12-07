@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\OAuth\Services;
 
+use DTS\eBaySDK as Functions;
 use DTS\eBaySDK\ConfigurationResolver;
 use DTS\eBaySDK\Credentials\CredentialsProvider;
 use DTS\eBaySDK\UriResolver;
-use \DTS\eBaySDK as Functions;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 
@@ -16,7 +17,7 @@ class OAuthService
      * @var array $endPoints The API endpoints.
      */
     private static $endPoints = [
-        'sandbox'    => 'https://api.sandbox.ebay.com/identity',
+        'sandbox' => 'https://api.sandbox.ebay.com/identity',
         'production' => 'https://api.ebay.com/identity'
     ];
 
@@ -87,37 +88,47 @@ class OAuthService
             ],
             'profile' => [
                 'valid' => ['string'],
-                'fn'    => 'DTS\eBaySDK\applyProfile',
+                'fn' => 'DTS\eBaySDK\applyProfile',
             ],
             'credentials' => [
-                'valid'   => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
-                'fn'      => 'DTS\eBaySDK\applyCredentials',
+                'valid' => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
+                'fn' => 'DTS\eBaySDK\applyCredentials',
                 'default' => [CredentialsProvider::class, 'defaultProvider']
             ],
             'debug' => [
-                'valid'   => ['bool', 'array'],
-                'fn'      => 'DTS\eBaySDK\applyDebug',
+                'valid' => ['bool', 'array'],
+                'fn' => 'DTS\eBaySDK\applyDebug',
                 'default' => false
             ],
             'httpHandler' => [
-                'valid'   => ['callable'],
+                'valid' => ['callable'],
                 'default' => 'DTS\eBaySDK\defaultHttpHandler'
             ],
             'httpOptions' => [
-                'valid'   => ['array'],
+                'valid' => ['array'],
                 'default' => [
                     'http_errors' => false
                 ]
             ],
             'ruName' => [
-                'valid'    => ['string'],
+                'valid' => ['string'],
                 'required' => true
             ],
             'sandbox' => [
-                'valid'   => ['bool'],
+                'valid' => ['bool'],
                 'default' => false
             ]
         ];
+    }
+
+    /**
+     * Helper method to return the value of the credentials configuration option.
+     *
+     * @return \DTS\eBaySDK\Credentials\CredentialsInterface
+     */
+    public function getCredentials()
+    {
+        return $this->getConfig('credentials');
     }
 
     /**
@@ -151,16 +162,6 @@ class OAuthService
     }
 
     /**
-     * Helper method to return the value of the credentials configuration option.
-     *
-     * @return \DTS\eBaySDK\Credentials\CredentialsInterface
-     */
-    public function getCredentials()
-    {
-        return $this->getConfig('credentials');
-    }
-
-    /**
      * @param array $params An associative array with state and scope as the keys.
      *
      * @return string The redirect URL.
@@ -181,15 +182,15 @@ class OAuthService
             : 'https://auth.ebay.com/oauth2/authorize?';
 
         $urlParams = [
-            'client_id'     => $this->getConfig('credentials')->getAppId(),
-            'redirect_uri'  => $this->getConfig('ruName'),
+            'client_id' => $this->getConfig('credentials')->getAppId(),
+            'redirect_uri' => $this->getConfig('ruName'),
             'response_type' => 'code',
-            'state'         => $params['state'],
-            'scope'         => implode($params['scope'], ' ')
+            'state' => $params['state'],
+            'scope' => implode($params['scope'], ' ')
 
         ];
 
-        return $url.http_build_query($urlParams, null, '&', PHP_QUERY_RFC3986);
+        return $url . http_build_query($urlParams, null, '&', PHP_QUERY_RFC3986);
     }
 
     /**
@@ -218,62 +219,6 @@ class OAuthService
         }
 
         return $this->callOperationAsync('getUserToken', $request);
-    }
-
-    /**
-     * @param \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request
-     * @return \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestResponse
-     */
-    public function refreshUserToken(\DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request)
-    {
-        return $this->refreshUserTokenAsync($request)->wait();
-    }
-
-    /**
-     * @param \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function refreshUserTokenAsync(\DTS\eBaySDK\OAuth\Types\refreshUserTokenRestRequest $request)
-    {
-        if (!$request) {
-            $request = new \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest();
-        }
-        if (!isset($request->grant_type)) {
-            $request->grant_type = 'refresh_token';
-        }
-
-        return $this->callOperationAsync('refreshUserToken', $request);
-    }
-
-    /**
-     * @param \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request
-     * @return \DTS\eBaySDK\OAuth\Types\GetAppTokenRestResponse
-     */
-    public function getAppToken(\DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request = null)
-    {
-        return $this->getAppTokenAsync($request)->wait();
-    }
-
-    /**
-     * @param \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getAppTokenAsync(\DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request = null)
-    {
-        if (!$request) {
-            $request = new \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest();
-        }
-        if (!isset($request->grant_type)) {
-            $request->grant_type = 'client_credentials';
-        }
-        if (!isset($request->redirect_uri)) {
-            $request->redirect_uri = $this->getConfig('ruName');
-        }
-        if (!isset($request->scope)) {
-            $request->scope = 'https://api.ebay.com/oauth/api_scope';
-        }
-
-        return $this->callOperationAsync('getAppToken', $request);
     }
 
     /**
@@ -354,7 +299,7 @@ class OAuthService
      */
     private function buildRequestBody(array $request)
     {
-        $params = array_reduce(array_keys($request), function ($carry, $key) use($request) {
+        $params = array_reduce(array_keys($request), function ($carry, $key) use ($request) {
             $value = $request[$key];
             $carry[$key] = is_array($value) ? implode(' ', $value) : $value;
             return $carry;
@@ -379,7 +324,7 @@ class OAuthService
         $headers = [];
 
         $headers['Accept'] = 'application/json';
-        $headers['Authorization'] = 'Basic '.base64_encode($appId.':'.$certId);
+        $headers['Authorization'] = 'Basic ' . base64_encode($appId . ':' . $certId);
         $headers['Content-Type'] = 'application/x-www-form-urlencoded';
         $headers['Content-Length'] = strlen($body);
 
@@ -392,29 +337,19 @@ class OAuthService
      * @param string $url API endpoint.
      * @param array $headers Associative array of HTTP headers.
      * @param string $body The JSON body of the request.
-      */
+     */
     private function debugRequest($url, array $headers, $body)
     {
-        $str = $url.PHP_EOL;
+        $str = $url . PHP_EOL;
 
         $str .= array_reduce(array_keys($headers), function ($str, $key) use ($headers) {
-            $str .= $key.': '.$headers[$key].PHP_EOL;
+            $str .= $key . ': ' . $headers[$key] . PHP_EOL;
             return $str;
         }, '');
 
         $str .= $body;
 
         $this->debug($str);
-    }
-
-    /**
-     * Sends a debug string of the response details.
-     *
-     * @param string $body The JSON body of the response.
-      */
-    private function debugResponse($body)
-    {
-        $this->debug($body);
     }
 
     /**
@@ -426,5 +361,71 @@ class OAuthService
     {
         $debugger = $this->getConfig('debug');
         $debugger($str);
+    }
+
+    /**
+     * Sends a debug string of the response details.
+     *
+     * @param string $body The JSON body of the response.
+     */
+    private function debugResponse($body)
+    {
+        $this->debug($body);
+    }
+
+    /**
+     * @param \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request
+     * @return \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestResponse
+     */
+    public function refreshUserToken(\DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request)
+    {
+        return $this->refreshUserTokenAsync($request)->wait();
+    }
+
+    /**
+     * @param \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest $request
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function refreshUserTokenAsync(\DTS\eBaySDK\OAuth\Types\refreshUserTokenRestRequest $request)
+    {
+        if (!$request) {
+            $request = new \DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest();
+        }
+        if (!isset($request->grant_type)) {
+            $request->grant_type = 'refresh_token';
+        }
+
+        return $this->callOperationAsync('refreshUserToken', $request);
+    }
+
+    /**
+     * @param \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request
+     * @return \DTS\eBaySDK\OAuth\Types\GetAppTokenRestResponse
+     */
+    public function getAppToken(\DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request = null)
+    {
+        return $this->getAppTokenAsync($request)->wait();
+    }
+
+    /**
+     * @param \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getAppTokenAsync(\DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest $request = null)
+    {
+        if (!$request) {
+            $request = new \DTS\eBaySDK\OAuth\Types\GetAppTokenRestRequest();
+        }
+        if (!isset($request->grant_type)) {
+            $request->grant_type = 'client_credentials';
+        }
+        if (!isset($request->redirect_uri)) {
+            $request->redirect_uri = $this->getConfig('ruName');
+        }
+        if (!isset($request->scope)) {
+            $request->scope = 'https://api.ebay.com/oauth/api_scope';
+        }
+
+        return $this->callOperationAsync('getAppToken', $request);
     }
 }

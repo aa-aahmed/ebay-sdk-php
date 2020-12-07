@@ -16,11 +16,6 @@ class EBayMotorsProShippingMethodEnabledDefinitionTypeTest extends \PHPUnit_Fram
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EBayMotorsProShippingMethodEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\EBayMotorsProShippingMethodEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class EBayMotorsProShippingMethodEnabledDefinitionTypeTest extends \PHPUnit_Fram
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EBayMotorsProShippingMethodEnabledDefinitionType();
     }
 }

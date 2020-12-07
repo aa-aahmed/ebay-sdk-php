@@ -16,13 +16,13 @@ class NoSellerUploadLabelReasonEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new NoSellerUploadLabelReasonEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\NoSellerUploadLabelReasonEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new NoSellerUploadLabelReasonEnum();
     }
 }

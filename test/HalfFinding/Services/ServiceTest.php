@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\HalfFinding\Services;
 
 use DTS\eBaySDK\HalfFinding\Services\HalfFindingBaseService;

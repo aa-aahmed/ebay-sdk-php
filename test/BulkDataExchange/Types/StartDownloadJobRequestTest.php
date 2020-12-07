@@ -16,11 +16,6 @@ class StartDownloadJobRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new StartDownloadJobRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\StartDownloadJobRequest', $this->obj);
@@ -29,5 +24,10 @@ class StartDownloadJobRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StartDownloadJobRequest();
     }
 }

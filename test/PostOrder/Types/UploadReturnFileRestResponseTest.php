@@ -16,11 +16,6 @@ class UploadReturnFileRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UploadReturnFileRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\UploadReturnFileRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class UploadReturnFileRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsUploadFileResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\UploadFileResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UploadReturnFileRestResponse();
     }
 }

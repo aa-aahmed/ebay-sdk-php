@@ -16,11 +16,6 @@ class StoreOwnerExtendedListingDurationsEnabledDefinitionTypeTest extends \PHPUn
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new StoreOwnerExtendedListingDurationsEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\StoreOwnerExtendedListingDurationsEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class StoreOwnerExtendedListingDurationsEnabledDefinitionTypeTest extends \PHPUn
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StoreOwnerExtendedListingDurationsEnabledDefinitionType();
     }
 }

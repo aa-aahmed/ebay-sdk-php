@@ -16,11 +16,6 @@ class FindCampaignByAdReferenceRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FindCampaignByAdReferenceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\FindCampaignByAdReferenceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class FindCampaignByAdReferenceRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsCampaigns()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\Campaigns', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FindCampaignByAdReferenceRestResponse();
     }
 }

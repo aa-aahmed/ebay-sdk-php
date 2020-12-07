@@ -16,13 +16,13 @@ class ReturnSortOrderTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnSortOrderType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\ReturnSortOrderType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnSortOrderType();
     }
 }

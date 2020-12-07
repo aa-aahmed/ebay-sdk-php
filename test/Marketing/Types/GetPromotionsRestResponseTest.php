@@ -16,11 +16,6 @@ class GetPromotionsRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPromotionsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetPromotionsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetPromotionsRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsPromotionsPagedCollection()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\PromotionsPagedCollection', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPromotionsRestResponse();
     }
 }

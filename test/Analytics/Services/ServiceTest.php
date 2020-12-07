@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Analytics\Services;
 
 use DTS\eBaySDK\Analytics\Services\AnalyticsBaseService;
@@ -21,7 +22,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('authorization', $d);
         $this->assertEquals([
-            'valid'   => ['string'],
+            'valid' => ['string'],
             'required' => true
         ], $d['authorization']);
 

@@ -16,11 +16,6 @@ class DeleteBundlesResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteBundlesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\DeleteBundlesResponse', $this->obj);
@@ -29,5 +24,10 @@ class DeleteBundlesResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteBundlesResponse();
     }
 }

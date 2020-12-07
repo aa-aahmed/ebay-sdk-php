@@ -16,13 +16,13 @@ class PromotionMethodCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PromotionMethodCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Enums\PromotionMethodCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PromotionMethodCodeType();
     }
 }

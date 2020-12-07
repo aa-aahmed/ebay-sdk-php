@@ -16,13 +16,13 @@ class PaymentMethodBrandEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PaymentMethodBrandEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Enums\PaymentMethodBrandEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PaymentMethodBrandEnum();
     }
 }

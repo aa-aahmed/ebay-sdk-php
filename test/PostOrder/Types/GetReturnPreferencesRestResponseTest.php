@@ -16,11 +16,6 @@ class GetReturnPreferencesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnPreferencesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetReturnPreferencesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnPreferencesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetSellerReturnPreferenceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetSellerReturnPreferenceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnPreferencesRestResponse();
     }
 }

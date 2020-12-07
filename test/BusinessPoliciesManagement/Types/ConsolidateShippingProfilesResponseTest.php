@@ -16,11 +16,6 @@ class ConsolidateShippingProfilesResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ConsolidateShippingProfilesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BusinessPoliciesManagement\Types\ConsolidateShippingProfilesResponse', $this->obj);
@@ -29,5 +24,10 @@ class ConsolidateShippingProfilesResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BusinessPoliciesManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ConsolidateShippingProfilesResponse();
     }
 }

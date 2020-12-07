@@ -16,11 +16,6 @@ class ClassifiedAdShippingMethodEnabledDefinitionTypeTest extends \PHPUnit_Frame
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ClassifiedAdShippingMethodEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ClassifiedAdShippingMethodEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class ClassifiedAdShippingMethodEnabledDefinitionTypeTest extends \PHPUnit_Frame
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ClassifiedAdShippingMethodEnabledDefinitionType();
     }
 }

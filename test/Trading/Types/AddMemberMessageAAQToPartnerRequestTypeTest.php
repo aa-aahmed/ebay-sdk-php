@@ -16,11 +16,6 @@ class AddMemberMessageAAQToPartnerRequestTypeTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddMemberMessageAAQToPartnerRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AddMemberMessageAAQToPartnerRequestType', $this->obj);
@@ -29,5 +24,10 @@ class AddMemberMessageAAQToPartnerRequestTypeTest extends \PHPUnit_Framework_Tes
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddMemberMessageAAQToPartnerRequestType();
     }
 }

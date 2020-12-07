@@ -16,11 +16,6 @@ class AddMemberMessagesAAQToBidderResponseContainerTypeTest extends \PHPUnit_Fra
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddMemberMessagesAAQToBidderResponseContainerType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AddMemberMessagesAAQToBidderResponseContainerType', $this->obj);
@@ -29,5 +24,10 @@ class AddMemberMessagesAAQToBidderResponseContainerTypeTest extends \PHPUnit_Fra
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddMemberMessagesAAQToBidderResponseContainerType();
     }
 }

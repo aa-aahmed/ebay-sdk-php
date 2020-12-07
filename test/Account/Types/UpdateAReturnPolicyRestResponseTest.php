@@ -16,11 +16,6 @@ class UpdateAReturnPolicyRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateAReturnPolicyRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\UpdateAReturnPolicyRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class UpdateAReturnPolicyRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsSetReturnPolicyResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\SetReturnPolicyResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateAReturnPolicyRestResponse();
     }
 }

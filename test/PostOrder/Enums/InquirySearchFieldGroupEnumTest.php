@@ -16,13 +16,13 @@ class InquirySearchFieldGroupEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InquirySearchFieldGroupEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\InquirySearchFieldGroupEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InquirySearchFieldGroupEnum();
     }
 }

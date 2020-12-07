@@ -16,11 +16,6 @@ class UpdateShippingOptionRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateShippingOptionRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdateShippingOptionRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdateShippingOptionRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsUpdateShippingOption()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdateShippingOption', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateShippingOptionRestRequest();
     }
 }

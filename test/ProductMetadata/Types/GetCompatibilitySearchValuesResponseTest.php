@@ -16,11 +16,6 @@ class GetCompatibilitySearchValuesResponseTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetCompatibilitySearchValuesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\GetCompatibilitySearchValuesResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetCompatibilitySearchValuesResponseTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetCompatibilitySearchValuesResponse();
     }
 }

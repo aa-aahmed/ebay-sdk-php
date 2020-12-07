@@ -16,11 +16,6 @@ class SubmitReturnFileRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SubmitReturnFileRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SubmitReturnFileRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class SubmitReturnFileRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsSubmitFileRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SubmitFileRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SubmitReturnFileRestRequest();
     }
 }

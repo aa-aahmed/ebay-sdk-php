@@ -16,13 +16,13 @@ class ConditionEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ConditionEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\ConditionEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ConditionEnum();
     }
 }

@@ -16,11 +16,6 @@ class GetASalesTaxTableRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetASalesTaxTableRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetASalesTaxTableRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetASalesTaxTableRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsSalesTax()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\SalesTax', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetASalesTaxTableRestResponse();
     }
 }

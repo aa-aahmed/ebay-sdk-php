@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Constants\Test;
 
 use DTS\eBaySDK\Constants\MarketplaceIds as MarketplaceIds;

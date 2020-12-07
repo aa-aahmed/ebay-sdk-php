@@ -16,11 +16,6 @@ class GetSearchKeywordsRecommendationRequestTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSearchKeywordsRecommendationRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Finding\Types\GetSearchKeywordsRecommendationRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetSearchKeywordsRecommendationRequestTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Finding\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSearchKeywordsRecommendationRequest();
     }
 }

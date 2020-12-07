@@ -16,11 +16,6 @@ class CheckReturnEligibilityRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CheckReturnEligibilityRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckReturnEligibilityRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CheckReturnEligibilityRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCheckEligibilityRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckEligibilityRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CheckReturnEligibilityRestRequest();
     }
 }

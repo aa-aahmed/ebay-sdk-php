@@ -16,11 +16,6 @@ class GetACategorySubtreeRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetACategorySubtreeRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\GetACategorySubtreeRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetACategorySubtreeRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetACategorySubtreeRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class PriceTreatmentEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PriceTreatmentEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Enums\PriceTreatmentEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PriceTreatmentEnum();
     }
 }

@@ -16,13 +16,13 @@ class StandardsLevelEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new StandardsLevelEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Enums\StandardsLevelEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StandardsLevelEnum();
     }
 }

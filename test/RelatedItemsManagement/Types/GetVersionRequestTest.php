@@ -16,11 +16,6 @@ class GetVersionRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetVersionRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\GetVersionRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetVersionRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\BaseRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetVersionRequest();
     }
 }

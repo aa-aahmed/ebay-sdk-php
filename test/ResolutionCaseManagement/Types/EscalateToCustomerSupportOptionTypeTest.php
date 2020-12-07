@@ -16,11 +16,6 @@ class EscalateToCustomerSupportOptionTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EscalateToCustomerSupportOptionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\EscalateToCustomerSupportOptionType', $this->obj);
@@ -29,5 +24,10 @@ class EscalateToCustomerSupportOptionTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBaseActivityOptionType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\BaseActivityOptionType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EscalateToCustomerSupportOptionType();
     }
 }

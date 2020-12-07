@@ -16,13 +16,13 @@ class ListingStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ListingStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\ListingStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ListingStatusEnum();
     }
 }

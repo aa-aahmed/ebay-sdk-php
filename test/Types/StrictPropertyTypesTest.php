@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
@@ -6,17 +7,6 @@ use DTS\eBaySDK\Test\Mocks\ComplexClass;
 class StrictPropertyTypesTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        \DTS\eBaySDK\Sdk::$STRICT_PROPERTY_TYPES = false;
-        $this->obj = new ComplexClass();
-    }
-
-    protected function tearDown()
-    {
-        \DTS\eBaySDK\Sdk::$STRICT_PROPERTY_TYPES = true;
-    }
 
     public function testSettingPropertyWithAnInvalidTypeAllowed()
     {
@@ -51,5 +41,16 @@ class StrictPropertyTypesTest extends \PHPUnit_Framework_TestCase
     public function testSettingComplexRepeatablePropertiesThrows()
     {
         $this->obj->simpleClasses[] = 'foo';
+    }
+
+    protected function setUp()
+    {
+        \DTS\eBaySDK\Sdk::$STRICT_PROPERTY_TYPES = false;
+        $this->obj = new ComplexClass();
+    }
+
+    protected function tearDown()
+    {
+        \DTS\eBaySDK\Sdk::$STRICT_PROPERTY_TYPES = true;
     }
 }

@@ -16,11 +16,6 @@ class GetSellingManagerItemAutomationRuleResponseTypeTest extends \PHPUnit_Frame
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSellingManagerItemAutomationRuleResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetSellingManagerItemAutomationRuleResponseType', $this->obj);
@@ -29,5 +24,10 @@ class GetSellingManagerItemAutomationRuleResponseTypeTest extends \PHPUnit_Frame
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSellingManagerItemAutomationRuleResponseType();
     }
 }

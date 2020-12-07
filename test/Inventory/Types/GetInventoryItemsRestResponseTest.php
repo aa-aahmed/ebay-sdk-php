@@ -16,11 +16,6 @@ class GetInventoryItemsRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetInventoryItemsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\GetInventoryItemsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetInventoryItemsRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsInventoryItems()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\InventoryItems', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetInventoryItemsRestResponse();
     }
 }

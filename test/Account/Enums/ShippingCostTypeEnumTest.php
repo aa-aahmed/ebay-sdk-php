@@ -16,13 +16,13 @@ class ShippingCostTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ShippingCostTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Enums\ShippingCostTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ShippingCostTypeEnum();
     }
 }

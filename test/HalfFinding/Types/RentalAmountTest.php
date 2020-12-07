@@ -16,11 +16,6 @@ class RentalAmountTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RentalAmount();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\HalfFinding\Types\RentalAmount', $this->obj);
@@ -29,5 +24,10 @@ class RentalAmountTest extends \PHPUnit_Framework_TestCase
     public function testExtendsDoubleType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\DoubleType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RentalAmount();
     }
 }

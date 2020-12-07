@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 /**
@@ -74,7 +75,7 @@ class Sdk
      * Create a service object by namespace. Service is configured using array of options.
      *
      * @param string $namespace Service namespace (e.g. Finding, Trading).
-     * @param array  $config Configuration options for the service.
+     * @param array $config Configuration options for the service.
      *
      * @return \DTS\eBaySDK\Services\BaseService
      **/

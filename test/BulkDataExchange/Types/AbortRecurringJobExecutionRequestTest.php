@@ -16,11 +16,6 @@ class AbortRecurringJobExecutionRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AbortRecurringJobExecutionRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\AbortRecurringJobExecutionRequest', $this->obj);
@@ -29,5 +24,10 @@ class AbortRecurringJobExecutionRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AbortRecurringJobExecutionRequest();
     }
 }

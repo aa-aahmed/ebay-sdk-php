@@ -16,11 +16,6 @@ class UpdateGuestLineItemQuantityRestResponseTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateGuestLineItemQuantityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdateGuestLineItemQuantityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class UpdateGuestLineItemQuantityRestResponseTest extends \PHPUnit_Framework_Tes
     public function testExtendsCheckoutSessionResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\CheckoutSessionResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateGuestLineItemQuantityRestResponse();
     }
 }

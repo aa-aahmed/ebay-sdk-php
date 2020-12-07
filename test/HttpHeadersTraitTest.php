@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test;
 
 use DTS\eBaySDK\Test\Mocks\HttpHeaders;

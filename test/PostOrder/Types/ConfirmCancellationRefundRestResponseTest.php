@@ -16,11 +16,6 @@ class ConfirmCancellationRefundRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ConfirmCancellationRefundRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ConfirmCancellationRefundRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class ConfirmCancellationRefundRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ConfirmCancellationRefundRestResponse();
     }
 }

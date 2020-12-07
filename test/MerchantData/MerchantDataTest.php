@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\MerchantData;
 
 use DTS\eBaySDK\MerchantData\MerchantData;
@@ -7,11 +8,6 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 {
     private $merchantData;
 
-    protected function setUp()
-    {
-        $this->merchantData = new MerchantData();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\MerchantData', $this->merchantData);
@@ -19,13 +15,13 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testActiveInventoryReport()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/ActiveInventoryReport.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/ActiveInventoryReport.xml');
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\ActiveInventoryReportResponseType', $this->merchantData->activeInventoryReport($xml));
     }
 
     public function testAddFixedPriceItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/AddFixedPriceItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/AddFixedPriceItem.xml');
         $responses = $this->merchantData->addFixedPriceItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -36,7 +32,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testAddItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/AddItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/AddItem.xml');
         $responses = $this->merchantData->addItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -47,7 +43,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testEndFixedPriceItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/EndFixedPriceItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/EndFixedPriceItem.xml');
         $responses = $this->merchantData->endFixedPriceItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -58,7 +54,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testEndItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/EndItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/EndItem.xml');
         $responses = $this->merchantData->endItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -69,13 +65,13 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testFeeSettlementReport()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/FeeSettlementReport.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/FeeSettlementReport.xml');
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\FeeSettlementReportResponseType', $this->merchantData->feeSettlementReport($xml));
     }
 
     public function testOrderAck()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/OrderAck.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/OrderAck.xml');
         $responses = $this->merchantData->orderAck($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -86,7 +82,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testRelistFixedPriceItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/RelistFixedPriceItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/RelistFixedPriceItem.xml');
         $responses = $this->merchantData->relistFixedPriceItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -97,7 +93,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testRelistItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/RelistItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/RelistItem.xml');
         $responses = $this->merchantData->relistItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -108,7 +104,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testReviseFixedPriceItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/ReviseFixedPriceItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/ReviseFixedPriceItem.xml');
         $responses = $this->merchantData->reviseFixedPriceItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -119,7 +115,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testReviseInventoryStatus()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/ReviseInventoryStatus.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/ReviseInventoryStatus.xml');
         $responses = $this->merchantData->reviseInventoryStatus($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -130,7 +126,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testReviseItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/ReviseItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/ReviseItem.xml');
         $responses = $this->merchantData->reviseItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -141,7 +137,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testSetShipmentTrackingInfo()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/SetShipmentTrackingInfo.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/SetShipmentTrackingInfo.xml');
         $responses = $this->merchantData->setShipmentTrackingInfo($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -152,13 +148,13 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testSoldReport()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/SoldReport.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/SoldReport.xml');
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\SoldReportResponseType', $this->merchantData->soldReport($xml));
     }
 
     public function testUploadSiteHostedPictures()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/UploadSiteHostedPictures.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/UploadSiteHostedPictures.xml');
         $responses = $this->merchantData->uploadSiteHostedPictures($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -169,7 +165,7 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testVerifyAddFixedPriceItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/VerifyAddFixedPriceItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/VerifyAddFixedPriceItem.xml');
         $responses = $this->merchantData->verifyAddFixedPriceItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
@@ -180,12 +176,17 @@ class MerchantDataTest extends \PHPUnit_Framework_TestCase
 
     public function testVerifyAddItem()
     {
-        $xml = file_get_contents(__DIR__.'/Mocks/VerifyAddItem.xml');
+        $xml = file_get_contents(__DIR__ . '/Mocks/VerifyAddItem.xml');
         $responses = $this->merchantData->verifyAddItem($xml);
         $this->assertInstanceOf('\DTS\eBaySDK\Types\RepeatableType', $responses);
         $this->assertEquals(2, count($responses));
         foreach ($responses as $response) {
             $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\VerifyAddItemResponseType', $response);
         }
+    }
+
+    protected function setUp()
+    {
+        $this->merchantData = new MerchantData();
     }
 }

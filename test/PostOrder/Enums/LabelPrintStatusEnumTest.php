@@ -16,13 +16,13 @@ class LabelPrintStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LabelPrintStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\LabelPrintStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LabelPrintStatusEnum();
     }
 }

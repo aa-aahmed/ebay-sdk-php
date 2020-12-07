@@ -16,11 +16,6 @@ class DeleteSellingManagerItemAutomationRuleRequestTypeTest extends \PHPUnit_Fra
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteSellingManagerItemAutomationRuleRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\DeleteSellingManagerItemAutomationRuleRequestType', $this->obj);
@@ -29,5 +24,10 @@ class DeleteSellingManagerItemAutomationRuleRequestTypeTest extends \PHPUnit_Fra
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteSellingManagerItemAutomationRuleRequestType();
     }
 }

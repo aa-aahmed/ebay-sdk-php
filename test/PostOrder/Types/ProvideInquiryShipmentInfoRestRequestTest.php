@@ -16,11 +16,6 @@ class ProvideInquiryShipmentInfoRestRequestTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideInquiryShipmentInfoRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvideInquiryShipmentInfoRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProvideInquiryShipmentInfoRestRequestTest extends \PHPUnit_Framework_TestC
     public function testExtendsShipmentInfoRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ShipmentInfoRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideInquiryShipmentInfoRestRequest();
     }
 }

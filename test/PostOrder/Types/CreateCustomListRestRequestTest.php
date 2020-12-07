@@ -16,11 +16,6 @@ class CreateCustomListRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateCustomListRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CreateCustomListRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateCustomListRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCreateCustomListRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CreateCustomListRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateCustomListRestRequest();
     }
 }

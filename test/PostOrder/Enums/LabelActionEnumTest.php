@@ -16,13 +16,13 @@ class LabelActionEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LabelActionEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\LabelActionEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LabelActionEnum();
     }
 }

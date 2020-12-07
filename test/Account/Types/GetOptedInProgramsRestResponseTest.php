@@ -16,11 +16,6 @@ class GetOptedInProgramsRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetOptedInProgramsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetOptedInProgramsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetOptedInProgramsRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsPrograms()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\Programs', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetOptedInProgramsRestResponse();
     }
 }

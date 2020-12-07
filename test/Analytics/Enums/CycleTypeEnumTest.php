@@ -16,13 +16,13 @@ class CycleTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CycleTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Enums\CycleTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CycleTypeEnum();
     }
 }

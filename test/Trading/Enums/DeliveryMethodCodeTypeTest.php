@@ -16,13 +16,13 @@ class DeliveryMethodCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeliveryMethodCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\DeliveryMethodCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeliveryMethodCodeType();
     }
 }

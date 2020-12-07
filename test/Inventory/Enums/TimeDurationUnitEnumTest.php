@@ -16,13 +16,13 @@ class TimeDurationUnitEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new TimeDurationUnitEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\TimeDurationUnitEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new TimeDurationUnitEnum();
     }
 }

@@ -16,11 +16,6 @@ class GetProductMetadataForCategoriesRestResponseTest extends \PHPUnit_Framework
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetProductMetadataForCategoriesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\GetProductMetadataForCategoriesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetProductMetadataForCategoriesRestResponseTest extends \PHPUnit_Framework
     public function testExtendsProductMetadataForCategories()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\ProductMetadataForCategories', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetProductMetadataForCategoriesRestResponse();
     }
 }

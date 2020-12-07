@@ -16,11 +16,6 @@ class VerifyAddItemResponseTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new VerifyAddItemResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\VerifyAddItemResponseType', $this->obj);
@@ -29,5 +24,10 @@ class VerifyAddItemResponseTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new VerifyAddItemResponseType();
     }
 }

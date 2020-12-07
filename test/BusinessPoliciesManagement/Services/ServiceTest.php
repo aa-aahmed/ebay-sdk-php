@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\BusinessPoliciesManagement\Services;
 
 use DTS\eBaySDK\BusinessPoliciesManagement\Services\BusinessPoliciesManagementBaseService;

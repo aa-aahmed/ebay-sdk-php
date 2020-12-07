@@ -16,11 +16,6 @@ class GetSellingManagerAlertsResponseTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSellingManagerAlertsResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetSellingManagerAlertsResponseType', $this->obj);
@@ -29,5 +24,10 @@ class GetSellingManagerAlertsResponseTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSellingManagerAlertsResponseType();
     }
 }

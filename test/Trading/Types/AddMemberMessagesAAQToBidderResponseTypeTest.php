@@ -16,11 +16,6 @@ class AddMemberMessagesAAQToBidderResponseTypeTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddMemberMessagesAAQToBidderResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AddMemberMessagesAAQToBidderResponseType', $this->obj);
@@ -29,5 +24,10 @@ class AddMemberMessagesAAQToBidderResponseTypeTest extends \PHPUnit_Framework_Te
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddMemberMessagesAAQToBidderResponseType();
     }
 }

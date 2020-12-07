@@ -16,11 +16,6 @@ class FindHalfProductsResponseTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FindHalfProductsResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Shopping\Types\FindHalfProductsResponseType', $this->obj);
@@ -29,5 +24,10 @@ class FindHalfProductsResponseTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Shopping\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FindHalfProductsResponseType();
     }
 }

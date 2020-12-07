@@ -16,11 +16,6 @@ class CheckShippingLabelEligibilityRestResponseTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CheckShippingLabelEligibilityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckShippingLabelEligibilityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class CheckShippingLabelEligibilityRestResponseTest extends \PHPUnit_Framework_T
     public function testExtendsCheckLabelPrintEligibilityResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckLabelPrintEligibilityResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CheckShippingLabelEligibilityRestResponse();
     }
 }

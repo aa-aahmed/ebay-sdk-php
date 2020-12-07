@@ -16,11 +16,6 @@ class AdditionalCompatibilityEnabledDefinitionTypeTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AdditionalCompatibilityEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AdditionalCompatibilityEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class AdditionalCompatibilityEnabledDefinitionTypeTest extends \PHPUnit_Framewor
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AdditionalCompatibilityEnabledDefinitionType();
     }
 }

@@ -16,11 +16,6 @@ class ProcessResolutionTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProcessResolution();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\ProcessResolution', $this->obj);
@@ -29,5 +24,10 @@ class ProcessResolutionTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProcessResolution();
     }
 }

@@ -16,11 +16,6 @@ class UploadFileResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UploadFileResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\FileTransfer\Types\UploadFileResponse', $this->obj);
@@ -29,5 +24,10 @@ class UploadFileResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\FileTransfer\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UploadFileResponse();
     }
 }

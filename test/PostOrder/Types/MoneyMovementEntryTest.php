@@ -16,11 +16,6 @@ class MoneyMovementEntryTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MoneyMovementEntry();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\MoneyMovementEntry', $this->obj);
@@ -29,5 +24,10 @@ class MoneyMovementEntryTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MoneyMovementEntry();
     }
 }

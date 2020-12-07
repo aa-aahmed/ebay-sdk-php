@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\HalfFinding\Services;
 
 /**
@@ -44,14 +45,14 @@ class HalfFindingBaseService extends \DTS\eBaySDK\Services\BaseService
         $definitions = parent::getConfigDefinitions();
 
         return $definitions + [
-            'apiVersion' => [
-                'valid' => ['string'],
-                'default' => \DTS\eBaySDK\HalfFinding\Services\HalfFindingService::API_VERSION
-            ],
-            'globalId' => [
-                'valid' => ['string']
-            ]
-        ];
+                'apiVersion' => [
+                    'valid' => ['string'],
+                    'default' => \DTS\eBaySDK\HalfFinding\Services\HalfFindingService::API_VERSION
+                ],
+                'globalId' => [
+                    'valid' => ['string']
+                ]
+            ];
     }
 
     /**

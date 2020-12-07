@@ -16,11 +16,6 @@ class AppealCaseDecisionRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AppealCaseDecisionRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\AppealCaseDecisionRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class AppealCaseDecisionRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAppealRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\AppealRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AppealCaseDecisionRestRequest();
     }
 }

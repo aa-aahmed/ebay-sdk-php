@@ -16,11 +16,6 @@ class OfferRefundUponReturnResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new OfferRefundUponReturnResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\OfferRefundUponReturnResponse', $this->obj);
@@ -29,5 +24,10 @@ class OfferRefundUponReturnResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new OfferRefundUponReturnResponse();
     }
 }

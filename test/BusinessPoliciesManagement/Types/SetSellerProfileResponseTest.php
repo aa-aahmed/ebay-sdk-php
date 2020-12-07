@@ -16,11 +16,6 @@ class SetSellerProfileResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SetSellerProfileResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BusinessPoliciesManagement\Types\SetSellerProfileResponse', $this->obj);
@@ -29,5 +24,10 @@ class SetSellerProfileResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BusinessPoliciesManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SetSellerProfileResponse();
     }
 }

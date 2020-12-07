@@ -16,13 +16,13 @@ class PictureManagerPictureDisplayTypeCodeTypeTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PictureManagerPictureDisplayTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\PictureManagerPictureDisplayTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PictureManagerPictureDisplayTypeCodeType();
     }
 }

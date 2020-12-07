@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace DTS\eBaySDK\JmesPath;
 
 /**
@@ -49,18 +50,6 @@ class DebugRuntime
         return $this->debugInterpreted($expression, $data);
     }
 
-    private function debugInterpreted($expression, $data)
-    {
-        return $this->debugCallback(
-            function () use ($expression, $data) {
-                $runtime = $this->runtime;
-                return $runtime($expression, $data);
-            },
-            $expression,
-            $data
-        );
-    }
-
     private function debugCompiled($expression, $data)
     {
         $result = $this->debugCallback(
@@ -72,6 +61,22 @@ class DebugRuntime
             $data
         );
         $this->dumpCompiledCode($expression);
+
+        return $result;
+    }
+
+    private function debugCallback(callable $debugFn, $expression, $data)
+    {
+        fprintf($this->out, "Expression\n==========\n\n%s\n\n", $expression);
+        $this->dumpTokens($expression);
+        $this->dumpAst($expression);
+        fprintf($this->out, "\nData\n====\n\n%s\n\n", json_encode($data, JSON_PRETTY_PRINT));
+        $startTime = microtime(true);
+        $result = $debugFn();
+        $total = microtime(true) - $startTime;
+        fprintf($this->out, "\nResult\n======\n\n%s\n\n", json_encode($result, JSON_PRETTY_PRINT));
+        fwrite($this->out, "Time\n====\n\n");
+        fprintf($this->out, "Total time:     %f ms\n\n", $total);
 
         return $result;
     }
@@ -112,19 +117,15 @@ class DebugRuntime
         fprintf($this->out, file_get_contents($filename));
     }
 
-    private function debugCallback(callable $debugFn, $expression, $data)
+    private function debugInterpreted($expression, $data)
     {
-        fprintf($this->out, "Expression\n==========\n\n%s\n\n", $expression);
-        $this->dumpTokens($expression);
-        $this->dumpAst($expression);
-        fprintf($this->out, "\nData\n====\n\n%s\n\n", json_encode($data, JSON_PRETTY_PRINT));
-        $startTime = microtime(true);
-        $result = $debugFn();
-        $total = microtime(true) - $startTime;
-        fprintf($this->out, "\nResult\n======\n\n%s\n\n", json_encode($result, JSON_PRETTY_PRINT));
-        fwrite($this->out, "Time\n====\n\n");
-        fprintf($this->out, "Total time:     %f ms\n\n", $total);
-
-        return $result;
+        return $this->debugCallback(
+            function () use ($expression, $data) {
+                $runtime = $this->runtime;
+                return $runtime($expression, $data);
+            },
+            $expression,
+            $data
+        );
     }
 }

@@ -16,13 +16,13 @@ class ExternalPaymentMethodTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ExternalPaymentMethodTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Enums\ExternalPaymentMethodTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ExternalPaymentMethodTypeEnum();
     }
 }

@@ -16,13 +16,13 @@ class SortPriorityTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SortPriority();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Enums\SortPriority', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SortPriority();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
 class ComplexClass extends \DTS\eBaySDK\Test\Mocks\SimpleClass

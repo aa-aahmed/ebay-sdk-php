@@ -16,11 +16,6 @@ class PromotionalShippingDiscountDetailsTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PromotionalShippingDiscountDetailsType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\PromotionalShippingDiscountDetailsType', $this->obj);
@@ -29,5 +24,10 @@ class PromotionalShippingDiscountDetailsTypeTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PromotionalShippingDiscountDetailsType();
     }
 }

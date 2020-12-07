@@ -16,11 +16,6 @@ class VerifyAddSecondChanceItemRequestTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new VerifyAddSecondChanceItemRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\VerifyAddSecondChanceItemRequestType', $this->obj);
@@ -29,5 +24,10 @@ class VerifyAddSecondChanceItemRequestTypeTest extends \PHPUnit_Framework_TestCa
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new VerifyAddSecondChanceItemRequestType();
     }
 }

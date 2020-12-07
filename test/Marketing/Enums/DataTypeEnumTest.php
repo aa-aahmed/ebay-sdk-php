@@ -16,13 +16,13 @@ class DataTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DataTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\DataTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DataTypeEnum();
     }
 }

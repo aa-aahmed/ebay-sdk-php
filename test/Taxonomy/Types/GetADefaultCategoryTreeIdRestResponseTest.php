@@ -16,11 +16,6 @@ class GetADefaultCategoryTreeIdRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetADefaultCategoryTreeIdRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\GetADefaultCategoryTreeIdRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetADefaultCategoryTreeIdRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsBaseCategoryTree()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\BaseCategoryTree', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetADefaultCategoryTreeIdRestResponse();
     }
 }

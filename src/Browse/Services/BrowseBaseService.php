@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Browse\Services;
 
 /**
@@ -7,27 +8,24 @@ namespace DTS\eBaySDK\Browse\Services;
 class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
 {
     /**
-     * @var array $endPoints The API endpoints.
-     */
-    protected static $endPoints = [
-        'sandbox'    => 'https://api.sandbox.ebay.com/buy/browse',
-        'production' => 'https://api.ebay.com/buy/browse'
-    ];
-
-    /**
      * HTTP header constant. The Authentication Token that is used to validate the caller has permission to access the eBay servers.
      */
     const HDR_AUTHORIZATION = 'Authorization';
-
     /**
      * HTTP header constant. The global ID of the eBay site on which the transaction took place.
      */
     const HDR_MARKETPLACE_ID = 'X-EBAY-C-MARKETPLACE-ID';
-
     /**
      * HTTP header constant.
      */
     const HDR_END_USER_CTX = 'X-EBAY-C-ENDUSERCTX';
+    /**
+     * @var array $endPoints The API endpoints.
+     */
+    protected static $endPoints = [
+        'sandbox' => 'https://api.sandbox.ebay.com/buy/browse',
+        'production' => 'https://api.ebay.com/buy/browse'
+    ];
 
     /**
      * @param array $config Configuration option values.
@@ -47,28 +45,28 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
         $definitions = parent::getConfigDefinitions();
 
         return $definitions + [
-            'affiliateCampaignId' => [
-                'valid' => ['string']
-            ],
-            'affiliateReferenceId' => [
-                'valid' => ['string']
-            ],
-            'apiVersion' => [
-                'valid' => ['string'],
-                'default' => \DTS\eBaySDK\Browse\Services\BrowseService::API_VERSION,
-                'required' => true
-            ],
-            'authorization' => [
-                'valid' => ['string'],
-                'required' => true
-            ],
-            'contextualLocation' => [
-                'valid' => ['string']
-            ],
-            'marketplaceId' => [
-                'valid' => ['string']
-            ]
-        ];
+                'affiliateCampaignId' => [
+                    'valid' => ['string']
+                ],
+                'affiliateReferenceId' => [
+                    'valid' => ['string']
+                ],
+                'apiVersion' => [
+                    'valid' => ['string'],
+                    'default' => \DTS\eBaySDK\Browse\Services\BrowseService::API_VERSION,
+                    'required' => true
+                ],
+                'authorization' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ],
+                'contextualLocation' => [
+                    'valid' => ['string']
+                ],
+                'marketplaceId' => [
+                    'valid' => ['string']
+                ]
+            ];
     }
 
     /**
@@ -81,7 +79,7 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
         $headers = [];
 
         // Add required headers first.
-        $headers[self::HDR_AUTHORIZATION] = 'Bearer '.$this->getConfig('authorization');
+        $headers[self::HDR_AUTHORIZATION] = 'Bearer ' . $this->getConfig('authorization');
 
         // Add optional headers.
         if ($this->getConfig('marketplaceId')) {
@@ -90,16 +88,16 @@ class BrowseBaseService extends \DTS\eBaySDK\Services\BaseRestService
 
         $endUserCTX = [];
         if ($this->getConfig('affiliateCampaignId')) {
-            $endUserCTX[ ] = 'affiliateCampaignId='.$this->getConfig('affiliateCampaignId');
+            $endUserCTX[] = 'affiliateCampaignId=' . $this->getConfig('affiliateCampaignId');
         }
         if ($this->getConfig('affiliateReferenceId')) {
-            $endUserCTX[ ] = 'affiliateReferenceId='.$this->getConfig('affiliateReferenceId');
+            $endUserCTX[] = 'affiliateReferenceId=' . $this->getConfig('affiliateReferenceId');
         }
         if ($this->getConfig('contextualLocation')) {
-            $endUserCTX[ ] = 'contextualLocation='.$this->getConfig('contextualLocation');
+            $endUserCTX[] = 'contextualLocation=' . $this->getConfig('contextualLocation');
         }
         if (count($endUserCTX)) {
-            $headers[self::HDR_END_USER_CTX ] = implode(',', $endUserCTX);
+            $headers[self::HDR_END_USER_CTX] = implode(',', $endUserCTX);
         }
 
         return $headers;

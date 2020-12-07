@@ -16,11 +16,6 @@ class GetProductCompatibilityRestResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetProductCompatibilityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\GetProductCompatibilityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetProductCompatibilityRestResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsCompatibility()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\Compatibility', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetProductCompatibilityRestResponse();
     }
 }

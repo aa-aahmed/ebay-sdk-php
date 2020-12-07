@@ -16,11 +16,6 @@ class SendReturnShippingLabelRestResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SendReturnShippingLabelRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SendReturnShippingLabelRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class SendReturnShippingLabelRestResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsSendShippingLabelResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SendShippingLabelResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SendReturnShippingLabelRestResponse();
     }
 }

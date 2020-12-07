@@ -16,11 +16,6 @@ class CreateDSRSummaryByTransactionRequestTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateDSRSummaryByTransactionRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\CreateDSRSummaryByTransactionRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateDSRSummaryByTransactionRequestTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateDSRSummaryByTransactionRequest();
     }
 }

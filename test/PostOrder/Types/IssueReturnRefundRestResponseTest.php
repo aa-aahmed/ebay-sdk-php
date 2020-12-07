@@ -16,11 +16,6 @@ class IssueReturnRefundRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new IssueReturnRefundRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\IssueReturnRefundRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class IssueReturnRefundRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsIssueRefundResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\IssueRefundResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new IssueReturnRefundRestResponse();
     }
 }

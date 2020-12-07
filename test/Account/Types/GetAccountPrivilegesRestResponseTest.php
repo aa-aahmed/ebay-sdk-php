@@ -16,11 +16,6 @@ class GetAccountPrivilegesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAccountPrivilegesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetAccountPrivilegesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAccountPrivilegesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsSellingPrivileges()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\SellingPrivileges', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAccountPrivilegesRestResponse();
     }
 }

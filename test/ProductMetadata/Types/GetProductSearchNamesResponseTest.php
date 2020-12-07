@@ -16,11 +16,6 @@ class GetProductSearchNamesResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetProductSearchNamesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\GetProductSearchNamesResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetProductSearchNamesResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetProductSearchNamesResponse();
     }
 }

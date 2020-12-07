@@ -16,11 +16,6 @@ class UploadSiteHostedPicturesRequestTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UploadSiteHostedPicturesRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\UploadSiteHostedPicturesRequestType', $this->obj);
@@ -29,5 +24,10 @@ class UploadSiteHostedPicturesRequestTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UploadSiteHostedPicturesRequestType();
     }
 }

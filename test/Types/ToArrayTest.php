@@ -1,14 +1,15 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Test\Mocks\AmountClass;
-use DTS\eBaySDK\Test\Mocks\SimpleClass;
-use DTS\eBaySDK\Test\Mocks\ComplexClass;
 use DTS\eBaySDK\Test\Mocks\Base64BinaryType;
 use DTS\eBaySDK\Test\Mocks\BooleanType;
+use DTS\eBaySDK\Test\Mocks\ComplexClass;
 use DTS\eBaySDK\Test\Mocks\DecimalType;
 use DTS\eBaySDK\Test\Mocks\DoubleType;
 use DTS\eBaySDK\Test\Mocks\IntegerType;
+use DTS\eBaySDK\Test\Mocks\SimpleClass;
 use DTS\eBaySDK\Test\Mocks\StringType;
 use DTS\eBaySDK\Test\Mocks\TokenType;
 use DTS\eBaySDK\Test\Mocks\URIType;
@@ -16,11 +17,6 @@ use DTS\eBaySDK\Test\Mocks\URIType;
 class ToArrayTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new ComplexClass();
-    }
 
     public function testToArrayExists()
     {
@@ -122,5 +118,10 @@ class ToArrayTest extends \PHPUnit_Framework_TestCase
         $this->obj->uriType = new URIType();
 
         $this->assertEquals($array, $this->obj->toArray());
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ComplexClass();
     }
 }

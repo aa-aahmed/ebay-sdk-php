@@ -16,13 +16,13 @@ class AspectDataTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AspectDataTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Enums\AspectDataTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AspectDataTypeEnum();
     }
 }

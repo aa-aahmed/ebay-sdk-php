@@ -16,11 +16,6 @@ class GetReturnDraftFilesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnDraftFilesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetReturnDraftFilesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnDraftFilesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetFileResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetFileResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnDraftFilesRestResponse();
     }
 }

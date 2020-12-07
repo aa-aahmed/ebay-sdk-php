@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 /**
@@ -7,12 +8,7 @@ namespace DTS\eBaySDK;
 class Debugger
 {
     /**
-     * @var array $config. Debug configuration.
-     */
-    private $config;
-
-    /**
-     * @var array $credentialsStrings. RegExp patterns to remove credentials from the debug info.
+     * @var array $credentialsStrings . RegExp patterns to remove credentials from the debug info.
      */
     private static $credentialsStrings = [
         '/^(X-EBAY-SOA-SECURITY-TOKEN:.*)?$/im' => 'X-EBAY-SOA-SECURITY-TOKEN: SECURITY-TOKEN',
@@ -26,6 +22,10 @@ class Debugger
         '/^(X-EBAY-API-DEV-NAME:.*)?$/im' => 'X-EBAY-API-DEV-NAME: DEV-NAME ',
         '/<eBayAuthToken>.*<\/eBayAuthToken>/i' => '<eBayAuthToken>EBAY-AUTH-TOKEN</eBayAuthToken>'
     ];
+    /**
+     * @var array $config . Debug configuration.
+     */
+    private $config;
 
     /**
      * @param array $config Debug configuration.
@@ -33,12 +33,12 @@ class Debugger
     public function __construct(array $config)
     {
         $this->config = $config + [
-            'logfn' => function ($msg) {
-                echo $msg.PHP_EOL;
-            },
-            'scrub_credentials' => true,
-            'scrub_strings' => []
-        ];
+                'logfn' => function ($msg) {
+                    echo $msg . PHP_EOL;
+                },
+                'scrub_credentials' => true,
+                'scrub_strings' => []
+            ];
 
         $this->config['scrub_strings'] += self::$credentialsStrings;
     }

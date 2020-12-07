@@ -16,11 +16,6 @@ class IssueFullRefundRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new IssueFullRefundRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\IssueFullRefundRequest', $this->obj);
@@ -29,5 +24,10 @@ class IssueFullRefundRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\BaseRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new IssueFullRefundRequest();
     }
 }

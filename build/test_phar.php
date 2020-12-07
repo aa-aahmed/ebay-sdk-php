@@ -4,11 +4,11 @@ require __DIR__ . '/artifacts/ebay-sdk-php.phar';
 $sdk = new \DTS\eBaySDK\Sdk();
 
 $trading = new \DTS\eBaySDK\Trading\Services\TradingService([
-    'siteId'      => 0,
+    'siteId' => 0,
     'credentials' => [
-        'appId'  => 'secret',
+        'appId' => 'secret',
         'certId' => 'secret',
-        'devId'  => 'secret'
+        'devId' => 'secret'
     ]
 ]);
 

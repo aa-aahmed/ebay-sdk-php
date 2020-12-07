@@ -16,13 +16,13 @@ class TaskStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new TaskStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\TaskStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new TaskStatusEnum();
     }
 }

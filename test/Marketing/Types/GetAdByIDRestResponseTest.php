@@ -16,11 +16,6 @@ class GetAdByIDRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAdByIDRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetAdByIDRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAdByIDRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAd()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\Ad', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAdByIDRestResponse();
     }
 }

@@ -16,13 +16,13 @@ class SellereBayPaymentProcessStatusCodeTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellereBayPaymentProcessStatusCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Enums\SellereBayPaymentProcessStatusCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellereBayPaymentProcessStatusCodeType();
     }
 }

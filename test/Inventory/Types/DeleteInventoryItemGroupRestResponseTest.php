@@ -16,11 +16,6 @@ class DeleteInventoryItemGroupRestResponseTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteInventoryItemGroupRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\DeleteInventoryItemGroupRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class DeleteInventoryItemGroupRestResponseTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteInventoryItemGroupRestResponse();
     }
 }

@@ -16,11 +16,6 @@ class GetCustomListRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetCustomListRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetCustomListRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetCustomListRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetCustomListDetailResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetCustomListDetailResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetCustomListRestResponse();
     }
 }

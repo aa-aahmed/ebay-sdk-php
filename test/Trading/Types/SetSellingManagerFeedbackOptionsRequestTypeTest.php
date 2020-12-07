@@ -16,11 +16,6 @@ class SetSellingManagerFeedbackOptionsRequestTypeTest extends \PHPUnit_Framework
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SetSellingManagerFeedbackOptionsRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SetSellingManagerFeedbackOptionsRequestType', $this->obj);
@@ -29,5 +24,10 @@ class SetSellingManagerFeedbackOptionsRequestTypeTest extends \PHPUnit_Framework
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SetSellingManagerFeedbackOptionsRequestType();
     }
 }

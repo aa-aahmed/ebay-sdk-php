@@ -16,13 +16,13 @@ class AvailabilityThresholdEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AvailabilityThresholdEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Enums\AvailabilityThresholdEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AvailabilityThresholdEnum();
     }
 }

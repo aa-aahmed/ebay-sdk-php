@@ -16,11 +16,6 @@ class MarketingPriceTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MarketingPrice();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Types\MarketingPrice', $this->obj);
@@ -29,5 +24,10 @@ class MarketingPriceTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MarketingPrice();
     }
 }

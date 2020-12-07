@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Parser\Test;
 
 use DTS\eBaySDK\Parser\JsonParser;
@@ -8,7 +9,7 @@ class JsonParserTest extends \PHPUnit_Framework_TestCase
     public function testCanParseJson()
     {
         $obj = new \DTS\eBaySDK\Test\Mocks\ComplexClass();
-        $json = file_get_contents(__DIR__.'/../Mocks/ResponseWithUnknownProperties.json');
+        $json = file_get_contents(__DIR__ . '/../Mocks/ResponseWithUnknownProperties.json');
         JsonParser::parseAndAssignProperties($obj, $json);
 
         $this->assertInstanceOf('\DTS\eBaySDK\Test\Mocks\ComplexClass', $obj);

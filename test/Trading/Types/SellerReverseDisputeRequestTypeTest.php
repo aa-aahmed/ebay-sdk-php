@@ -16,11 +16,6 @@ class SellerReverseDisputeRequestTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellerReverseDisputeRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SellerReverseDisputeRequestType', $this->obj);
@@ -29,5 +24,10 @@ class SellerReverseDisputeRequestTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellerReverseDisputeRequestType();
     }
 }

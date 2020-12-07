@@ -16,13 +16,13 @@ class CancelSortTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CancelSortTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\CancelSortTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CancelSortTypeEnum();
     }
 }

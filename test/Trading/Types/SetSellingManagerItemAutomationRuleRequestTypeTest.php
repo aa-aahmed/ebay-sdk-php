@@ -16,11 +16,6 @@ class SetSellingManagerItemAutomationRuleRequestTypeTest extends \PHPUnit_Framew
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SetSellingManagerItemAutomationRuleRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SetSellingManagerItemAutomationRuleRequestType', $this->obj);
@@ -29,5 +24,10 @@ class SetSellingManagerItemAutomationRuleRequestTypeTest extends \PHPUnit_Framew
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SetSellingManagerItemAutomationRuleRequestType();
     }
 }

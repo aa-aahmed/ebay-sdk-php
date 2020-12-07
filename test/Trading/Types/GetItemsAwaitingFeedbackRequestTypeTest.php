@@ -16,11 +16,6 @@ class GetItemsAwaitingFeedbackRequestTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetItemsAwaitingFeedbackRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetItemsAwaitingFeedbackRequestType', $this->obj);
@@ -29,5 +24,10 @@ class GetItemsAwaitingFeedbackRequestTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetItemsAwaitingFeedbackRequestType();
     }
 }

@@ -16,11 +16,6 @@ class UpdateBidRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateBidRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\UpdateBidRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdateBidRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsUpdateBidPercentageRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\UpdateBidPercentageRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateBidRestRequest();
     }
 }

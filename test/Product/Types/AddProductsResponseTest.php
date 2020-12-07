@@ -16,11 +16,6 @@ class AddProductsResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddProductsResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Types\AddProductsResponse', $this->obj);
@@ -29,5 +24,10 @@ class AddProductsResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddProductsResponse();
     }
 }

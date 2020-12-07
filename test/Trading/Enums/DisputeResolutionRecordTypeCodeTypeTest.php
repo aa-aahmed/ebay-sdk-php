@@ -16,13 +16,13 @@ class DisputeResolutionRecordTypeCodeTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DisputeResolutionRecordTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\DisputeResolutionRecordTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DisputeResolutionRecordTypeCodeType();
     }
 }

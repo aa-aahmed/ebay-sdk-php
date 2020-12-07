@@ -16,11 +16,6 @@ class CreateOrReplaceInventoryItemGroupRestRequestTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateOrReplaceInventoryItemGroupRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\CreateOrReplaceInventoryItemGroupRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateOrReplaceInventoryItemGroupRestRequestTest extends \PHPUnit_Framewor
     public function testExtendsInventoryItemGroup()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\InventoryItemGroup', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateOrReplaceInventoryItemGroupRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class FilePurposeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FilePurposeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\FilePurposeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FilePurposeEnum();
     }
 }

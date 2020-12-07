@@ -16,13 +16,13 @@ class FormatTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FormatTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\FormatTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FormatTypeEnum();
     }
 }

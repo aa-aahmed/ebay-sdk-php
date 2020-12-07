@@ -16,13 +16,13 @@ class LineItemFulfillmentStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LineItemFulfillmentStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Enums\LineItemFulfillmentStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LineItemFulfillmentStatusEnum();
     }
 }

@@ -16,11 +16,6 @@ class PayPalRequiredForStoreOwnerDefinitionTypeTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PayPalRequiredForStoreOwnerDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\PayPalRequiredForStoreOwnerDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class PayPalRequiredForStoreOwnerDefinitionTypeTest extends \PHPUnit_Framework_T
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PayPalRequiredForStoreOwnerDefinitionType();
     }
 }

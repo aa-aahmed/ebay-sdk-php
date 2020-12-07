@@ -16,11 +16,6 @@ class ReviseSellingManagerProductRequestTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReviseSellingManagerProductRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ReviseSellingManagerProductRequestType', $this->obj);
@@ -29,5 +24,10 @@ class ReviseSellingManagerProductRequestTypeTest extends \PHPUnit_Framework_Test
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReviseSellingManagerProductRequestType();
     }
 }

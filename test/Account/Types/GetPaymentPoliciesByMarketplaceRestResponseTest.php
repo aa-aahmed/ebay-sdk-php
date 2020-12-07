@@ -16,11 +16,6 @@ class GetPaymentPoliciesByMarketplaceRestResponseTest extends \PHPUnit_Framework
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPaymentPoliciesByMarketplaceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetPaymentPoliciesByMarketplaceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetPaymentPoliciesByMarketplaceRestResponseTest extends \PHPUnit_Framework
     public function testExtendsPaymentPolicyResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\PaymentPolicyResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPaymentPoliciesByMarketplaceRestResponse();
     }
 }

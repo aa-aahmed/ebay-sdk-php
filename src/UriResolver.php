@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 /**
@@ -62,11 +63,30 @@ class UriResolver
         }
 
         return (
-            "$uri/".
-            "$version/".
-            $this->fillPathParams($resource, $paramValues).
+            "$uri/" .
+            "$version/" .
+            $this->fillPathParams($resource, $paramValues) .
             $this->buildQueryParameters($paramValues)
         );
+    }
+
+    private function throwRequired(array $paramDefs, array $paramValues)
+    {
+        $missing = [];
+
+        foreach ($paramDefs as $key => $def) {
+            if (empty($def['required'])
+                || isset($def['default'])
+                || array_key_exists($key, $paramValues)
+            ) {
+                continue;
+            }
+            $missing[] = $key;
+        }
+
+        $msg = "Missing required uri parameters: \n\n";
+        $msg .= implode("\n\n", $missing);
+        throw new \InvalidArgumentException($msg);
     }
 
     private function checkType(array $valid, $name, $provided)
@@ -89,25 +109,6 @@ class UriResolver
             $expected,
             describeType($provided)
         );
-        throw new \InvalidArgumentException($msg);
-    }
-
-    private function throwRequired(array $paramDefs, array $paramValues)
-    {
-        $missing = [];
-
-        foreach ($paramDefs as $key => $def) {
-            if (empty($def['required'])
-                || isset($def['default'])
-                || array_key_exists($key, $paramValues)
-            ) {
-                continue;
-            }
-            $missing[] = $key;
-        }
-
-        $msg = "Missing required uri parameters: \n\n";
-        $msg .= implode("\n\n", $missing);
         throw new \InvalidArgumentException($msg);
     }
 
@@ -155,8 +156,8 @@ class UriResolver
             } elseif (is_callable($value)) {
                 $value = $value();
             }
-            $query[] = $param.'='.urlencode($value);
+            $query[] = $param . '=' . urlencode($value);
         }
-        return '?'.join('&', $query);
+        return '?' . join('&', $query);
     }
 }

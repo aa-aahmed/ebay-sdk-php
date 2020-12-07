@@ -16,11 +16,6 @@ class ProvideSellerInfoOptionTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideSellerInfoOptionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\ProvideSellerInfoOptionType', $this->obj);
@@ -29,5 +24,10 @@ class ProvideSellerInfoOptionTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseActivityOptionType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\BaseActivityOptionType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideSellerInfoOptionType();
     }
 }

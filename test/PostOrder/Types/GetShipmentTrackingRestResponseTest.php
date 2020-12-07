@@ -16,11 +16,6 @@ class GetShipmentTrackingRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetShipmentTrackingRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetShipmentTrackingRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetShipmentTrackingRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetTrackingHistoryResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetTrackingHistoryResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetShipmentTrackingRestResponse();
     }
 }

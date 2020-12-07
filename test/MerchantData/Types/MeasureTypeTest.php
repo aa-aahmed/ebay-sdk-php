@@ -16,11 +16,6 @@ class MeasureTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MeasureType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\MeasureType', $this->obj);
@@ -29,5 +24,10 @@ class MeasureTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsDecimalType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\DecimalType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MeasureType();
     }
 }

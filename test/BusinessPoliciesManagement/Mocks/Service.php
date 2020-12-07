@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\BusinessPoliciesManagement\Mocks;
 
 use DTS\eBaySDK\Test\Mocks\ComplexClass;

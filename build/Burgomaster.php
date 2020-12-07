@@ -18,7 +18,7 @@ class Burgomaster
     private $sections = array();
 
     /**
-     * @param string $stageDir    Staging base directory where your packaging
+     * @param string $stageDir Staging base directory where your packaging
      *                            takes place. This folder will be created for
      *                            you if it does not exist. If it exists, it
      *                            will be deleted and recreated to start fresh.
@@ -64,16 +64,6 @@ class Burgomaster
     }
 
     /**
-     * Cleanup if the last section was not already closed.
-     */
-    public function __destruct()
-    {
-        if ($this->sections) {
-            $this->endSection();
-        }
-    }
-
-    /**
      * Call this method when starting a specific section of the packager.
      *
      * This makes the debug messages used in your script more meaningful and
@@ -86,17 +76,6 @@ class Burgomaster
     {
         $this->sections[] = $section;
         $this->debug('Starting');
-    }
-
-    /**
-     * Call this method when leaving the last pushed section of the packager.
-     */
-    public function endSection()
-    {
-        if ($this->sections) {
-            $this->debug('Completed');
-            array_pop($this->sections);
-        }
     }
 
     /**
@@ -116,10 +95,112 @@ class Burgomaster
     }
 
     /**
+     * Execute a command and throw an exception if the return code is not 0.
+     *
+     * @param string $command Command to execute
+     *
+     * @return string Returns the output of the command as a string
+     * @throws \RuntimeException on error.
+     */
+    public function exec($command)
+    {
+        $this->debug("Executing: $command");
+        $output = $returnValue = null;
+        exec($command, $output, $returnValue);
+
+        if ($returnValue != 0) {
+            throw new \RuntimeException('Error executing command: '
+                . $command . ' : ' . implode("\n", $output));
+        }
+
+        return implode("\n", $output);
+    }
+
+    /**
+     * Call this method when leaving the last pushed section of the packager.
+     */
+    public function endSection()
+    {
+        if ($this->sections) {
+            $this->debug('Completed');
+            array_pop($this->sections);
+        }
+    }
+
+    /**
+     * Cleanup if the last section was not already closed.
+     */
+    public function __destruct()
+    {
+        if ($this->sections) {
+            $this->endSection();
+        }
+    }
+
+    /**
+     * Recursively copy one folder to another.
+     *
+     * Any LICENSE file is automatically copied.
+     *
+     * @param string $sourceDir Source directory to copy from
+     * @param string $destDir Directory to copy the files to that is relative
+     *                              to the the stage base directory.
+     * @param array $extensions File extensions to copy from the $sourceDir.
+     *                              Defaults to "php" files only (e.g., ['php']).
+     * @param Iterator|null $files Files to copy from the source directory, each
+     *                              yielded out as an SplFileInfo object.
+     *                              Defaults to a recursive iterator of $sourceDir
+     * @throws \InvalidArgumentException if the source directory is invalid.
+     */
+    function recursiveCopy(
+        $sourceDir,
+        $destDir,
+        $extensions = array('php'),
+        Iterator $files = null
+    )
+    {
+        if (!realpath($sourceDir)) {
+            throw new \InvalidArgumentException("$sourceDir not found");
+        }
+
+        if (!$extensions) {
+            throw new \InvalidArgumentException('$extensions is empty!');
+        }
+
+        $sourceDir = realpath($sourceDir);
+        $exts = array_fill_keys($extensions, true);
+        if (empty($files)) {
+            $files = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($sourceDir)
+            );
+        }
+        $total = 0;
+
+        $this->startSection('copy');
+        $this->debug("Starting to copy files from $sourceDir");
+
+        foreach ($files as $file) {
+            if (isset($exts[$file->getExtension()])
+                || $file->getBaseName() == 'LICENSE'
+            ) {
+                // Remove the source directory from the destination path
+                $toPath = str_replace($sourceDir, '', (string)$file);
+                $toPath = $destDir . '/' . $toPath;
+                $toPath = str_replace('//', '/', $toPath);
+                $this->deepCopy((string)$file, $toPath);
+                $total++;
+            }
+        }
+
+        $this->debug("Copied $total files from $sourceDir");
+        $this->endSection();
+    }
+
+    /**
      * Copies a file and creates the destination directory if needed.
      *
      * @param string $from File to copy
-     * @param string $to   Destination to copy the file to, relative to the
+     * @param string $to Destination to copy the file to, relative to the
      *                     base staging directory.
      * @throws \InvalidArgumentException if the file cannot be found
      * @throws \RuntimeException if the directory cannot be created.
@@ -146,86 +227,6 @@ class Burgomaster
     }
 
     /**
-     * Recursively copy one folder to another.
-     *
-     * Any LICENSE file is automatically copied.
-     *
-     * @param string    $sourceDir  Source directory to copy from
-     * @param string    $destDir    Directory to copy the files to that is relative
-     *                              to the the stage base directory.
-     * @param array     $extensions File extensions to copy from the $sourceDir.
-     *                              Defaults to "php" files only (e.g., ['php']).
-     * @param Iterator|null  $files Files to copy from the source directory, each
-     *                              yielded out as an SplFileInfo object.
-     *                              Defaults to a recursive iterator of $sourceDir
-     * @throws \InvalidArgumentException if the source directory is invalid.
-     */
-    function recursiveCopy(
-        $sourceDir,
-        $destDir,
-        $extensions = array('php'),
-        Iterator $files = null
-    ) {
-        if (!realpath($sourceDir)) {
-            throw new \InvalidArgumentException("$sourceDir not found");
-        }
-
-        if (!$extensions) {
-            throw new \InvalidArgumentException('$extensions is empty!');
-        }
-
-        $sourceDir = realpath($sourceDir);
-        $exts = array_fill_keys($extensions, true);
-        if (empty($files)) {
-            $files = new \RecursiveIteratorIterator(
-                new \RecursiveDirectoryIterator($sourceDir)
-            );
-        }
-        $total = 0;
-
-        $this->startSection('copy');
-        $this->debug("Starting to copy files from $sourceDir");
-
-        foreach ($files as $file) {
-            if (isset($exts[$file->getExtension()])
-                || $file->getBaseName() == 'LICENSE'
-            ) {
-                // Remove the source directory from the destination path
-                $toPath = str_replace($sourceDir, '', (string) $file);
-                $toPath = $destDir . '/' . $toPath;
-                $toPath = str_replace('//', '/', $toPath);
-                $this->deepCopy((string) $file, $toPath);
-                $total++;
-            }
-        }
-
-        $this->debug("Copied $total files from $sourceDir");
-        $this->endSection();
-    }
-
-    /**
-     * Execute a command and throw an exception if the return code is not 0.
-     *
-     * @param string $command Command to execute
-     *
-     * @return string Returns the output of the command as a string
-     * @throws \RuntimeException on error.
-     */
-    public function exec($command)
-    {
-        $this->debug("Executing: $command");
-        $output = $returnValue = null;
-        exec($command, $output, $returnValue);
-
-        if ($returnValue != 0) {
-            throw new \RuntimeException('Error executing command: '
-                . $command . ' : ' . implode("\n", $output));
-        }
-
-        return implode("\n", $output);
-    }
-
-    /**
      * Creates a class-map autoloader to the staging directory in a file
      * named autoloader.php
      *
@@ -234,7 +235,8 @@ class Burgomaster
      * @param string $filename Name of the autoloader file.
      * @throws \RuntimeException if the file cannot be written
      */
-    function createAutoloader($files = array(), $filename = 'autoloader.php') {
+    function createAutoloader($files = array(), $filename = 'autoloader.php')
+    {
         $sourceDir = realpath($this->stageDir);
         $iter = new \RecursiveDirectoryIterator($sourceDir);
         $iter = new \RecursiveIteratorIterator($iter);
@@ -246,7 +248,7 @@ class Burgomaster
         $classMap = array();
         foreach ($iter as $file) {
             if ($file->getExtension() == 'php') {
-                $location = str_replace($this->stageDir . '/', '', (string) $file);
+                $location = str_replace($this->stageDir . '/', '', (string)$file);
                 $className = str_replace('/', '\\', $location);
                 $className = substr($className, 0, -4);
 
@@ -299,6 +301,50 @@ EOT
     }
 
     /**
+     * Creates a phar that automatically registers an autoloader.
+     *
+     * Call this only after your staging directory is built.
+     *
+     * @param string $dest Where to save the file. The basename of the file
+     *     is also used as the alias name in the phar
+     *     (e.g., /path/to/guzzle.phar => guzzle.phar).
+     * @param string|bool|null $stub The path to the phar stub file. Pass or
+     *      leave null to automatically have one created for you. Pass false
+     *      to no use a stub in the generated phar.
+     * @param string $autoloaderFilename Name of the autolaoder filename.
+     */
+    public function createPhar(
+        $dest,
+        $stub = null,
+        $autoloaderFilename = 'autoloader.php',
+        $alias = null
+    )
+    {
+        $this->startSection('phar');
+        $this->debug("Creating phar file at $dest");
+        $this->createDirIfNeeded(dirname($dest));
+        $phar = new \Phar($dest, 0, $alias ?: basename($dest));
+        $phar->buildFromDirectory($this->stageDir);
+
+        if ($stub !== false) {
+            if (!$stub) {
+                $stub = $this->createStub($dest, $autoloaderFilename, $alias);
+            }
+            $phar->setStub($stub);
+        }
+
+        $this->debug("Created phar at $dest");
+        $this->endSection();
+    }
+
+    private function createDirIfNeeded($dir)
+    {
+        if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
+            throw new \RuntimeException("Could not create dir: $dir");
+        }
+    }
+
+    /**
      * Creates a default stub for the phar that includeds the generated
      * autoloader.
      *
@@ -320,7 +366,7 @@ EOT
 
         $alias = $alias ?: basename($dest);
         $constName = str_replace('.phar', '', strtoupper($alias)) . '_PHAR';
-        $stub  = "<?php\n";
+        $stub = "<?php\n";
         $stub .= "define('$constName', true);\n";
         $stub .= "Phar::mapPhar('$alias');\n";
         $stub .= "require 'phar://$alias/{$autoloaderFilename}';\n";
@@ -328,42 +374,6 @@ EOT
         $this->endSection();
 
         return $stub;
-    }
-
-    /**
-     * Creates a phar that automatically registers an autoloader.
-     *
-     * Call this only after your staging directory is built.
-     *
-     * @param string $dest Where to save the file. The basename of the file
-     *     is also used as the alias name in the phar
-     *     (e.g., /path/to/guzzle.phar => guzzle.phar).
-     * @param string|bool|null $stub The path to the phar stub file. Pass or
-     *      leave null to automatically have one created for you. Pass false
-     *      to no use a stub in the generated phar.
-     * @param string $autoloaderFilename Name of the autolaoder filename.
-     */
-    public function createPhar(
-        $dest,
-        $stub = null,
-        $autoloaderFilename = 'autoloader.php',
-        $alias = null
-    ) {
-        $this->startSection('phar');
-        $this->debug("Creating phar file at $dest");
-        $this->createDirIfNeeded(dirname($dest));
-        $phar = new \Phar($dest, 0, $alias ?: basename($dest));
-        $phar->buildFromDirectory($this->stageDir);
-
-        if ($stub !== false) {
-            if (!$stub) {
-                $stub = $this->createStub($dest, $autoloaderFilename, $alias);
-            }
-            $phar->setStub($stub);
-        }
-
-        $this->debug("Created phar at $dest");
-        $this->endSection();
     }
 
     /**
@@ -383,12 +393,5 @@ EOT
         $this->debug("  > Created at $dest");
         chdir(__DIR__);
         $this->endSection();
-    }
-
-    private function createDirIfNeeded($dir)
-    {
-        if (!is_dir($dir) && !mkdir($dir, 0755, true)) {
-            throw new \RuntimeException("Could not create dir: $dir");
-        }
     }
 }

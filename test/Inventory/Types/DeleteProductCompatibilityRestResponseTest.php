@@ -16,11 +16,6 @@ class DeleteProductCompatibilityRestResponseTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteProductCompatibilityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\DeleteProductCompatibilityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class DeleteProductCompatibilityRestResponseTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteProductCompatibilityRestResponse();
     }
 }

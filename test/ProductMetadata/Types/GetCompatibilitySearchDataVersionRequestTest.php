@@ -16,11 +16,6 @@ class GetCompatibilitySearchDataVersionRequestTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetCompatibilitySearchDataVersionRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\GetCompatibilitySearchDataVersionRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetCompatibilitySearchDataVersionRequestTest extends \PHPUnit_Framework_Te
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetCompatibilitySearchDataVersionRequest();
     }
 }

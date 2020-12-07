@@ -16,11 +16,6 @@ class BestOfferAutoDeclineEnabledDefinitionTypeTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BestOfferAutoDeclineEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\BestOfferAutoDeclineEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class BestOfferAutoDeclineEnabledDefinitionTypeTest extends \PHPUnit_Framework_T
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BestOfferAutoDeclineEnabledDefinitionType();
     }
 }

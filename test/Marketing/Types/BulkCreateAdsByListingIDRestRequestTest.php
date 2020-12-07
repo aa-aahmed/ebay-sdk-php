@@ -16,11 +16,6 @@ class BulkCreateAdsByListingIDRestRequestTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkCreateAdsByListingIDRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkCreateAdsByListingIDRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class BulkCreateAdsByListingIDRestRequestTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBulkCreateAdRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkCreateAdRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkCreateAdsByListingIDRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class ActivityOptionTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ActivityOptionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\ActivityOptionType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ActivityOptionType();
     }
 }

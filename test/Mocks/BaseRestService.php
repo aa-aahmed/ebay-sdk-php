@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
 class BaseRestService extends \DTS\eBaySDK\Services\BaseRestService
 {
     protected static $endPoints = [
-        'sandbox'    => 'http://sandbox.com',
+        'sandbox' => 'http://sandbox.com',
         'production' => 'http://production.com'
     ];
 
@@ -18,12 +19,12 @@ class BaseRestService extends \DTS\eBaySDK\Services\BaseRestService
         $definitions = parent::getConfigDefinitions();
 
         return $definitions + [
-            'apiVersion' => [
-                'valid' => ['string'],
-                'default' => 'v1',
-                'required' => true
-            ]
-        ];
+                'apiVersion' => [
+                    'valid' => ['string'],
+                    'default' => 'v1',
+                    'required' => true
+                ]
+            ];
     }
 
     protected function getEbayHeaders()

@@ -16,11 +16,6 @@ class CreateDSRSummaryByPeriodRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateDSRSummaryByPeriodRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\CreateDSRSummaryByPeriodRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateDSRSummaryByPeriodRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateDSRSummaryByPeriodRequest();
     }
 }

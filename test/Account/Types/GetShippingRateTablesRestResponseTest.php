@@ -16,11 +16,6 @@ class GetShippingRateTablesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetShippingRateTablesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetShippingRateTablesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetShippingRateTablesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsRateTableResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\RateTableResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetShippingRateTablesRestResponse();
     }
 }

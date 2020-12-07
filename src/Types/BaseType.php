@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Types;
 
-use \DTS\eBaySDK\Types;
-use \DTS\eBaySDK\Exceptions;
-use \DTS\eBaySDK\JmesPath\Env;
-use \DTS\eBaySDK\JmesPath\JmesPathableObjectInterface;
+use DTS\eBaySDK\Exceptions;
+use DTS\eBaySDK\JmesPath\Env;
+use DTS\eBaySDK\JmesPath\JmesPathableObjectInterface;
+use DTS\eBaySDK\Types;
 
 /**
  * Base class for all API objects.
@@ -65,6 +66,248 @@ class BaseType implements JmesPathableObjectInterface
     }
 
     /**
+     * Assign multiple values to an object.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param array $values . Associative array of property names and their values.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
+     */
+    protected function setValues($class, array $values = [])
+    {
+        foreach ($values as $property => $value) {
+            $value = self::removeNull($value);
+            if (!is_null($value)) {
+                $actualValue = self::determineActualValueToAssign($class, $property, $value);
+                $this->set($class, $property, $actualValue);
+            }
+        }
+    }
+
+    /**
+     * @param mixed $value Remove null elements if an array.
+     *
+     * @return mixed Original value if not an array or array without null elements.
+     */
+    private static function removeNull($value)
+    {
+        if (!is_array($value)) {
+            return $value;
+        }
+
+        return array_filter($value, function ($val) {
+            return !is_null($val);
+        });
+    }
+
+    /**
+     * Helper function when assigning values via the ctor.
+     * Determines the actual value to assign to a property.
+     *
+     * @param string $class The name of the class the property belong to.
+     * @param string $property The property name.
+     * @param mixed $value The property value.
+     *
+     * @return mixed
+     */
+    private static function determineActualValueToAssign($class, $property, $value)
+    {
+        if (!array_key_exists($property, self::$properties[$class])) {
+            return $value;
+        }
+
+        $info = self::propertyInfo($class, $property);
+
+        if ($info['repeatable'] && is_array($value)) {
+            $values = [];
+            foreach ($value as $val) {
+                $values[] = self::actualValue($info, $val);
+            }
+            return $values;
+        }
+
+        return self::actualValue($info, $value);
+    }
+
+    /**
+     * Helper function to return the meta data of a property.
+     *
+     * @param string $class The name of the class the property belongs to.
+     * @param string $name The property name.
+     *
+     * @return array The meta data for the property.
+     */
+    private static function propertyInfo($class, $name)
+    {
+        return self::$properties[$class][$name];
+    }
+
+    /**
+     * Helper function when assigning values via the ctor.
+     *
+     * @param array $info The metadata for the property.
+     * @param mixed $value The property value.
+     *
+     * @return mixed
+     */
+    private static function actualValue(array $info, $value)
+    {
+        /**
+         * Shortcut. Objects can be assigned as is.
+         */
+        if (is_object($value)) {
+            return $value;
+        }
+
+        $types = explode('|', $info['type']);
+
+        foreach ($types as $type) {
+            switch ($type) {
+                case 'integer':
+                case 'string':
+                case 'double':
+                case 'boolean':
+                case 'any':
+                    return $value;
+                case 'DateTime':
+                    return new \DateTime($value, new \DateTimeZone('UTC'));
+            }
+        }
+
+        return new $info['type']($value);
+    }
+
+    /**
+     * Assign a value to a property.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param string $name The property name.
+     * @param mixed $value . The value to assign to the property.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
+     */
+    private function set($class, $name, $value)
+    {
+        self::ensurePropertyExists($class, $name);
+        self::ensurePropertyType($class, $name, $value);
+
+        $this->setValue($class, $name, $value);
+    }
+
+    /**
+     * Determines if the property is a member of the class.
+     *
+     * @param string $class The name of the class that we are checking for.
+     * @param string $name The property name.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     */
+    private static function ensurePropertyExists($class, $name)
+    {
+        if (!array_key_exists($name, self::$properties[$class])) {
+            throw new Exceptions\UnknownPropertyException($name);
+        }
+    }
+
+    /**
+     * Determines if the value is the correct type to assign to a property.
+     *
+     * @param string $class The name of the class that we are checking for.
+     * @param mixed $name The property name.
+     * @param mixed $value The value to check the type of.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
+     */
+    private static function ensurePropertyType($class, $name, $value)
+    {
+        $isValid = false;
+        $info = self::propertyInfo($class, $name);
+        $actualType = self::getActualType($value);
+        $valid = explode('|', $info['type']);
+
+        foreach ($valid as $check) {
+            if ($check !== 'any' && \DTS\eBaySDK\checkPropertyType($check)) {
+                if ($check === $actualType || 'array' === $actualType) {
+                    return;
+                }
+                $isValid = false;
+            } else {
+                $isValid = true;
+            }
+        }
+
+        if (!$isValid) {
+            $expectedType = $info['type'];
+            throw new Exceptions\InvalidPropertyTypeException($name, $expectedType, $actualType);
+        }
+    }
+
+    /**
+     * Helper function to return the actual type of a value.
+     *
+     * @param mixed $value The value we want the type of.
+     *
+     * @return string The type name of the value.
+     */
+    private static function getActualType($value)
+    {
+        $actualType = gettype($value);
+
+        if ('object' === $actualType) {
+            $actualType = get_class($value);
+        }
+
+        return $actualType;
+    }
+
+    /**
+     * Set the value of a property. Assumes property exists.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param string $name The property name.
+     * @param mixed $value . The value to assign to the property.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If trying to assign a non array type to an repeatable property.
+     */
+    private function setValue($class, $name, $value)
+    {
+        $info = self::propertyInfo($class, $name);
+
+        if (!$info['repeatable']) {
+            $this->values[$name] = $value;
+        } else {
+            $actualType = self::getActualType($value);
+            if ('array' !== $actualType) {
+                throw new Exceptions\InvalidPropertyTypeException($name, 'DTS\eBaySDK\Types\RepeatableType', $actualType);
+            } else {
+                $this->values[$name] = new Types\RepeatableType(get_class($this), $name, $info['type']);
+                foreach ($value as $item) {
+                    $this->values[$name][] = $item;
+                }
+            }
+        }
+    }
+
+    /**
+     * Helper function to remove the properties and values that belong to a object's parent.
+     *
+     * @param array $properties
+     * @param array $values
+     *
+     * @return array The first element is an array of parent properties and values.
+     * The second element is an array of the object's properties and values.
+     */
+    protected static function getParentValues(array $properties, array $values)
+    {
+        return [
+            array_diff_key($values, $properties),
+            array_intersect_key($values, $properties)
+        ];
+    }
+
+    /**
      * PHP magic function that is called when getting a property.
      *
      * @param string $name The property name.
@@ -88,6 +331,41 @@ class BaseType implements JmesPathableObjectInterface
     }
 
     /**
+     * Return a property's value.
+     *
+     * @param string $class The name of the class the property belongs to.
+     * @param string $name The property name.
+     *
+     * @return mixed The property value.
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     */
+    private function get($class, $name)
+    {
+        self::ensurePropertyExists($class, $name);
+
+        return $this->getValue($class, $name);
+    }
+
+    /**
+     * Get the value of a property. Assumes property exists.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param string $name The property name.
+     *
+     * @return mixed The property value.
+     */
+    private function getValue($class, $name)
+    {
+        $info = self::propertyInfo($class, $name);
+
+        if ($info['repeatable'] && !array_key_exists($name, $this->values)) {
+            $this->values[$name] = new Types\RepeatableType($class, $name, $info['type']);
+        }
+
+        return array_key_exists($name, $this->values) ? $this->values[$name] : null;
+    }
+
+    /**
      * PHP magic function that is called to determine if a property is set.
      *
      * @param string $name The property name.
@@ -100,6 +378,22 @@ class BaseType implements JmesPathableObjectInterface
     }
 
     /**
+     * Determine if a property has been set.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param string $name The property name.
+     *
+     * @return bool Returns if the property has been set.
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     */
+    private function isPropertySet($class, $name)
+    {
+        self::ensurePropertyExists($class, $name);
+
+        return array_key_exists($name, $this->values);
+    }
+
+    /**
      * PHP magic function that is called to unset a property.
      *
      * @param string $name The property name.
@@ -107,6 +401,21 @@ class BaseType implements JmesPathableObjectInterface
     public function __unset($name)
     {
         $this->unSetProperty(get_class($this), $name);
+    }
+
+    /**
+     *  Unset a property.
+     *
+     * @param string $class The name of the class the properties belong to.
+     * @param string $name The property name.
+     *
+     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
+     */
+    private function unSetProperty($class, $name)
+    {
+        self::ensurePropertyExists($class, $name);
+
+        unset($this->values[$name]);
     }
 
     /**
@@ -138,6 +447,114 @@ class BaseType implements JmesPathableObjectInterface
             $this->propertiesToXml(),
             $elementName
         );
+    }
+
+    /**
+     * Returns an XML string of the object's attributes.
+     *
+     * @return string The XML.
+     */
+    private function attributesToXml()
+    {
+        $attributes = [];
+
+        foreach (self::$properties[get_class($this)] as $name => $info) {
+            if (!$info['attribute']) {
+                continue;
+            }
+
+            if (!array_key_exists($name, $this->values)) {
+                continue;
+            }
+
+            $attributes[] = self::attributeToXml($info['attributeName'], $this->values[$name]);
+        }
+
+        return join('', $attributes);
+    }
+
+    /**
+     * Helper function to convert an attribute property into XML
+     *
+     * @param string $name The attribute name.
+     * @param mixed $value The attribute value.
+     *
+     * @return string The XML.
+     */
+    private static function attributeToXml($name, $value)
+    {
+        return sprintf(' %s="%s"', $name, self::encodeValueXml($value));
+    }
+
+    /**
+     * Helper function to convert a value into XML
+     *
+     * @param mixed $value The property value.
+     *
+     * @return string The XML.
+     */
+    private static function encodeValueXml($value)
+    {
+        if ($value instanceof \DateTime) {
+            return $value->format('Y-m-d\TH:i:s.000\Z');
+        } elseif (is_bool($value)) {
+            return $value ? 'true' : 'false';
+        } else {
+            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', true);
+        }
+    }
+
+    /**
+     * Returns an XML string of the object's properties.
+     *
+     * @return string The XML.
+     */
+    private function propertiesToXml()
+    {
+        $properties = [];
+
+        foreach (self::$properties[get_class($this)] as $name => $info) {
+            if ($info['attribute']) {
+                continue;
+            }
+
+            if (!array_key_exists($name, $this->values)) {
+                continue;
+            }
+
+            $value = $this->values[$name];
+
+            if (!array_key_exists('elementName', $info) && !array_key_exists('attributeName', $info)) {
+                $properties[] = self::encodeValueXml($value);
+            } else {
+                if ($info['repeatable']) {
+                    foreach ($value as $property) {
+                        $properties[] = self::propertyToXml($info['elementName'], $property);
+                    }
+                } else {
+                    $properties[] = self::propertyToXml($info['elementName'], $value);
+                }
+            }
+        }
+
+        return join("\n", $properties);
+    }
+
+    /**
+     * Helper function to convert an property into XML
+     *
+     * @param string $name The property name.
+     * @param mixed $value The property value.
+     *
+     * @return string The XML.
+     */
+    private static function propertyToXml($name, $value)
+    {
+        if (is_subclass_of($value, '\DTS\eBaySDK\Types\BaseType', false)) {
+            return $value->toXml($name);
+        } else {
+            return sprintf('<%s>%s</%s>', $name, self::encodeValueXml($value), $name);
+        }
     }
 
     /**
@@ -208,6 +625,26 @@ class BaseType implements JmesPathableObjectInterface
     }
 
     /**
+     * Assign multiple values to an object.
+     *
+     * @param string $expression A valid JMESPath expression
+     *
+     * @return mixed The results of the search.
+     */
+    public function search($expression)
+    {
+        return Env::search($expression, $this);
+    }
+
+    /**
+     * @return string JSON string of the object's properties and values.
+     */
+    public function __toString()
+    {
+        return json_encode($this->toArray());
+    }
+
+    /**
      * Helper method that returns an associative array of the object's properties and values.
      *
      * @return array Associative array where the keys are the object's properties.
@@ -239,362 +676,6 @@ class BaseType implements JmesPathableObjectInterface
     }
 
     /**
-     * Assign multiple values to an object.
-     *
-     * @param string $expression A valid JMESPath expression
-     *
-     * @return mixed The results of the search.
-     */
-    public function search($expression)
-    {
-        return Env::search($expression, $this);
-    }
-
-    /**
-     * @return string JSON string of the object's properties and values.
-     */
-    public function __toString()
-    {
-        return json_encode($this->toArray());
-    }
-
-    /**
-     * Assign multiple values to an object.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param array $values. Associative array of property names and their values.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
-     */
-    protected function setValues($class, array $values = [])
-    {
-        foreach ($values as $property => $value) {
-            $value = self::removeNull($value);
-            if (!is_null($value)) {
-                $actualValue = self::determineActualValueToAssign($class, $property, $value);
-                $this->set($class, $property, $actualValue);
-            }
-        }
-    }
-
-    /**
-     * Return a property's value.
-     *
-     * @param string $class The name of the class the property belongs to.
-     * @param string $name The property name.
-     *
-     * @return mixed The property value.
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     */
-    private function get($class, $name)
-    {
-        self::ensurePropertyExists($class, $name);
-
-        return $this->getValue($class, $name);
-    }
-
-    /**
-     * Assign a value to a property.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param string $name The property name.
-     * @param mixed $value. The value to assign to the property.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
-     */
-    private function set($class, $name, $value)
-    {
-        self::ensurePropertyExists($class, $name);
-        self::ensurePropertyType($class, $name, $value);
-
-        $this->setValue($class, $name, $value);
-    }
-
-    /**
-     * Determine if a property has been set.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param string $name The property name.
-     *
-     * @return bool Returns if the property has been set.
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     */
-    private function isPropertySet($class, $name)
-    {
-        self::ensurePropertyExists($class, $name);
-
-        return array_key_exists($name, $this->values);
-    }
-
-    /**
-     *  Unset a property.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param string $name The property name.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     */
-    private function unSetProperty($class, $name)
-    {
-        self::ensurePropertyExists($class, $name);
-
-        unset($this->values[$name]);
-    }
-
-    /**
-     * Get the value of a property. Assumes property exists.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param string $name The property name.
-     *
-     * @return mixed The property value.
-     */
-    private function getValue($class, $name)
-    {
-        $info = self::propertyInfo($class, $name);
-
-        if ($info['repeatable'] && !array_key_exists($name, $this->values)) {
-            $this->values[$name] = new Types\RepeatableType($class, $name, $info['type']);
-        }
-
-        return array_key_exists($name, $this->values) ? $this->values[$name] : null;
-    }
-
-    /**
-     * Set the value of a property. Assumes property exists.
-     *
-     * @param string $class The name of the class the properties belong to.
-     * @param string $name The property name.
-     * @param mixed $value. The value to assign to the property.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If trying to assign a non array type to an repeatable property.
-     */
-    private function setValue($class, $name, $value)
-    {
-        $info = self::propertyInfo($class, $name);
-
-        if (!$info['repeatable']) {
-            $this->values[$name] = $value;
-        } else {
-            $actualType = self::getActualType($value);
-            if ('array' !== $actualType) {
-                throw new Exceptions\InvalidPropertyTypeException($name, 'DTS\eBaySDK\Types\RepeatableType', $actualType);
-            } else {
-                $this->values[$name] = new Types\RepeatableType(get_class($this), $name, $info['type']);
-                foreach ($value as $item) {
-                    $this->values[$name][] = $item;
-                }
-            }
-        }
-    }
-
-    /**
-     * Returns an XML string of the object's attributes.
-     *
-     * @return string The XML.
-     */
-    private function attributesToXml()
-    {
-        $attributes = [];
-
-        foreach (self::$properties[get_class($this)] as $name => $info) {
-            if (!$info['attribute']) {
-                continue;
-            }
-
-            if (!array_key_exists($name, $this->values)) {
-                continue;
-            }
-
-            $attributes[] = self::attributeToXml($info['attributeName'], $this->values[$name]);
-        }
-
-        return join('', $attributes);
-    }
-
-    /**
-     * Returns an XML string of the object's properties.
-     *
-     * @return string The XML.
-     */
-    private function propertiesToXml()
-    {
-        $properties = [];
-
-        foreach (self::$properties[get_class($this)] as $name => $info) {
-            if ($info['attribute']) {
-                continue;
-            }
-
-            if (!array_key_exists($name, $this->values)) {
-                continue;
-            }
-
-            $value = $this->values[$name];
-
-            if (!array_key_exists('elementName', $info) && !array_key_exists('attributeName', $info)) {
-                $properties[] = self::encodeValueXml($value);
-            } else {
-                if ($info['repeatable']) {
-                    foreach ($value as $property) {
-                        $properties[] = self::propertyToXml($info['elementName'], $property);
-                    }
-                } else {
-                    $properties[] = self::propertyToXml($info['elementName'], $value);
-                }
-            }
-        }
-
-        return join("\n", $properties);
-    }
-
-    /**
-     * Determines if the property is a member of the class.
-     *
-     * @param string $class The name of the class that we are checking for.
-     * @param string $name The property name.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\UnknownPropertyException If the property does not exist.
-     */
-    private static function ensurePropertyExists($class, $name)
-    {
-        if (!array_key_exists($name, self::$properties[$class])) {
-            throw new Exceptions\UnknownPropertyException($name);
-        }
-    }
-
-    /**
-     * Determines if the value is the correct type to assign to a property.
-     *
-     * @param string $class The name of the class that we are checking for.
-     * @param mixed $name The property name.
-     * @param mixed $value The value to check the type of.
-     *
-     * @throws \DTS\eBaySDK\Exceptions\InvalidPropertyTypeException If the value is the wrong type for the property.
-     */
-    private static function ensurePropertyType($class, $name, $value)
-    {
-        $isValid = false;
-        $info = self::propertyInfo($class, $name);
-        $actualType = self::getActualType($value);
-        $valid = explode('|', $info['type']);
-
-        foreach ($valid as $check) {
-            if ($check !== 'any' && \DTS\eBaySDK\checkPropertyType($check)) {
-                if ($check === $actualType || 'array' === $actualType) {
-                    return;
-                }
-                $isValid = false;
-            } else {
-                $isValid = true;
-            }
-        }
-
-        if (!$isValid) {
-            $expectedType = $info['type'];
-            throw new Exceptions\InvalidPropertyTypeException($name, $expectedType, $actualType);
-        }
-    }
-
-    /**
-     * Helper function to return the actual type of a value.
-     *
-     * @param mixed $value The value we want the type of.
-     *
-     * @return string The type name of the value.
-     */
-    private static function getActualType($value)
-    {
-        $actualType = gettype($value);
-
-        if ('object' === $actualType) {
-            $actualType = get_class($value);
-        }
-
-        return $actualType;
-    }
-
-    /**
-     * Helper function to return the meta data of a property.
-     *
-     * @param string $class The name of the class the property belongs to.
-     * @param string $name The property name.
-     *
-     * @return array The meta data for the property.
-     */
-    private static function propertyInfo($class, $name)
-    {
-        return self::$properties[$class][$name];
-    }
-
-    /**
-     * Helper function to remove the properties and values that belong to a object's parent.
-     *
-     * @param array $properties
-     * @param array $values
-     *
-     * @return array The first element is an array of parent properties and values.
-     * The second element is an array of the object's properties and values.
-     */
-    protected static function getParentValues(array $properties, array $values)
-    {
-        return [
-            array_diff_key($values, $properties),
-            array_intersect_key($values, $properties)
-        ];
-    }
-
-    /**
-     * Helper function to convert an attribute property into XML
-     *
-     * @param string $name The attribute name.
-     * @param mixed $value The attribute value.
-     *
-     * @return string The XML.
-     */
-    private static function attributeToXml($name, $value)
-    {
-        return sprintf(' %s="%s"', $name, self::encodeValueXml($value));
-    }
-
-    /**
-     * Helper function to convert an property into XML
-     *
-     * @param string $name The property name.
-     * @param mixed $value The property value.
-     *
-     * @return string The XML.
-     */
-    private static function propertyToXml($name, $value)
-    {
-        if (is_subclass_of($value, '\DTS\eBaySDK\Types\BaseType', false)) {
-            return $value->toXml($name);
-        } else {
-            return sprintf('<%s>%s</%s>', $name, self::encodeValueXml($value), $name);
-        }
-    }
-
-    /**
-     * Helper function to convert a value into XML
-     *
-     * @param mixed $value The property value.
-     *
-     * @return string The XML.
-     */
-    private static function encodeValueXml($value)
-    {
-        if ($value instanceof \DateTime) {
-            return $value->format('Y-m-d\TH:i:s.000\Z');
-        } elseif (is_bool($value)) {
-            return $value ? 'true' : 'false';
-        } else {
-            return htmlspecialchars($value, ENT_QUOTES, 'UTF-8', true);
-        }
-    }
-
-    /**
      * Helper function to convert a property in a value that we want in an array.
      *
      * @param mixed $value The property value.
@@ -610,85 +691,5 @@ class BaseType implements JmesPathableObjectInterface
         } else {
             return $value;
         }
-    }
-
-    /**
-     * Helper function when assigning values via the ctor.
-     * Determines the actual value to assign to a property.
-     *
-     * @param string $class The name of the class the property belong to.
-     * @param string $property The property name.
-     * @param mixed $value The property value.
-     *
-     * @return mixed
-     */
-    private static function determineActualValueToAssign($class, $property, $value)
-    {
-        if (!array_key_exists($property, self::$properties[$class])) {
-            return $value;
-        }
-
-        $info = self::propertyInfo($class, $property);
-
-        if ($info['repeatable'] && is_array($value)) {
-            $values = [];
-            foreach ($value as $val) {
-                $values[] = self::actualValue($info, $val);
-            }
-            return $values;
-        }
-
-        return self::actualValue($info, $value);
-    }
-
-    /**
-     * Helper function when assigning values via the ctor.
-     *
-     * @param array $info The metadata for the property.
-     * @param mixed $value The property value.
-     *
-     * @return mixed
-     */
-    private static function actualValue(array $info, $value)
-    {
-        /**
-         * Shortcut. Objects can be assigned as is.
-         */
-        if (is_object($value)) {
-            return $value;
-        }
-
-        $types = explode('|', $info['type']);
-
-        foreach ($types as $type) {
-            switch ($type) {
-                case 'integer':
-                case 'string':
-                case 'double':
-                case 'boolean':
-                case 'any':
-                    return $value;
-                case 'DateTime':
-                    return new \DateTime($value, new \DateTimeZone('UTC'));
-            }
-        }
-
-        return new $info['type']($value);
-    }
-
-    /**
-     * @param mixed $value Remove null elements if an array.
-     *
-     * @return mixed Original value if not an array or array without null elements.
-     */
-    private static function removeNull($value)
-    {
-        if (!is_array($value)) {
-            return $value;
-        }
-
-        return array_filter($value, function ($val) {
-            return !is_null($val);
-        });
     }
 }

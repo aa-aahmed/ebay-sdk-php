@@ -16,11 +16,6 @@ class EBayMotorsProBestOfferEnabledDefinitionTypeTest extends \PHPUnit_Framework
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EBayMotorsProBestOfferEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\EBayMotorsProBestOfferEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class EBayMotorsProBestOfferEnabledDefinitionTypeTest extends \PHPUnit_Framework
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EBayMotorsProBestOfferEnabledDefinitionType();
     }
 }

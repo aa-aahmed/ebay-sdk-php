@@ -1,7 +1,9 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK as Sdk;
+
 /**
  * These tests are to cover where we have corrected
  * the property names of various classes.

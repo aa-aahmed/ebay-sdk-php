@@ -16,11 +16,6 @@ class ProvideTrackingInfoRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideTrackingInfoRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\ProvideTrackingInfoRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProvideTrackingInfoRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\BaseRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideTrackingInfoRequest();
     }
 }

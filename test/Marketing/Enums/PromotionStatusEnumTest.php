@@ -16,13 +16,13 @@ class PromotionStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PromotionStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\PromotionStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PromotionStatusEnum();
     }
 }

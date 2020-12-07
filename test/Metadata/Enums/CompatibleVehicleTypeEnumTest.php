@@ -16,13 +16,13 @@ class CompatibleVehicleTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CompatibleVehicleTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Enums\CompatibleVehicleTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CompatibleVehicleTypeEnum();
     }
 }

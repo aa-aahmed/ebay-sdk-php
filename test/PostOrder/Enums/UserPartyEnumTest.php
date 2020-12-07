@@ -16,13 +16,13 @@ class UserPartyEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UserPartyEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\UserPartyEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UserPartyEnum();
     }
 }

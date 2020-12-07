@@ -16,13 +16,13 @@ class MailOptionsTypeCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MailOptionsTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\MailOptionsTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MailOptionsTypeCodeType();
     }
 }

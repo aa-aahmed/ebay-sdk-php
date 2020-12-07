@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Services;
 
-use DTS\eBaySDK\Parser\XmlParser;
+use DTS\eBaySDK as Functions;
 use DTS\eBaySDK\ConfigurationResolver;
 use DTS\eBaySDK\Credentials\CredentialsProvider;
-use \DTS\eBaySDK as Functions;
+use DTS\eBaySDK\Parser\XmlParser;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 
@@ -52,7 +53,8 @@ abstract class BaseService
         $productionUrl,
         $sandboxUrl,
         array $config
-    ) {
+    )
+    {
         $this->resolver = new ConfigurationResolver(static::getConfigDefinitions());
         $this->config = $this->resolver->resolve($config);
         $this->productionUrl = $productionUrl;
@@ -69,35 +71,45 @@ abstract class BaseService
         return [
             'profile' => [
                 'valid' => ['string'],
-                'fn'    => 'DTS\eBaySDK\applyProfile',
+                'fn' => 'DTS\eBaySDK\applyProfile',
             ],
             'compressResponse' => [
-                'valid'   => ['bool'],
+                'valid' => ['bool'],
                 'default' => false
             ],
             'credentials' => [
-                'valid'   => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
-                'fn'      => 'DTS\eBaySDK\applyCredentials',
+                'valid' => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
+                'fn' => 'DTS\eBaySDK\applyCredentials',
                 'default' => [CredentialsProvider::class, 'defaultProvider']
             ],
             'debug' => [
-                'valid'   => ['bool', 'array'],
-                'fn'      => 'DTS\eBaySDK\applyDebug',
+                'valid' => ['bool', 'array'],
+                'fn' => 'DTS\eBaySDK\applyDebug',
                 'default' => false
             ],
             'httpHandler' => [
-                'valid'   => ['callable'],
+                'valid' => ['callable'],
                 'default' => 'DTS\eBaySDK\defaultHttpHandler'
             ],
             'httpOptions' => [
-                'valid'   => ['array'],
+                'valid' => ['array'],
                 'default' => []
             ],
             'sandbox' => [
-                'valid'   => ['bool'],
+                'valid' => ['bool'],
                 'default' => false
             ]
         ];
+    }
+
+    /**
+     * Helper method to return the value of the credentials configuration option.
+     *
+     * @return \DTS\eBaySDK\Credentials\CredentialsInterface
+     */
+    public function getCredentials()
+    {
+        return $this->getConfig('credentials');
     }
 
     /**
@@ -128,16 +140,6 @@ abstract class BaseService
             $this->config,
             $this->resolver->resolveOptions($configuration)
         );
-    }
-
-    /**
-     * Helper method to return the value of the credentials configuration option.
-     *
-     * @return \DTS\eBaySDK\Credentials\CredentialsInterface
-     */
-    public function getCredentials()
-    {
-        return $this->getConfig('credentials');
     }
 
     /**
@@ -204,7 +206,7 @@ abstract class BaseService
         if (!$request->hasAttachment()) {
             return $request->toRequestXml();
         } else {
-            return $this->buildXopDocument($request).$this->buildAttachmentBody($request->attachment());
+            return $this->buildXopDocument($request) . $this->buildAttachmentBody($request->attachment());
         }
     }
 
@@ -219,11 +221,11 @@ abstract class BaseService
     {
         return sprintf(
             '%s%s%s%s%s',
-            '--MIME_boundary'.self::CRLF,
-            'Content-Type: application/xop+xml;charset=UTF-8;type="text/xml"'.self::CRLF,
-            'Content-Transfer-Encoding: 8bit'.self::CRLF,
-            'Content-ID: <request.xml@devbay.net>'.self::CRLF.self::CRLF,
-            $request->toRequestXml().self::CRLF
+            '--MIME_boundary' . self::CRLF,
+            'Content-Type: application/xop+xml;charset=UTF-8;type="text/xml"' . self::CRLF,
+            'Content-Transfer-Encoding: 8bit' . self::CRLF,
+            'Content-ID: <request.xml@devbay.net>' . self::CRLF . self::CRLF,
+            $request->toRequestXml() . self::CRLF
         );
     }
 
@@ -238,50 +240,12 @@ abstract class BaseService
     {
         return sprintf(
             '%s%s%s%s%s%s',
-            '--MIME_boundary'.self::CRLF,
-            'Content-Type: '.$attachment['mimeType'].self::CRLF,
-            'Content-Transfer-Encoding: binary'.self::CRLF,
-            'Content-ID: <attachment.bin@devbay.net>'.self::CRLF.self::CRLF,
-            $attachment['data'].self::CRLF,
+            '--MIME_boundary' . self::CRLF,
+            'Content-Type: ' . $attachment['mimeType'] . self::CRLF,
+            'Content-Transfer-Encoding: binary' . self::CRLF,
+            'Content-ID: <attachment.bin@devbay.net>' . self::CRLF . self::CRLF,
+            $attachment['data'] . self::CRLF,
             '--MIME_boundary--'
-        );
-    }
-
-    /**
-     * Builds the XML payload part of a multipart/form-data request body.
-     *
-     * @param \DTS\eBaySDK\Types\BaseType $request Request object containing the request information.
-     *
-     * @return string The XML payload part of a multipart/form-data request body.
-     */
-    protected function buildMultipartFormDataXMLPayload(\DTS\eBaySDK\Types\BaseType $request)
-    {
-        return sprintf(
-            '%s%s%s',
-            '--boundary'.self::CRLF,
-            'Content-Disposition: form-data; name="XML Payload"'.self::CRLF.self::CRLF,
-            $request->toRequestXml().self::CRLF
-        );
-    }
-
-
-    /**
-     * Builds the file part of a multipart/form-data request body.
-     *
-     * @param string $name
-     * @param array $attachment
-     *
-     * @return string The file part of a multipart/form-data request body.
-     */
-    protected function buildMultipartFormDataFilePayload($name, $attachment)
-    {
-        return sprintf(
-            '%s%s%s%s%s',
-            '--boundary'.self::CRLF,
-            'Content-Disposition: form-data; name="'.$name.'"; filename="picture"'.self::CRLF,
-            'Content-Type: '.$attachment['mimeType'].self::CRLF.self::CRLF,
-            $attachment['data'].self::CRLF,
-            '--boundary--'
         );
     }
 
@@ -311,6 +275,47 @@ abstract class BaseService
         $headers['Content-Length'] = strlen($body);
 
         return array_merge($headers, $this->getEbayHeaders($name));
+    }
+
+    /**
+     * Derived classes must implement this method that will build the needed eBay http headers.
+     *
+     * @param string $operationName The name of the operation been called.
+     *
+     * @return array An associative array of eBay http headers.
+     */
+    abstract protected function getEbayHeaders($operationName);
+
+    /**
+     * Sends a debug string of the request details.
+     *
+     * @param string $url API endpoint.
+     * @param array $headers Associative array of HTTP headers.
+     * @param string $body The XML body of the POST request.
+     */
+    private function debugRequest($url, array $headers, $body)
+    {
+        $str = $url . PHP_EOL;
+
+        $str .= array_reduce(array_keys($headers), function ($str, $key) use ($headers) {
+            $str .= $key . ': ' . $headers[$key] . PHP_EOL;
+            return $str;
+        }, '');
+
+        $str .= $body;
+
+        $this->debug($str);
+    }
+
+    /**
+     * Sends a debug string via the attach debugger.
+     *
+     * @param string $str
+     */
+    private function debug($str)
+    {
+        $debugger = $this->getConfig('debug');
+        $debugger($str);
     }
 
     /**
@@ -365,53 +370,49 @@ abstract class BaseService
     }
 
     /**
-     * Derived classes must implement this method that will build the needed eBay http headers.
-     *
-     * @param string $operationName The name of the operation been called.
-     *
-     * @return array An associative array of eBay http headers.
-     */
-    abstract protected function getEbayHeaders($operationName);
-
-    /**
-     * Sends a debug string of the request details.
-     *
-     * @param string $url API endpoint.
-     * @param array  $headers Associative array of HTTP headers.
-     * @param string $body The XML body of the POST request.
-      */
-    private function debugRequest($url, array $headers, $body)
-    {
-        $str = $url.PHP_EOL;
-
-        $str .= array_reduce(array_keys($headers), function ($str, $key) use ($headers) {
-            $str .= $key.': '.$headers[$key].PHP_EOL;
-            return $str;
-        }, '');
-
-        $str .= $body;
-
-        $this->debug($str);
-    }
-
-    /**
      * Sends a debug string of the response details.
      *
      * @param string $body The XML body of the response.
-      */
+     */
     private function debugResponse($body)
     {
         $this->debug($body);
     }
 
     /**
-     * Sends a debug string via the attach debugger.
+     * Builds the XML payload part of a multipart/form-data request body.
      *
-     * @param string $str
+     * @param \DTS\eBaySDK\Types\BaseType $request Request object containing the request information.
+     *
+     * @return string The XML payload part of a multipart/form-data request body.
      */
-    private function debug($str)
+    protected function buildMultipartFormDataXMLPayload(\DTS\eBaySDK\Types\BaseType $request)
     {
-        $debugger = $this->getConfig('debug');
-        $debugger($str);
+        return sprintf(
+            '%s%s%s',
+            '--boundary' . self::CRLF,
+            'Content-Disposition: form-data; name="XML Payload"' . self::CRLF . self::CRLF,
+            $request->toRequestXml() . self::CRLF
+        );
+    }
+
+    /**
+     * Builds the file part of a multipart/form-data request body.
+     *
+     * @param string $name
+     * @param array $attachment
+     *
+     * @return string The file part of a multipart/form-data request body.
+     */
+    protected function buildMultipartFormDataFilePayload($name, $attachment)
+    {
+        return sprintf(
+            '%s%s%s%s%s',
+            '--boundary' . self::CRLF,
+            'Content-Disposition: form-data; name="' . $name . '"; filename="picture"' . self::CRLF,
+            'Content-Type: ' . $attachment['mimeType'] . self::CRLF . self::CRLF,
+            $attachment['data'] . self::CRLF,
+            '--boundary--'
+        );
     }
 }

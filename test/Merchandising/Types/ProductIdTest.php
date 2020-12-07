@@ -16,11 +16,6 @@ class ProductIdTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProductId();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Types\ProductId', $this->obj);
@@ -29,5 +24,10 @@ class ProductIdTest extends \PHPUnit_Framework_TestCase
     public function testExtendsStringType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\StringType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProductId();
     }
 }

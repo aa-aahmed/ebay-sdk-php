@@ -16,11 +16,6 @@ class GetACategoryTreeRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetACategoryTreeRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\GetACategoryTreeRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetACategoryTreeRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCategoryTree()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\CategoryTree', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetACategoryTreeRestResponse();
     }
 }

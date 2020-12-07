@@ -16,13 +16,13 @@ class ShippingServiceTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ShippingServiceTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\ShippingServiceTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ShippingServiceTypeEnum();
     }
 }

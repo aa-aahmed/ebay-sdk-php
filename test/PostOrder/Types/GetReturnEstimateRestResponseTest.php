@@ -16,11 +16,6 @@ class GetReturnEstimateRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnEstimateRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetReturnEstimateRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnEstimateRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetEstimateResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetEstimateResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnEstimateRestResponse();
     }
 }

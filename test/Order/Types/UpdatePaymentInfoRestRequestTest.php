@@ -16,11 +16,6 @@ class UpdatePaymentInfoRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdatePaymentInfoRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdatePaymentInfoRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdatePaymentInfoRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsUpdatePaymentInformation()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdatePaymentInformation', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdatePaymentInfoRestRequest();
     }
 }

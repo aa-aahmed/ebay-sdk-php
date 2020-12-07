@@ -16,13 +16,13 @@ class BulkCatalogListerStatusCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkCatalogListerStatusCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\BulkCatalogListerStatusCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkCatalogListerStatusCodeType();
     }
 }

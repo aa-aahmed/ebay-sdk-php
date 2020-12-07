@@ -16,11 +16,6 @@ class GetMultipleItemsRequestTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetMultipleItemsRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Shopping\Types\GetMultipleItemsRequestType', $this->obj);
@@ -29,5 +24,10 @@ class GetMultipleItemsRequestTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Shopping\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetMultipleItemsRequestType();
     }
 }

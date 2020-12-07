@@ -16,13 +16,13 @@ class BidderTypeCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BidderTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\BidderTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BidderTypeCodeType();
     }
 }

@@ -16,13 +16,13 @@ class DeliveryStatusEmailCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeliveryStatusEmailCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\DeliveryStatusEmailCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeliveryStatusEmailCodeType();
     }
 }

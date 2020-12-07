@@ -16,11 +16,6 @@ class BulkUpdatePriceAndQuantityRestResponseTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkUpdatePriceAndQuantityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\BulkUpdatePriceAndQuantityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class BulkUpdatePriceAndQuantityRestResponseTest extends \PHPUnit_Framework_Test
     public function testExtendsBulkPriceQuantityResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\BulkPriceQuantityResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkUpdatePriceAndQuantityRestResponse();
     }
 }

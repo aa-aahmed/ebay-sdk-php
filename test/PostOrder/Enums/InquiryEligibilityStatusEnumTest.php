@@ -16,13 +16,13 @@ class InquiryEligibilityStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InquiryEligibilityStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\InquiryEligibilityStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InquiryEligibilityStatusEnum();
     }
 }

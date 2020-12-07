@@ -16,11 +16,6 @@ class WithdrawOfferRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new WithdrawOfferRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\WithdrawOfferRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class WithdrawOfferRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsWithdrawResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\WithdrawResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new WithdrawOfferRestResponse();
     }
 }

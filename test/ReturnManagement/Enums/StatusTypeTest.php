@@ -16,13 +16,13 @@ class StatusTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new StatusType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\StatusType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StatusType();
     }
 }

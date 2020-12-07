@@ -1,9 +1,10 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 use DTS\eBaySDK\Credentials\Credentials;
-use DTS\eBaySDK\Credentials\CredentialsProvider;
 use DTS\eBaySDK\Credentials\CredentialsInterface;
+use DTS\eBaySDK\Credentials\CredentialsProvider;
 
 /**
  * Returns a description of the type for the passed value.
@@ -16,7 +17,7 @@ function describeType($value)
 {
     switch (gettype($value)) {
         case 'object':
-            return 'object('. get_class($value) . ')';
+            return 'object(' . get_class($value) . ')';
         case 'array':
             return 'array(' . count($value) . ')';
         default:

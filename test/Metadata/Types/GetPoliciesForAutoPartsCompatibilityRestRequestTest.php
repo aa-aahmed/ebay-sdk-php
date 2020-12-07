@@ -16,11 +16,6 @@ class GetPoliciesForAutoPartsCompatibilityRestRequestTest extends \PHPUnit_Frame
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPoliciesForAutoPartsCompatibilityRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetPoliciesForAutoPartsCompatibilityRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetPoliciesForAutoPartsCompatibilityRestRequestTest extends \PHPUnit_Frame
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPoliciesForAutoPartsCompatibilityRestRequest();
     }
 }

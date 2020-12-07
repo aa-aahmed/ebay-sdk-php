@@ -16,11 +16,6 @@ class VoidShippingLabelRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new VoidShippingLabelRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\VoidShippingLabelRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class VoidShippingLabelRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsVoidLabelRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\VoidLabelRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new VoidShippingLabelRestRequest();
     }
 }

@@ -16,11 +16,6 @@ class DeleteASalesTaxTableRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteASalesTaxTableRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\DeleteASalesTaxTableRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class DeleteASalesTaxTableRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteASalesTaxTableRestResponse();
     }
 }

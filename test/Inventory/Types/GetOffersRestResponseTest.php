@@ -16,11 +16,6 @@ class GetOffersRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetOffersRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\GetOffersRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetOffersRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsOffers()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\Offers', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetOffersRestResponse();
     }
 }

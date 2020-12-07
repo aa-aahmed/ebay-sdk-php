@@ -16,13 +16,13 @@ class SellingManagerAutoRelistOptionCodeTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerAutoRelistOptionCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\SellingManagerAutoRelistOptionCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerAutoRelistOptionCodeType();
     }
 }

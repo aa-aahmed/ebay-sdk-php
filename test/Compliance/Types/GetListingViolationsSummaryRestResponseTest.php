@@ -16,11 +16,6 @@ class GetListingViolationsSummaryRestResponseTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetListingViolationsSummaryRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Compliance\Types\GetListingViolationsSummaryRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetListingViolationsSummaryRestResponseTest extends \PHPUnit_Framework_Tes
     public function testExtendsComplianceSummary()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Compliance\Types\ComplianceSummary', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetListingViolationsSummaryRestResponse();
     }
 }

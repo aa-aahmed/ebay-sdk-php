@@ -16,11 +16,6 @@ class UpdateOfferRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateOfferRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\UpdateOfferRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdateOfferRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsEbayOfferDetailsWithId()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\EbayOfferDetailsWithId', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateOfferRestRequest();
     }
 }

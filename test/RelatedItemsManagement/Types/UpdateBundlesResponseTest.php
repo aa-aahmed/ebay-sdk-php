@@ -16,11 +16,6 @@ class UpdateBundlesResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateBundlesResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\UpdateBundlesResponse', $this->obj);
@@ -29,5 +24,10 @@ class UpdateBundlesResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateBundlesResponse();
     }
 }

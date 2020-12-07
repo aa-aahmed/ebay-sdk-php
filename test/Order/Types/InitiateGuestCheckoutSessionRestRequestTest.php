@@ -16,11 +16,6 @@ class InitiateGuestCheckoutSessionRestRequestTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InitiateGuestCheckoutSessionRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\InitiateGuestCheckoutSessionRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class InitiateGuestCheckoutSessionRestRequestTest extends \PHPUnit_Framework_Tes
     public function testExtendsCreateGuestCheckoutSessionRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\CreateGuestCheckoutSessionRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InitiateGuestCheckoutSessionRestRequest();
     }
 }

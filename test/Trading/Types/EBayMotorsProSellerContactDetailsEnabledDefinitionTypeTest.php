@@ -16,11 +16,6 @@ class EBayMotorsProSellerContactDetailsEnabledDefinitionTypeTest extends \PHPUni
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EBayMotorsProSellerContactDetailsEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\EBayMotorsProSellerContactDetailsEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class EBayMotorsProSellerContactDetailsEnabledDefinitionTypeTest extends \PHPUni
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EBayMotorsProSellerContactDetailsEnabledDefinitionType();
     }
 }

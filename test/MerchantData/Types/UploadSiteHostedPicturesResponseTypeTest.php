@@ -16,11 +16,6 @@ class UploadSiteHostedPicturesResponseTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UploadSiteHostedPicturesResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\UploadSiteHostedPicturesResponseType', $this->obj);
@@ -29,5 +24,10 @@ class UploadSiteHostedPicturesResponseTypeTest extends \PHPUnit_Framework_TestCa
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UploadSiteHostedPicturesResponseType();
     }
 }

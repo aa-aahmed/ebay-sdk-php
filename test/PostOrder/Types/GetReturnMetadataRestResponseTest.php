@@ -16,11 +16,6 @@ class GetReturnMetadataRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnMetadataRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetReturnMetadataRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnMetadataRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetMetadataResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetMetadataResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnMetadataRestResponse();
     }
 }

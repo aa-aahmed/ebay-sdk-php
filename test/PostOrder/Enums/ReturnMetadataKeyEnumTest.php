@@ -16,13 +16,13 @@ class ReturnMetadataKeyEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnMetadataKeyEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\ReturnMetadataKeyEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnMetadataKeyEnum();
     }
 }

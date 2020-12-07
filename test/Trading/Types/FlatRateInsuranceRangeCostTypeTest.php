@@ -16,11 +16,6 @@ class FlatRateInsuranceRangeCostTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FlatRateInsuranceRangeCostType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\FlatRateInsuranceRangeCostType', $this->obj);
@@ -29,5 +24,10 @@ class FlatRateInsuranceRangeCostTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FlatRateInsuranceRangeCostType();
     }
 }

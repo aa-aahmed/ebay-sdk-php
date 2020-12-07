@@ -16,11 +16,6 @@ class SearchCasesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SearchCasesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SearchCasesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class SearchCasesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCaseSearchResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CaseSearchResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SearchCasesRestResponse();
     }
 }

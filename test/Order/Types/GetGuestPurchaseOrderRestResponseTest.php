@@ -16,11 +16,6 @@ class GetGuestPurchaseOrderRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetGuestPurchaseOrderRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\GetGuestPurchaseOrderRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetGuestPurchaseOrderRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGuestPurchaseOrder()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\GuestPurchaseOrder', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetGuestPurchaseOrderRestResponse();
     }
 }

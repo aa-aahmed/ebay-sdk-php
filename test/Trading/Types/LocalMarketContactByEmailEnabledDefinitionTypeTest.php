@@ -16,11 +16,6 @@ class LocalMarketContactByEmailEnabledDefinitionTypeTest extends \PHPUnit_Framew
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LocalMarketContactByEmailEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\LocalMarketContactByEmailEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class LocalMarketContactByEmailEnabledDefinitionTypeTest extends \PHPUnit_Framew
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LocalMarketContactByEmailEnabledDefinitionType();
     }
 }

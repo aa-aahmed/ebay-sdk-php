@@ -20,16 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace DTS\eBaySDK\JmesPath;
 
 class Utils
 {
     static $typeMap = [
         'boolean' => 'boolean',
-        'string'  => 'string',
-        'NULL'    => 'null',
-        'double'  => 'number',
-        'float'   => 'number',
+        'string' => 'string',
+        'NULL' => 'null',
+        'double' => 'number',
+        'float' => 'number',
         'integer' => 'number'
     ];
 
@@ -45,11 +46,11 @@ class Utils
         if (!$value) {
             return $value === 0 || $value === '0';
         } elseif ($value instanceof \stdClass) {
-            return (bool) get_object_vars($value);
+            return (bool)get_object_vars($value);
         } elseif ($value instanceof JmesPathableArrayInterface) {
             return Utils::isTruthy(iterator_to_array($value));
         } elseif ($value instanceof JmesPathableObjectInterface) {
-            return (bool) $value->toArray();
+            return (bool)$value->toArray();
         } else {
             return true;
         }
@@ -113,25 +114,6 @@ class Utils
             : $value instanceof \stdClass || $value instanceof JmesPathableObjectInterface;
     }
 
-    /**
-     * Determine if the provided value is a JMESPath compatible array.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    public static function isArray($value)
-    {
-        if (is_array($value)) {
-            return !$value || array_keys($value)[0] === 0;
-        }
-
-        // Handle array-like values. Must be empty or offset 0 exists.
-        return $value instanceof \Countable && $value instanceof \ArrayAccess
-            ? count($value) == 0 || $value->offsetExists(0)
-            : $value instanceof JmesPathableArrayInterface;
-    }
-
     public static function toArray($value)
     {
         if ($value instanceof JmesPathableArrayInterface) {
@@ -156,9 +138,9 @@ class Utils
         if ($a === $b) {
             return true;
         } elseif ($a instanceof \stdClass) {
-            return self::isEqual((array) $a, $b);
+            return self::isEqual((array)$a, $b);
         } elseif ($b instanceof \stdClass) {
-            return self::isEqual($a, (array) $b);
+            return self::isEqual($a, (array)$b);
         } elseif ($a instanceof JmesPathableArrayInterface) {
             return Utils::isEqual(iterator_to_array($a), $b);
         } elseif ($b instanceof JmesPathableArrayInterface) {
@@ -177,7 +159,7 @@ class Utils
      * a simple Schwartzian transform that uses array index positions as tie
      * breakers.
      *
-     * @param array    $data   List or map of data to sort
+     * @param array $data List or map of data to sort
      * @param callable $sortFn Callable used to sort values
      *
      * @return array Returns the sorted array
@@ -186,23 +168,27 @@ class Utils
     public static function stableSort(array $data, callable $sortFn)
     {
         // Decorate each item by creating an array of [value, index]
-        array_walk($data, function (&$v, $k) { $v = [$v, $k]; });
+        array_walk($data, function (&$v, $k) {
+            $v = [$v, $k];
+        });
         // Sort by the sort function and use the index as a tie-breaker
         uasort($data, function ($a, $b) use ($sortFn) {
             return $sortFn($a[0], $b[0]) ?: ($a[1] < $b[1] ? -1 : 1);
         });
 
         // Undecorate each item and return the resulting sorted array
-        return array_map(function ($v) { return $v[0]; }, array_values($data));
+        return array_map(function ($v) {
+            return $v[0];
+        }, array_values($data));
     }
 
     /**
      * Creates a Python-style slice of a string or array.
      *
      * @param array|string $value Value to slice
-     * @param int|null     $start Starting position
-     * @param int|null     $stop  Stop position
-     * @param int          $step  Step (1, 2, -1, -2, etc.)
+     * @param int|null $start Starting position
+     * @param int|null $stop Stop position
+     * @param int $step Step (1, 2, -1, -2, etc.)
      *
      * @return array|string
      * @throws \InvalidArgumentException
@@ -216,18 +202,43 @@ class Utils
         return self::sliceIndices($value, $start, $stop, $step);
     }
 
-    private static function adjustEndpoint($length, $endpoint, $step)
+    /**
+     * Determine if the provided value is a JMESPath compatible array.
+     *
+     * @param mixed $value
+     *
+     * @return bool
+     */
+    public static function isArray($value)
     {
-        if ($endpoint < 0) {
-            $endpoint += $length;
-            if ($endpoint < 0) {
-                $endpoint = $step < 0 ? -1 : 0;
-            }
-        } elseif ($endpoint >= $length) {
-            $endpoint = $step < 0 ? $length - 1 : $length;
+        if (is_array($value)) {
+            return !$value || array_keys($value)[0] === 0;
         }
 
-        return $endpoint;
+        // Handle array-like values. Must be empty or offset 0 exists.
+        return $value instanceof \Countable && $value instanceof \ArrayAccess
+            ? count($value) == 0 || $value->offsetExists(0)
+            : $value instanceof JmesPathableArrayInterface;
+    }
+
+    private static function sliceIndices($subject, $start, $stop, $step)
+    {
+        $type = gettype($subject);
+        $len = $type == 'string' ? strlen($subject) : count($subject);
+        list($start, $stop, $step) = self::adjustSlice($len, $start, $stop, $step);
+
+        $result = [];
+        if ($step > 0) {
+            for ($i = $start; $i < $stop; $i += $step) {
+                $result[] = $subject[$i];
+            }
+        } else {
+            for ($i = $start; $i > $stop; $i += $step) {
+                $result[] = $subject[$i];
+            }
+        }
+
+        return $type == 'string' ? implode($result, '') : $result;
     }
 
     private static function adjustSlice($length, $start, $stop, $step)
@@ -253,23 +264,17 @@ class Utils
         return [$start, $stop, $step];
     }
 
-    private static function sliceIndices($subject, $start, $stop, $step)
+    private static function adjustEndpoint($length, $endpoint, $step)
     {
-        $type = gettype($subject);
-        $len = $type == 'string' ? strlen($subject) : count($subject);
-        list($start, $stop, $step) = self::adjustSlice($len, $start, $stop, $step);
-
-        $result = [];
-        if ($step > 0) {
-            for ($i = $start; $i < $stop; $i += $step) {
-                $result[] = $subject[$i];
+        if ($endpoint < 0) {
+            $endpoint += $length;
+            if ($endpoint < 0) {
+                $endpoint = $step < 0 ? -1 : 0;
             }
-        } else {
-            for ($i = $start; $i > $stop; $i += $step) {
-                $result[] = $subject[$i];
-            }
+        } elseif ($endpoint >= $length) {
+            $endpoint = $step < 0 ? $length - 1 : $length;
         }
 
-        return $type == 'string' ? implode($result, '') : $result;
+        return $endpoint;
     }
 }

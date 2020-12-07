@@ -1,9 +1,10 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Trading\Services;
 
+use DTS\eBaySDK\Test\Mocks\HttpHandler;
 use DTS\eBaySDK\Trading\Services\TradingService;
 use DTS\eBaySDK\Trading\Types;
-use DTS\eBaySDK\Test\Mocks\HttpHandler;
 
 class AuthTokenTest extends \PHPUnit_Framework_TestCase
 {

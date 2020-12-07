@@ -16,11 +16,6 @@ class GetItemAspectsForCategoryRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetItemAspectsForCategoryRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\GetItemAspectsForCategoryRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetItemAspectsForCategoryRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsAspectMetadata()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\AspectMetadata', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetItemAspectsForCategoryRestResponse();
     }
 }

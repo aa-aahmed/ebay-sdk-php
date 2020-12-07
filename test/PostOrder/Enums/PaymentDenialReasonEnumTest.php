@@ -16,13 +16,13 @@ class PaymentDenialReasonEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PaymentDenialReasonEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\PaymentDenialReasonEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PaymentDenialReasonEnum();
     }
 }

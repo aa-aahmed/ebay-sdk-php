@@ -16,11 +16,6 @@ class IssueRefundOptionTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new IssueRefundOptionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\IssueRefundOptionType', $this->obj);
@@ -29,5 +24,10 @@ class IssueRefundOptionTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseActivityOptionType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\BaseActivityOptionType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new IssueRefundOptionType();
     }
 }

@@ -16,13 +16,13 @@ class MetadataCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MetadataCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\MetadataCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MetadataCodeType();
     }
 }

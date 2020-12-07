@@ -16,11 +16,6 @@ class CreateReturnShippingLabelRestRequestTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateReturnShippingLabelRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CreateReturnShippingLabelRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateReturnShippingLabelRestRequestTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateReturnShippingLabelRestRequest();
     }
 }

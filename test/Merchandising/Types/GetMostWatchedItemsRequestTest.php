@@ -16,11 +16,6 @@ class GetMostWatchedItemsRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetMostWatchedItemsRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Types\GetMostWatchedItemsRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetMostWatchedItemsRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseMerchandisingServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Types\BaseMerchandisingServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetMostWatchedItemsRequest();
     }
 }

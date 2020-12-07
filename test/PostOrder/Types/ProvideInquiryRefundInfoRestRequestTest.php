@@ -16,11 +16,6 @@ class ProvideInquiryRefundInfoRestRequestTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideInquiryRefundInfoRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvideInquiryRefundInfoRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProvideInquiryRefundInfoRestRequestTest extends \PHPUnit_Framework_TestCas
     public function testExtendsSellerProvideRefundInfoRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SellerProvideRefundInfoRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideInquiryRefundInfoRestRequest();
     }
 }

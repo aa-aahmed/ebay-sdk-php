@@ -16,13 +16,13 @@ class CalculatedShippingChargeOptionCodeTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CalculatedShippingChargeOptionCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\CalculatedShippingChargeOptionCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CalculatedShippingChargeOptionCodeType();
     }
 }

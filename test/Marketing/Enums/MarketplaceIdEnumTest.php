@@ -16,13 +16,13 @@ class MarketplaceIdEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MarketplaceIdEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\MarketplaceIdEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MarketplaceIdEnum();
     }
 }

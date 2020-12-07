@@ -16,11 +16,6 @@ class GetRecurringJobExecutionStatusRequestTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetRecurringJobExecutionStatusRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\GetRecurringJobExecutionStatusRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetRecurringJobExecutionStatusRequestTest extends \PHPUnit_Framework_TestC
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\BulkDataExchange\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetRecurringJobExecutionStatusRequest();
     }
 }

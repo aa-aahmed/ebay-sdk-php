@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
@@ -9,7 +10,7 @@ class SearchTest extends \PHPUnit_Framework_TestCase
     public function testCanSearch()
     {
         $foo = new SimpleClass([
-           'string' => 'foo'
+            'string' => 'foo'
         ]);
         $bar = new SimpleClass([
             'string' => 'bar'

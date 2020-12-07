@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
 class Service extends \DTS\eBaySDK\Test\Mocks\BaseService

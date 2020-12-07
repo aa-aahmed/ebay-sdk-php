@@ -16,11 +16,6 @@ class FindCompatibilitiesBySpecificationRequestTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FindCompatibilitiesBySpecificationRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Types\FindCompatibilitiesBySpecificationRequest', $this->obj);
@@ -29,5 +24,10 @@ class FindCompatibilitiesBySpecificationRequestTest extends \PHPUnit_Framework_T
     public function testExtendsBaseServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Types\BaseServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FindCompatibilitiesBySpecificationRequest();
     }
 }

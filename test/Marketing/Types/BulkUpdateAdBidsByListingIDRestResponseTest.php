@@ -16,11 +16,6 @@ class BulkUpdateAdBidsByListingIDRestResponseTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkUpdateAdBidsByListingIDRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkUpdateAdBidsByListingIDRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class BulkUpdateAdBidsByListingIDRestResponseTest extends \PHPUnit_Framework_Tes
     public function testExtendsBulkAdResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkAdResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkUpdateAdBidsByListingIDRestResponse();
     }
 }

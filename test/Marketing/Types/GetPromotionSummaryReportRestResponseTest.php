@@ -16,11 +16,6 @@ class GetPromotionSummaryReportRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPromotionSummaryReportRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetPromotionSummaryReportRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetPromotionSummaryReportRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsSummaryReportResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\SummaryReportResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPromotionSummaryReportRestResponse();
     }
 }

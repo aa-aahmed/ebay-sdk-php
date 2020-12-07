@@ -16,11 +16,6 @@ class GetMetadataForAReportTypeRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetMetadataForAReportTypeRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetMetadataForAReportTypeRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetMetadataForAReportTypeRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsReportMetadata()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\ReportMetadata', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetMetadataForAReportTypeRestResponse();
     }
 }

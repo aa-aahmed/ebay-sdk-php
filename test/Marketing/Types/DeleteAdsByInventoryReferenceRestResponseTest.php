@@ -16,11 +16,6 @@ class DeleteAdsByInventoryReferenceRestResponseTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteAdsByInventoryReferenceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\DeleteAdsByInventoryReferenceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class DeleteAdsByInventoryReferenceRestResponseTest extends \PHPUnit_Framework_T
     public function testExtendsAdIds()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\AdIds', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteAdsByInventoryReferenceRestResponse();
     }
 }

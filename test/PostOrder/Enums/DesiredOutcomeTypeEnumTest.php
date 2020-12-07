@@ -16,13 +16,13 @@ class DesiredOutcomeTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DesiredOutcomeTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\DesiredOutcomeTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DesiredOutcomeTypeEnum();
     }
 }

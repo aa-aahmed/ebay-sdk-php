@@ -16,11 +16,6 @@ class PagedComplianceViolationCollectionTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PagedComplianceViolationCollection();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Compliance\Types\PagedComplianceViolationCollection', $this->obj);
@@ -29,5 +24,10 @@ class PagedComplianceViolationCollectionTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PagedComplianceViolationCollection();
     }
 }

@@ -16,11 +16,6 @@ class UpdateCampaignIDentificationRestRequestTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateCampaignIDentificationRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\UpdateCampaignIDentificationRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdateCampaignIDentificationRestRequestTest extends \PHPUnit_Framework_Tes
     public function testExtendsUpdateCampaignIdentificationRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\UpdateCampaignIdentificationRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateCampaignIDentificationRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class GeneralPaymentMethodCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GeneralPaymentMethodCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\GeneralPaymentMethodCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GeneralPaymentMethodCodeType();
     }
 }

@@ -16,11 +16,6 @@ class ProvideInquiryRefundInfoRestResponseTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideInquiryRefundInfoRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvideInquiryRefundInfoRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class ProvideInquiryRefundInfoRestResponseTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideInquiryRefundInfoRestResponse();
     }
 }

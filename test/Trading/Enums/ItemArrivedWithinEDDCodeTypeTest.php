@@ -16,13 +16,13 @@ class ItemArrivedWithinEDDCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ItemArrivedWithinEDDCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\ItemArrivedWithinEDDCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ItemArrivedWithinEDDCodeType();
     }
 }

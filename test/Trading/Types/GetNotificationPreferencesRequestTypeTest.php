@@ -16,11 +16,6 @@ class GetNotificationPreferencesRequestTypeTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetNotificationPreferencesRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetNotificationPreferencesRequestType', $this->obj);
@@ -29,5 +24,10 @@ class GetNotificationPreferencesRequestTypeTest extends \PHPUnit_Framework_TestC
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetNotificationPreferencesRequestType();
     }
 }

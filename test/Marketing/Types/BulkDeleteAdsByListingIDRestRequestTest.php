@@ -16,11 +16,6 @@ class BulkDeleteAdsByListingIDRestRequestTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkDeleteAdsByListingIDRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkDeleteAdsByListingIDRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class BulkDeleteAdsByListingIDRestRequestTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBulkDeleteAdRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkDeleteAdRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkDeleteAdsByListingIDRestRequest();
     }
 }

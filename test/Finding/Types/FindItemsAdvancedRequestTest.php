@@ -16,11 +16,6 @@ class FindItemsAdvancedRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FindItemsAdvancedRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Finding\Types\FindItemsAdvancedRequest', $this->obj);
@@ -29,5 +24,10 @@ class FindItemsAdvancedRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseFindingServiceRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Finding\Types\BaseFindingServiceRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FindItemsAdvancedRequest();
     }
 }

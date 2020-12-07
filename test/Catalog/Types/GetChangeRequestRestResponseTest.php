@@ -16,11 +16,6 @@ class GetChangeRequestRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetChangeRequestRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\GetChangeRequestRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetChangeRequestRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsChangeRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\ChangeRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetChangeRequestRestResponse();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Test\Mocks\AmountClass;

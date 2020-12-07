@@ -16,13 +16,13 @@ class MetadataEntryTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MetadataEntryType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\MetadataEntryType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MetadataEntryType();
     }
 }

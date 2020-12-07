@@ -16,13 +16,13 @@ class PickupStatusCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PickupStatusCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Enums\PickupStatusCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PickupStatusCodeType();
     }
 }

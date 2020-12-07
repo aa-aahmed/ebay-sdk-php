@@ -16,11 +16,6 @@ class CreateDSRSummaryResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateDSRSummaryResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\CreateDSRSummaryResponse', $this->obj);
@@ -29,5 +24,10 @@ class CreateDSRSummaryResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Feedback\Types\BaseServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateDSRSummaryResponse();
     }
 }

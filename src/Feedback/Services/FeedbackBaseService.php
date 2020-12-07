@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Feedback\Services;
 
 /**
@@ -39,15 +40,15 @@ class FeedbackBaseService extends \DTS\eBaySDK\Services\BaseService
         $definitions = parent::getConfigDefinitions();
 
         return $definitions + [
-            'apiVersion' => [
-                'valid' => ['string'],
-                'default' => \DTS\eBaySDK\Feedback\Services\FeedbackService::API_VERSION
-            ],
-            'authToken' => [
-                'valid' => ['string'],
-                'required' => true
-            ]
-        ];
+                'apiVersion' => [
+                    'valid' => ['string'],
+                    'default' => \DTS\eBaySDK\Feedback\Services\FeedbackService::API_VERSION
+                ],
+                'authToken' => [
+                    'valid' => ['string'],
+                    'required' => true
+                ]
+            ];
     }
 
     /**

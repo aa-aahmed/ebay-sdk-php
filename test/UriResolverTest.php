@@ -1,8 +1,9 @@
 <?php
+
 namespace DTS\eBaySDK\Test;
 
-use DTS\eBaySDK\UriResolver;
 use DTS\eBaySDK\Test\Mocks\StaticMethods;
+use DTS\eBaySDK\UriResolver;
 
 class UriResolverTest extends \PHPUnit_Framework_TestCase
 {

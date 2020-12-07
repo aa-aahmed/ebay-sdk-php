@@ -16,11 +16,6 @@ class GetASpecificSellerProfileRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetASpecificSellerProfileRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Types\GetASpecificSellerProfileRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetASpecificSellerProfileRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsStandardsProfile()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Types\StandardsProfile', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetASpecificSellerProfileRestResponse();
     }
 }

@@ -16,13 +16,13 @@ class BuyerCloseReasonEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BuyerCloseReasonEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\BuyerCloseReasonEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BuyerCloseReasonEnum();
     }
 }

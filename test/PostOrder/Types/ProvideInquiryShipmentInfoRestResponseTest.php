@@ -16,11 +16,6 @@ class ProvideInquiryShipmentInfoRestResponseTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideInquiryShipmentInfoRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvideInquiryShipmentInfoRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class ProvideInquiryShipmentInfoRestResponseTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideInquiryShipmentInfoRestResponse();
     }
 }

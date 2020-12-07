@@ -16,11 +16,6 @@ class CreateAShippingFulfillmentRestResponseTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateAShippingFulfillmentRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\CreateAShippingFulfillmentRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class CreateAShippingFulfillmentRestResponseTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateAShippingFulfillmentRestResponse();
     }
 }

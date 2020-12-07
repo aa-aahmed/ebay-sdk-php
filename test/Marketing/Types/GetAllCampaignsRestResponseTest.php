@@ -16,11 +16,6 @@ class GetAllCampaignsRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAllCampaignsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetAllCampaignsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAllCampaignsRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCampaignPagedCollection()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CampaignPagedCollection', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAllCampaignsRestResponse();
     }
 }

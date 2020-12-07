@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 use GuzzleHttp\Client;
@@ -11,23 +12,22 @@ use Psr\Http\Message\RequestInterface;
 class HttpHandler
 {
     /**
-     * @var \GuzzleHttp\ClientInterface $client The client for making the HTTP request.
-     */
-    private $client;
-
-    /**
      * @var array Associative array of HTTP options that the SDK supports.
      */
     private static $validOptions = [
         'connect_timeout' => true,
-        'curl'            => true,
-        'debug'           => true,
-        'delay'           => true,
-        'http_errors'     => true,
-        'proxy'           => true,
-        'timeout'         => true,
-        'verify'          => true
+        'curl' => true,
+        'debug' => true,
+        'delay' => true,
+        'http_errors' => true,
+        'proxy' => true,
+        'timeout' => true,
+        'verify' => true
     ];
+    /**
+     * @var \GuzzleHttp\ClientInterface $client The client for making the HTTP request.
+     */
+    private $client;
 
     /**
      * @param \GuzzleHttp\ClientInterface $client The client for making the HTTP request.

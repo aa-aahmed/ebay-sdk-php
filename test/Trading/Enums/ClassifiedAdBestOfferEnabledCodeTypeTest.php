@@ -16,13 +16,13 @@ class ClassifiedAdBestOfferEnabledCodeTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ClassifiedAdBestOfferEnabledCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\ClassifiedAdBestOfferEnabledCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ClassifiedAdBestOfferEnabledCodeType();
     }
 }

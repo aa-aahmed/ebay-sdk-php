@@ -16,11 +16,6 @@ class AddShippingLabelInfoRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AddShippingLabelInfoRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\AddShippingLabelInfoRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class AddShippingLabelInfoRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsProvideLabelRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvideLabelRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AddShippingLabelInfoRestRequest();
     }
 }

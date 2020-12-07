@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Trading\Services;
 
 use DTS\eBaySDK\Trading\Types;
@@ -61,22 +62,22 @@ class TradingBaseService extends \DTS\eBaySDK\Services\BaseService
         $definitions = parent::getConfigDefinitions();
 
         return $definitions + [
-            'apiVersion' => [
-                'valid' => ['string'],
-                'default' => \DTS\eBaySDK\Trading\Services\TradingService::API_VERSION,
-                'required' => true
-            ],
-            'authorization' => [
-                'valid' => ['string']
-            ],
-            'authToken' => [
-                'valid' => ['string']
-            ],
-            'siteId' => [
-                'valid' => ['int', 'string'],
-                'required' => true
-            ]
-        ];
+                'apiVersion' => [
+                    'valid' => ['string'],
+                    'default' => \DTS\eBaySDK\Trading\Services\TradingService::API_VERSION,
+                    'required' => true
+                ],
+                'authorization' => [
+                    'valid' => ['string']
+                ],
+                'authToken' => [
+                    'valid' => ['string']
+                ],
+                'siteId' => [
+                    'valid' => ['int', 'string'],
+                    'required' => true
+                ]
+            ];
     }
 
     /**
@@ -176,7 +177,7 @@ class TradingBaseService extends \DTS\eBaySDK\Services\BaseService
     protected function buildRequestBody(\DTS\eBaySDK\Types\BaseType $request)
     {
         if ($request->hasAttachment() && $request instanceof Types\UploadSiteHostedPicturesRequestType) {
-            return $this->buildMultipartFormDataXMLPayload($request).$this->buildMultipartFormDataFilePayload($request->PictureName, $request->attachment());
+            return $this->buildMultipartFormDataXMLPayload($request) . $this->buildMultipartFormDataFilePayload($request->PictureName, $request->attachment());
         } else {
             return parent::buildRequestBody($request);
         }

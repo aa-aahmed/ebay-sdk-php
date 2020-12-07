@@ -16,11 +16,6 @@ class VerifyAddItemRequestTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new VerifyAddItemRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\VerifyAddItemRequestType', $this->obj);
@@ -29,5 +24,10 @@ class VerifyAddItemRequestTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new VerifyAddItemRequestType();
     }
 }

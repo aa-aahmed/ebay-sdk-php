@@ -16,13 +16,13 @@ class CampaignStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CampaignStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\CampaignStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CampaignStatusEnum();
     }
 }

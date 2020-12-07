@@ -16,11 +16,6 @@ class ReviseItemResponseTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReviseItemResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\ReviseItemResponseType', $this->obj);
@@ -29,5 +24,10 @@ class ReviseItemResponseTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReviseItemResponseType();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Types\DecimalType;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\Types\DecimalType;
 class DecimalTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new DecimalType();
-    }
 
     public function testCanBeCreated()
     {
@@ -47,5 +43,10 @@ class DecimalTypeTest extends \PHPUnit_Framework_TestCase
         $this->obj->value = -123.45;
         $this->assertEquals(-123.45, $this->obj->value);
         $this->assertInternalType('float', $this->obj->value);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DecimalType();
     }
 }

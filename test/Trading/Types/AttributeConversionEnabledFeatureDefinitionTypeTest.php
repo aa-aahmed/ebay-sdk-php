@@ -16,11 +16,6 @@ class AttributeConversionEnabledFeatureDefinitionTypeTest extends \PHPUnit_Frame
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AttributeConversionEnabledFeatureDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AttributeConversionEnabledFeatureDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class AttributeConversionEnabledFeatureDefinitionTypeTest extends \PHPUnit_Frame
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AttributeConversionEnabledFeatureDefinitionType();
     }
 }

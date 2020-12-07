@@ -16,11 +16,6 @@ class GetPromotionalSaleDetailsRequestTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPromotionalSaleDetailsRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetPromotionalSaleDetailsRequestType', $this->obj);
@@ -29,5 +24,10 @@ class GetPromotionalSaleDetailsRequestTypeTest extends \PHPUnit_Framework_TestCa
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPromotionalSaleDetailsRequestType();
     }
 }

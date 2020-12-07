@@ -16,13 +16,13 @@ class RequestTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RequestTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\RequestTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RequestTypeEnum();
     }
 }

@@ -16,13 +16,13 @@ class StoreCustomListingHeaderLinkCodeTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new StoreCustomListingHeaderLinkCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\StoreCustomListingHeaderLinkCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StoreCustomListingHeaderLinkCodeType();
     }
 }

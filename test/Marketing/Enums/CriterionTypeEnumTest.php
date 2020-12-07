@@ -16,13 +16,13 @@ class CriterionTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CriterionTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\CriterionTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CriterionTypeEnum();
     }
 }

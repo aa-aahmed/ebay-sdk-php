@@ -16,11 +16,6 @@ class ProductMetadataBulkRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProductMetadataBulkRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\ProductMetadataBulkRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProductMetadataBulkRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\BaseRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProductMetadataBulkRequest();
     }
 }

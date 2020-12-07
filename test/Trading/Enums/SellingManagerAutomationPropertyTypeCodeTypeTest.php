@@ -16,13 +16,13 @@ class SellingManagerAutomationPropertyTypeCodeTypeTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerAutomationPropertyTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\SellingManagerAutomationPropertyTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerAutomationPropertyTypeCodeType();
     }
 }

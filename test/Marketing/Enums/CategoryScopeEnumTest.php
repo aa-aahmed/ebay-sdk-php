@@ -16,13 +16,13 @@ class CategoryScopeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CategoryScopeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Enums\CategoryScopeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CategoryScopeEnum();
     }
 }

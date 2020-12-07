@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
 class SimpleClass extends \DTS\eBaySDK\Types\BaseType

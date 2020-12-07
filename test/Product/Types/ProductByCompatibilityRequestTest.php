@@ -16,11 +16,6 @@ class ProductByCompatibilityRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProductByCompatibilityRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Product\Types\ProductByCompatibilityRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProductByCompatibilityRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProductByCompatibilityRequest();
     }
 }

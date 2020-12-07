@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK;
 
 /**
@@ -6,11 +7,6 @@ namespace DTS\eBaySDK;
  */
 class ConfigurationResolver
 {
-    /**
-     * @var array $definitions Definitions for each configuration option.
-     */
-    private $definitions;
-
     /**
      * @var array Map of type to function that confirms type.
      */
@@ -21,6 +17,10 @@ class ConfigurationResolver
         'int' => 'is_int',
         'string' => 'is_string'
     ];
+    /**
+     * @var array $definitions Definitions for each configuration option.
+     */
+    private $definitions;
 
     /**
      * @param array $definitions Definitions for each configuration option.
@@ -64,31 +64,27 @@ class ConfigurationResolver
     }
 
     /**
-     * Resolve and validate the passed configuration options.
-     * The difference between this method and resolve is that
-     * this will only resolve options in the passed configuration.
-     * It will not use the definitions to resolve optional and required options.
+     * @param array $configuration Associative array of configuration options.
      *
-     * @param array $configuration Associative array of configuration options that will be resolved and validated.
-     *
-     * @return array Returns an associative array of the resolved and validated configuration options.
      * @throws \InvalidArgumentException.
      */
-    public function resolveOptions(array $configuration)
+    private function throwRequired(array $configuration)
     {
-        foreach ($configuration as $key => $value) {
-            if (isset($this->definitions[$key])) {
-                $def = $this->definitions[$key];
+        $missing = [];
 
-                $this->checkType($def['valid'], $key, $value);
-
-                if (isset($def['fn'])) {
-                    $def['fn']($configuration[$key], $configuration);
-                }
+        foreach ($this->definitions as $key => $def) {
+            if (empty($def['required'])
+                || isset($def['default'])
+                || array_key_exists($key, $configuration)
+            ) {
+                continue;
             }
+            $missing[] = $key;
         }
 
-        return $configuration;
+        $msg = "Missing required configuration options: \n\n";
+        $msg .= implode("\n\n", $missing);
+        throw new \InvalidArgumentException($msg);
     }
 
     /**
@@ -122,26 +118,30 @@ class ConfigurationResolver
     }
 
     /**
-     * @param array $configuration Associative array of configuration options.
+     * Resolve and validate the passed configuration options.
+     * The difference between this method and resolve is that
+     * this will only resolve options in the passed configuration.
+     * It will not use the definitions to resolve optional and required options.
      *
+     * @param array $configuration Associative array of configuration options that will be resolved and validated.
+     *
+     * @return array Returns an associative array of the resolved and validated configuration options.
      * @throws \InvalidArgumentException.
      */
-    private function throwRequired(array $configuration)
+    public function resolveOptions(array $configuration)
     {
-        $missing = [];
+        foreach ($configuration as $key => $value) {
+            if (isset($this->definitions[$key])) {
+                $def = $this->definitions[$key];
 
-        foreach ($this->definitions as $key => $def) {
-            if (empty($def['required'])
-                || isset($def['default'])
-                || array_key_exists($key, $configuration)
-            ) {
-                continue;
+                $this->checkType($def['valid'], $key, $value);
+
+                if (isset($def['fn'])) {
+                    $def['fn']($configuration[$key], $configuration);
+                }
             }
-            $missing[] = $key;
         }
 
-        $msg = "Missing required configuration options: \n\n";
-        $msg .= implode("\n\n", $missing);
-        throw new \InvalidArgumentException($msg);
+        return $configuration;
     }
 }

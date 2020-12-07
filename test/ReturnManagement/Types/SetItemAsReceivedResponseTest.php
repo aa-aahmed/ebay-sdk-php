@@ -16,11 +16,6 @@ class SetItemAsReceivedResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SetItemAsReceivedResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\SetItemAsReceivedResponse', $this->obj);
@@ -29,5 +24,10 @@ class SetItemAsReceivedResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\BaseResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SetItemAsReceivedResponse();
     }
 }

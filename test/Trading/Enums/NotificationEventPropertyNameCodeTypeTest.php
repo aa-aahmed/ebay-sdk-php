@@ -16,13 +16,13 @@ class NotificationEventPropertyNameCodeTypeTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new NotificationEventPropertyNameCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\NotificationEventPropertyNameCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new NotificationEventPropertyNameCodeType();
     }
 }

@@ -1,9 +1,10 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
-use DTS\eBaySDK\Test\Mocks\Service;
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
 use DTS\eBaySDK\Test\Mocks\HttpHandler;
+use DTS\eBaySDK\Test\Mocks\Service;
 
 class AttachmentTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,27 +12,6 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
     private $service;
     private $request;
     private $requestXml;
-
-    protected function setUp()
-    {
-        /**
-         * Use a class that will fake sending requests and getting responses.
-         * The idea is that all the information needed to make the request is
-         * passed to the client by the service. What we want to test is that the
-         * is actually passed correctly. We are not testing the sending of the request
-         * over the internet.
-         * The HttpHandler contains properties that will be set when the service
-         * makes the request. We can test these properties to check what the service is passing.
-         */
-        $this->httpHandler = new HttpHandler();
-        // BaseService is abstract so use class that is derived from it for testing.
-        $this->service = new Service(['httpHandler' => $this->httpHandler]);
-        $this->request = new ComplexClass();
-        $this->request->integer = 123;
-        $this->request->string = 'a string';
-        $this->request->double = 123.45;
-        $this->requestXml = rtrim(file_get_contents(__DIR__.'/../Mocks/AttachmentRequestResponse.xml'));
-    }
 
     public function testAttachment()
     {
@@ -84,5 +64,26 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(123.45, $response->double);
 
         $this->assertEquals(['data' => 'ABC123', 'mimeType' => 'image/jpeg'], $response->attachment());
+    }
+
+    protected function setUp()
+    {
+        /**
+         * Use a class that will fake sending requests and getting responses.
+         * The idea is that all the information needed to make the request is
+         * passed to the client by the service. What we want to test is that the
+         * is actually passed correctly. We are not testing the sending of the request
+         * over the internet.
+         * The HttpHandler contains properties that will be set when the service
+         * makes the request. We can test these properties to check what the service is passing.
+         */
+        $this->httpHandler = new HttpHandler();
+        // BaseService is abstract so use class that is derived from it for testing.
+        $this->service = new Service(['httpHandler' => $this->httpHandler]);
+        $this->request = new ComplexClass();
+        $this->request->integer = 123;
+        $this->request->string = 'a string';
+        $this->request->double = 123.45;
+        $this->requestXml = rtrim(file_get_contents(__DIR__ . '/../Mocks/AttachmentRequestResponse.xml'));
     }
 }

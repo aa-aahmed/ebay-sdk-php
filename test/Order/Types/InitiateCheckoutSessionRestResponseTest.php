@@ -16,11 +16,6 @@ class InitiateCheckoutSessionRestResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InitiateCheckoutSessionRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\InitiateCheckoutSessionRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class InitiateCheckoutSessionRestResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsCheckoutSessionResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\CheckoutSessionResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InitiateCheckoutSessionRestResponse();
     }
 }

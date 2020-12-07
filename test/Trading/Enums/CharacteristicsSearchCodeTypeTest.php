@@ -16,13 +16,13 @@ class CharacteristicsSearchCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CharacteristicsSearchCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\CharacteristicsSearchCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CharacteristicsSearchCodeType();
     }
 }

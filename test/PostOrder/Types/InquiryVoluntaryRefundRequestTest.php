@@ -16,11 +16,6 @@ class InquiryVoluntaryRefundRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InquiryVoluntaryRefundRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\InquiryVoluntaryRefundRequest', $this->obj);
@@ -29,5 +24,10 @@ class InquiryVoluntaryRefundRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InquiryVoluntaryRefundRequest();
     }
 }

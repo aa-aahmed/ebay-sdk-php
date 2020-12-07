@@ -16,11 +16,6 @@ class GetItemByLegacyIdRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetItemByLegacyIdRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Types\GetItemByLegacyIdRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetItemByLegacyIdRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsItem()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Types\Item', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetItemByLegacyIdRestResponse();
     }
 }

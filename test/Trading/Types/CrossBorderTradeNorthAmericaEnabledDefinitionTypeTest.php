@@ -16,11 +16,6 @@ class CrossBorderTradeNorthAmericaEnabledDefinitionTypeTest extends \PHPUnit_Fra
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CrossBorderTradeNorthAmericaEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\CrossBorderTradeNorthAmericaEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class CrossBorderTradeNorthAmericaEnabledDefinitionTypeTest extends \PHPUnit_Fra
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CrossBorderTradeNorthAmericaEnabledDefinitionType();
     }
 }

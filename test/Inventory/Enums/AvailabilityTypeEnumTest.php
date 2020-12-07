@@ -16,13 +16,13 @@ class AvailabilityTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AvailabilityTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\AvailabilityTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AvailabilityTypeEnum();
     }
 }

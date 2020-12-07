@@ -16,13 +16,13 @@ class SellingManagerAutoSecondChanceOfferTypeCodeTypeTest extends \PHPUnit_Frame
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerAutoSecondChanceOfferTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\SellingManagerAutoSecondChanceOfferTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerAutoSecondChanceOfferTypeCodeType();
     }
 }

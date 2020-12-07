@@ -16,13 +16,13 @@ class ReturnCountFilterEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnCountFilterEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\ReturnCountFilterEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnCountFilterEnum();
     }
 }

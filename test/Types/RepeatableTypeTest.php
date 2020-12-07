@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Types\RepeatableType;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\Types\RepeatableType;
 class RepeatableTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new RepeatableType('', '', 'string');
-    }
 
     public function testCanBeCreated()
     {
@@ -66,5 +62,10 @@ class RepeatableTypeTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('\DTS\eBaySDK\Exceptions\InvalidPropertyTypeException', 'Invalid property type provided for . Expected string but got integer');
 
         $this->obj[] = 123;
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RepeatableType('', '', 'string');
     }
 }

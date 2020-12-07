@@ -16,11 +16,6 @@ class AppliedPromotionTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AppliedPromotion();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\AppliedPromotion', $this->obj);
@@ -29,5 +24,10 @@ class AppliedPromotionTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AppliedPromotion();
     }
 }

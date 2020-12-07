@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Types\IntegerType;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\Types\IntegerType;
 class IntegerTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new IntegerType();
-    }
 
     public function testCanBeCreated()
     {
@@ -27,5 +23,10 @@ class IntegerTypeTest extends \PHPUnit_Framework_TestCase
         $this->obj->value = 123;
         $this->assertEquals(123, $this->obj->value);
         $this->assertInternalType('integer', $this->obj->value);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new IntegerType();
     }
 }

@@ -16,11 +16,6 @@ class CheckInquiryEligibilityRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CheckInquiryEligibilityRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckInquiryEligibilityRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CheckInquiryEligibilityRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCheckInquiryEligibilityRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckInquiryEligibilityRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CheckInquiryEligibilityRestRequest();
     }
 }

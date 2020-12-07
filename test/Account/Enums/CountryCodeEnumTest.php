@@ -16,13 +16,13 @@ class CountryCodeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CountryCodeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Enums\CountryCodeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CountryCodeEnum();
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test;
 
 use DTS\eBaySDK\Sdk;
@@ -6,20 +7,6 @@ use DTS\eBaySDK\Sdk;
 class SdkTest extends \PHPUnit_Framework_TestCase
 {
     private $sdk;
-
-    protected function setUp()
-    {
-        $this->sdk = new Sdk([
-            'apiVersion' => '',
-            'appId' => '',
-            'authToken' => '',
-            'authorization' => '',
-            'credentials' => ['appId' => '', 'certId' => '', 'devId' => ''],
-            'globalId' => '',
-            'ruName' => '',
-            'siteId' => 0
-        ]);
-    }
 
     public function testCanCreateServices()
     {
@@ -183,5 +170,19 @@ class SdkTest extends \PHPUnit_Framework_TestCase
     public function testCanCreateTrading()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Services\TradingService', $this->sdk->createTrading());
+    }
+
+    protected function setUp()
+    {
+        $this->sdk = new Sdk([
+            'apiVersion' => '',
+            'appId' => '',
+            'authToken' => '',
+            'authorization' => '',
+            'credentials' => ['appId' => '', 'certId' => '', 'devId' => ''],
+            'globalId' => '',
+            'ruName' => '',
+            'siteId' => 0
+        ]);
     }
 }

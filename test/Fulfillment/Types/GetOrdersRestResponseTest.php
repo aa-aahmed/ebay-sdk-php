@@ -16,11 +16,6 @@ class GetOrdersRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetOrdersRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\GetOrdersRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetOrdersRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsOrderSearchPagedCollection()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\OrderSearchPagedCollection', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetOrdersRestResponse();
     }
 }

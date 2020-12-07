@@ -1,18 +1,14 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Test\Mocks\AmountClass;
-use DTS\eBaySDK\Test\Mocks\SimpleClass;
 use DTS\eBaySDK\Test\Mocks\ComplexClass;
+use DTS\eBaySDK\Test\Mocks\SimpleClass;
 
 class ComplexClassTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new ComplexClass();
-    }
 
     public function testCanBeCreated()
     {
@@ -105,7 +101,7 @@ class ComplexClassTest extends \PHPUnit_Framework_TestCase
         $this->obj->AmountClass = $amountClass;
 
         $this->obj->strings = ['foo', 'bar'];
-        $this->obj->integers = [1,2,3,4,5];
+        $this->obj->integers = [1, 2, 3, 4, 5];
 
         $this->obj->simpleClasses = [
             new SimpleClass(['integer' => 888]),
@@ -136,7 +132,7 @@ class ComplexClassTest extends \PHPUnit_Framework_TestCase
         $this->obj->AmountClass = $amountClass;
 
         $this->obj->strings = ['foo', 'bar'];
-        $this->obj->integers = [1,2,3,4,5];
+        $this->obj->integers = [1, 2, 3, 4, 5];
 
         $this->obj->simpleClasses = [
             new SimpleClass(['integer' => 888]),
@@ -154,5 +150,10 @@ class ComplexClassTest extends \PHPUnit_Framework_TestCase
         $this->obj->anyTypes[] = [1, 2, 3];
 
         $this->assertJsonStringEqualsJsonFile(__DIR__ . '/../Mocks/ComplexClassJson.json', json_encode($this->obj->toArray()));
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ComplexClass();
     }
 }

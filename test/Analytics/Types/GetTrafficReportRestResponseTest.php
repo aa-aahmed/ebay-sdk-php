@@ -16,11 +16,6 @@ class GetTrafficReportRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetTrafficReportRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Types\GetTrafficReportRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetTrafficReportRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsReport()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Types\Report', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetTrafficReportRestResponse();
     }
 }

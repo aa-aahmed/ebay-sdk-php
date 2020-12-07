@@ -16,11 +16,6 @@ class GetPoliciesForListingStructuresRestRequestTest extends \PHPUnit_Framework_
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPoliciesForListingStructuresRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetPoliciesForListingStructuresRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetPoliciesForListingStructuresRestRequestTest extends \PHPUnit_Framework_
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPoliciesForListingStructuresRestRequest();
     }
 }

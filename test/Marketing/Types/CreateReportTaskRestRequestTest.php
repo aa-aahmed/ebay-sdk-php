@@ -16,11 +16,6 @@ class CreateReportTaskRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateReportTaskRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CreateReportTaskRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateReportTaskRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCreateReportTask()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CreateReportTask', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateReportTaskRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class CancelRequestStateEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CancelRequestStateEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Enums\CancelRequestStateEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CancelRequestStateEnum();
     }
 }

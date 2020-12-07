@@ -16,11 +16,6 @@ class GetReturnRulesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnRulesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetReturnRulesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnRulesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetDispositionRulesResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\GetDispositionRulesResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnRulesRestResponse();
     }
 }

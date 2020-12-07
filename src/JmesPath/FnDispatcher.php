@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace DTS\eBaySDK\JmesPath;
 
 /**
@@ -46,8 +47,8 @@ class FnDispatcher
     }
 
     /**
-     * @param string $fn   Function name.
-     * @param array  $args Function arguments.
+     * @param string $fn Function name.
+     * @param array $args Function arguments.
      *
      * @return mixed
      */
@@ -56,10 +57,66 @@ class FnDispatcher
         return $this->{'fn_' . $fn}($args);
     }
 
+    /** @param $name
+     * @param $args
+     * @internal Pass function name validation off to runtime
+     */
+    public function __call($name, $args)
+    {
+        $name = str_replace('fn_', '', $name);
+        throw new \RuntimeException("Call to undefined function {$name}");
+    }
+
     private function fn_abs(array $args)
     {
         $this->validate('abs', $args, [['number']]);
         return abs($args[0]);
+    }
+
+    private function validate($from, $args, $types = [])
+    {
+        $this->validateArity($from, count($args), count($types));
+        foreach ($args as $index => $value) {
+            if (!isset($types[$index]) || !$types[$index]) {
+                continue;
+            }
+            $this->validateType("{$from}:{$index}", $value, $types[$index]);
+        }
+    }
+
+    private function validateArity($from, $given, $expected)
+    {
+        if ($given != $expected) {
+            $err = "%s() expects {$expected} arguments, {$given} were provided";
+            throw new \RuntimeException(sprintf($err, $from));
+        }
+    }
+
+    private function validateType($from, $value, array $types)
+    {
+        if ($types[0] == 'any'
+            || in_array(Utils::type($value), $types)
+            || ($value === [] && in_array('object', $types))
+        ) {
+            return;
+        }
+        $msg = 'must be one of the following types: ' . implode(', ', $types)
+            . '. ' . Utils::type($value) . ' found';
+        $this->typeError($from, $msg);
+    }
+
+    private function typeError($from, $msg)
+    {
+        if (strpos($from, ':')) {
+            list($fn, $pos) = explode(':', $from);
+            throw new \RuntimeException(
+                sprintf('Argument %d of %s %s', $pos, $fn, $msg)
+            );
+        } else {
+            throw new \RuntimeException(
+                sprintf('Type error: %s %s', $from, $msg)
+            );
+        }
     }
 
     private function fn_avg(array $args)
@@ -70,6 +127,58 @@ class FnDispatcher
             return $a + $b;
         });
         return $arg ? ($sum / count($arg)) : null;
+    }
+
+    /**
+     * Reduces and validates an array of values to a single value using a fn.
+     *
+     * @param string $from String of function:argument_position
+     * @param array $values Values to reduce.
+     * @param array $types Array of valid value types.
+     * @param callable $reduce Reduce function that accepts ($carry, $item).
+     *
+     * @return mixed
+     */
+    private function reduce($from, array $values, array $types, callable $reduce)
+    {
+        $i = -1;
+        return array_reduce(
+            $values,
+            function ($carry, $item) use ($from, $types, $reduce, &$i) {
+                if (++$i > 0) {
+                    $this->validateSeq($from, $types, $carry, $item);
+                }
+                return $reduce($carry, $item, $i);
+            }
+        );
+    }
+
+    /**
+     * Validates value A and B, ensures they both are correctly typed, and of
+     * the same type.
+     *
+     * @param string $from String of function:argument_position
+     * @param array $types Array of valid value types.
+     * @param mixed $a Value A
+     * @param mixed $b Value B
+     */
+    private function validateSeq($from, array $types, $a, $b)
+    {
+        $ta = Utils::type($a);
+        $tb = Utils::type($b);
+
+        if ($ta !== $tb) {
+            $msg = "encountered a type mismatch in sequence: {$ta}, {$tb}";
+            $this->typeError($from, $msg);
+        }
+
+        $typeMatch = ($types && $types[0] == 'any') || in_array($ta, $types);
+        if (!$typeMatch) {
+            $msg = 'encountered a type error in sequence. The argument must be '
+                . 'an array of ' . implode('|', $types) . ' types. '
+                . "Found {$ta}, {$tb}.";
+            $this->typeError($from, $msg);
+        }
     }
 
     private function fn_ceil(array $args)
@@ -129,20 +238,22 @@ class FnDispatcher
     private function fn_keys(array $args)
     {
         $this->validate('keys', $args, [['object']]);
-        return array_keys((array) Utils::toArray($args[0]));
+        return array_keys((array)Utils::toArray($args[0]));
     }
 
     private function fn_length(array $args)
     {
         $this->validate('length', $args, [['string', 'array', 'object']]);
         $arg = Utils::toArray($args[0]);
-        return is_string($arg) ? strlen($arg) : count((array) $arg);
+        return is_string($arg) ? strlen($arg) : count((array)$arg);
     }
 
     private function fn_max(array $args)
     {
         $this->validate('max', $args, [['array']]);
-        $fn = function ($a, $b) { return $a >= $b ? $a : $b; };
+        $fn = function ($a, $b) {
+            return $a >= $b ? $a : $b;
+        };
         return $this->reduce('max:0', Utils::toArray($args[0]), ['number', 'string'], $fn);
     }
 
@@ -158,10 +269,32 @@ class FnDispatcher
         return $this->reduce('max_by:1', Utils::toArray($args[0]), ['any'], $fn);
     }
 
+    /**
+     * Validates the return values of expressions as they are applied.
+     *
+     * @param string $from Function name : position
+     * @param callable $expr Expression function to validate.
+     * @param array $types Array of acceptable return type values.
+     *
+     * @return callable Returns a wrapped function
+     */
+    private function wrapExpression($from, callable $expr, array $types)
+    {
+        list($fn, $pos) = explode(':', $from);
+        $from = "The expression return value of argument {$pos} of {$fn}";
+        return function ($value) use ($from, $expr, $types) {
+            $value = $expr($value);
+            $this->validateType($from, $value, $types);
+            return $value;
+        };
+    }
+
     private function fn_min(array $args)
     {
         $this->validate('min', $args, [['array']]);
-        $fn = function ($a, $b, $i) { return $i && $a <= $b ? $a : $b; };
+        $fn = function ($a, $b, $i) {
+            return $i && $a <= $b ? $a : $b;
+        };
         return $this->reduce('min:0', Utils::toArray($args[0]), ['number', 'string'], $fn);
     }
 
@@ -192,7 +325,9 @@ class FnDispatcher
     private function fn_sum(array $args)
     {
         $this->validate('sum', $args, [['array']]);
-        $fn = function ($a, $b) { return $a + $b; };
+        $fn = function ($a, $b) {
+            return $a + $b;
+        };
         return $this->reduce('sum:0', Utils::toArray($args[0]), ['number'], $fn);
     }
 
@@ -245,7 +380,7 @@ class FnDispatcher
             && !($v instanceof \JsonSerializable)
             && method_exists($v, '__toString')
         ) {
-            return (string) $v;
+            return (string)$v;
         } elseif (Utils::isArray($v)) {
             $v = Utils::toArray($v);
         }
@@ -261,7 +396,7 @@ class FnDispatcher
         if ($type == 'number') {
             return $value;
         } elseif ($type == 'string' && is_numeric($value)) {
-            return strpos($value, '.') ? (float) $value : (int) $value;
+            return strpos($value, '.') ? (float)$value : (int)$value;
         } else {
             return null;
         }
@@ -270,7 +405,7 @@ class FnDispatcher
     private function fn_values(array $args)
     {
         $this->validate('values', $args, [['array', 'object']]);
-        return array_values((array) Utils::toArray($args[0]));
+        return array_values((array)Utils::toArray($args[0]));
     }
 
     private function fn_merge(array $args)
@@ -302,133 +437,5 @@ class FnDispatcher
             $result[] = $args[0]($a);
         }
         return $result;
-    }
-
-    private function typeError($from, $msg)
-    {
-        if (strpos($from, ':')) {
-            list($fn, $pos) = explode(':', $from);
-            throw new \RuntimeException(
-                sprintf('Argument %d of %s %s', $pos, $fn, $msg)
-            );
-        } else {
-            throw new \RuntimeException(
-                sprintf('Type error: %s %s', $from, $msg)
-            );
-        }
-    }
-
-    private function validateArity($from, $given, $expected)
-    {
-        if ($given != $expected) {
-            $err = "%s() expects {$expected} arguments, {$given} were provided";
-            throw new \RuntimeException(sprintf($err, $from));
-        }
-    }
-
-    private function validate($from, $args, $types = [])
-    {
-        $this->validateArity($from, count($args), count($types));
-        foreach ($args as $index => $value) {
-            if (!isset($types[$index]) || !$types[$index]) {
-                continue;
-            }
-            $this->validateType("{$from}:{$index}", $value, $types[$index]);
-        }
-    }
-
-    private function validateType($from, $value, array $types)
-    {
-        if ($types[0] == 'any'
-            || in_array(Utils::type($value), $types)
-            || ($value === [] && in_array('object', $types))
-        ) {
-            return;
-        }
-        $msg = 'must be one of the following types: ' . implode(', ', $types)
-            . '. ' . Utils::type($value) . ' found';
-        $this->typeError($from, $msg);
-    }
-
-    /**
-     * Validates value A and B, ensures they both are correctly typed, and of
-     * the same type.
-     *
-     * @param string   $from   String of function:argument_position
-     * @param array    $types  Array of valid value types.
-     * @param mixed    $a      Value A
-     * @param mixed    $b      Value B
-     */
-    private function validateSeq($from, array $types, $a, $b)
-    {
-        $ta = Utils::type($a);
-        $tb = Utils::type($b);
-
-        if ($ta !== $tb) {
-            $msg = "encountered a type mismatch in sequence: {$ta}, {$tb}";
-            $this->typeError($from, $msg);
-        }
-
-        $typeMatch = ($types && $types[0] == 'any') || in_array($ta, $types);
-        if (!$typeMatch) {
-            $msg = 'encountered a type error in sequence. The argument must be '
-                . 'an array of ' . implode('|', $types) . ' types. '
-                . "Found {$ta}, {$tb}.";
-            $this->typeError($from, $msg);
-        }
-    }
-
-    /**
-     * Reduces and validates an array of values to a single value using a fn.
-     *
-     * @param string   $from   String of function:argument_position
-     * @param array    $values Values to reduce.
-     * @param array    $types  Array of valid value types.
-     * @param callable $reduce Reduce function that accepts ($carry, $item).
-     *
-     * @return mixed
-     */
-    private function reduce($from, array $values, array $types, callable $reduce)
-    {
-        $i = -1;
-        return array_reduce(
-            $values,
-            function ($carry, $item) use ($from, $types, $reduce, &$i) {
-                if (++$i > 0) {
-                    $this->validateSeq($from, $types, $carry, $item);
-                }
-                return $reduce($carry, $item, $i);
-            }
-        );
-    }
-
-    /**
-     * Validates the return values of expressions as they are applied.
-     *
-     * @param string   $from  Function name : position
-     * @param callable $expr  Expression function to validate.
-     * @param array    $types Array of acceptable return type values.
-     *
-     * @return callable Returns a wrapped function
-     */
-    private function wrapExpression($from, callable $expr, array $types)
-    {
-        list($fn, $pos) = explode(':', $from);
-        $from = "The expression return value of argument {$pos} of {$fn}";
-        return function ($value) use ($from, $expr, $types) {
-            $value = $expr($value);
-            $this->validateType($from, $value, $types);
-            return $value;
-        };
-    }
-
-    /** @internal Pass function name validation off to runtime
-     * @param $name
-     * @param $args
-     */
-    public function __call($name, $args)
-    {
-        $name = str_replace('fn_', '', $name);
-        throw new \RuntimeException("Call to undefined function {$name}");
     }
 }

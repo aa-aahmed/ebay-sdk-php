@@ -16,11 +16,6 @@ class ReturnEligibilityItemPerCheckTypeResultTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnEligibilityItemPerCheckTypeResult();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ReturnEligibilityItemPerCheckTypeResult', $this->obj);
@@ -29,5 +24,10 @@ class ReturnEligibilityItemPerCheckTypeResultTest extends \PHPUnit_Framework_Tes
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnEligibilityItemPerCheckTypeResult();
     }
 }

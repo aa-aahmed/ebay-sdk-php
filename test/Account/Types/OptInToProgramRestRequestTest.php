@@ -16,11 +16,6 @@ class OptInToProgramRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new OptInToProgramRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\OptInToProgramRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class OptInToProgramRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsProgram()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\Program', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new OptInToProgramRestRequest();
     }
 }

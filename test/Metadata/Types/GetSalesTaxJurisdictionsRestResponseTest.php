@@ -16,11 +16,6 @@ class GetSalesTaxJurisdictionsRestResponseTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSalesTaxJurisdictionsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetSalesTaxJurisdictionsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetSalesTaxJurisdictionsRestResponseTest extends \PHPUnit_Framework_TestCa
     public function testExtendsSalesTaxJurisdictions()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\SalesTaxJurisdictions', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSalesTaxJurisdictionsRestResponse();
     }
 }

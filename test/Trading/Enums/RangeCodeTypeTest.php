@@ -16,13 +16,13 @@ class RangeCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RangeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\RangeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RangeCodeType();
     }
 }

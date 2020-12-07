@@ -16,13 +16,13 @@ class ValueTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ValueTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Enums\ValueTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ValueTypeEnum();
     }
 }

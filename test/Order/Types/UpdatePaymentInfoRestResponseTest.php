@@ -16,11 +16,6 @@ class UpdatePaymentInfoRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdatePaymentInfoRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\UpdatePaymentInfoRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class UpdatePaymentInfoRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCheckoutSessionResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Order\Types\CheckoutSessionResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdatePaymentInfoRestResponse();
     }
 }

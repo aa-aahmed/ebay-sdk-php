@@ -16,11 +16,6 @@ class BulkDeleteAdsByInventoryReferenceResponseTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkDeleteAdsByInventoryReferenceResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\BulkDeleteAdsByInventoryReferenceResponse', $this->obj);
@@ -29,5 +24,10 @@ class BulkDeleteAdsByInventoryReferenceResponseTest extends \PHPUnit_Framework_T
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkDeleteAdsByInventoryReferenceResponse();
     }
 }

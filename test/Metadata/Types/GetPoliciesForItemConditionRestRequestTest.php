@@ -16,11 +16,6 @@ class GetPoliciesForItemConditionRestRequestTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPoliciesForItemConditionRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetPoliciesForItemConditionRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetPoliciesForItemConditionRestRequestTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPoliciesForItemConditionRestRequest();
     }
 }

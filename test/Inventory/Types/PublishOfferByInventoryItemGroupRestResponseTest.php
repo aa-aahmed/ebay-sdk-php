@@ -16,11 +16,6 @@ class PublishOfferByInventoryItemGroupRestResponseTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PublishOfferByInventoryItemGroupRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\PublishOfferByInventoryItemGroupRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class PublishOfferByInventoryItemGroupRestResponseTest extends \PHPUnit_Framewor
     public function testExtendsPublishResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\PublishResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PublishOfferByInventoryItemGroupRestResponse();
     }
 }

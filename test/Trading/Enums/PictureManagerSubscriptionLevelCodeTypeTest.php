@@ -16,13 +16,13 @@ class PictureManagerSubscriptionLevelCodeTypeTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PictureManagerSubscriptionLevelCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\PictureManagerSubscriptionLevelCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PictureManagerSubscriptionLevelCodeType();
     }
 }

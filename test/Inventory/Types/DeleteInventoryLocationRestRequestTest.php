@@ -16,11 +16,6 @@ class DeleteInventoryLocationRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DeleteInventoryLocationRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\DeleteInventoryLocationRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class DeleteInventoryLocationRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DeleteInventoryLocationRestRequest();
     }
 }

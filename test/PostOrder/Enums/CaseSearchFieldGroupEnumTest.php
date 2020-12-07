@@ -16,13 +16,13 @@ class CaseSearchFieldGroupEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CaseSearchFieldGroupEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\CaseSearchFieldGroupEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CaseSearchFieldGroupEnum();
     }
 }

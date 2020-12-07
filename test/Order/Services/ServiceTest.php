@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Order\Services;
 
 use DTS\eBaySDK\Order\Services\OrderBaseService;
 use DTS\eBaySDK\Order\Services\OrderService;
-use DTS\eBaySDK\Test\Order\Mocks\Service;
 use DTS\eBaySDK\Test\Mocks\HttpRestHandler;
+use DTS\eBaySDK\Test\Order\Mocks\Service;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +22,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('authorization', $d);
         $this->assertEquals([
-            'valid'   => ['string'],
+            'valid' => ['string'],
             'required' => true
         ], $d['authorization']);
 
@@ -71,6 +72,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey(OrderBaseService::HDR_MARKETPLACE_ID, $h->headers);
         $this->assertEquals('123', $h->headers[OrderBaseService::HDR_MARKETPLACE_ID]);
-        $this->assertEquals('deviceId=456', $h->headers[OrderBaseService::HDR_END_USER_CTX ]);
+        $this->assertEquals('deviceId=456', $h->headers[OrderBaseService::HDR_END_USER_CTX]);
     }
 }

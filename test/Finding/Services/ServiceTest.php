@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Finding\Services;
 
 use DTS\eBaySDK\Finding\Services\FindingBaseService;

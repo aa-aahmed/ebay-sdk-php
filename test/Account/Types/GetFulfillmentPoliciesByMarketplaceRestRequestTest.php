@@ -16,11 +16,6 @@ class GetFulfillmentPoliciesByMarketplaceRestRequestTest extends \PHPUnit_Framew
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetFulfillmentPoliciesByMarketplaceRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetFulfillmentPoliciesByMarketplaceRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetFulfillmentPoliciesByMarketplaceRestRequestTest extends \PHPUnit_Framew
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetFulfillmentPoliciesByMarketplaceRestRequest();
     }
 }

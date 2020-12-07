@@ -16,13 +16,13 @@ class WorldRegionEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new WorldRegionEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\WorldRegionEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new WorldRegionEnum();
     }
 }

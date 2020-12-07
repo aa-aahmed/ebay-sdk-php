@@ -16,11 +16,6 @@ class CreateAShippingFulfillmentRestRequestTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateAShippingFulfillmentRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\CreateAShippingFulfillmentRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateAShippingFulfillmentRestRequestTest extends \PHPUnit_Framework_TestC
     public function testExtendsShippingFulfillmentDetails()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Types\ShippingFulfillmentDetails', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateAShippingFulfillmentRestRequest();
     }
 }

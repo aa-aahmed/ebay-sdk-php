@@ -16,13 +16,13 @@ class PaymentModeTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PaymentModeTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Enums\PaymentModeTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PaymentModeTypeEnum();
     }
 }

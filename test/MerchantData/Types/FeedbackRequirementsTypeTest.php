@@ -16,11 +16,6 @@ class FeedbackRequirementsTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FeedbackRequirementsType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\FeedbackRequirementsType', $this->obj);
@@ -29,5 +24,10 @@ class FeedbackRequirementsTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBooleanType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BooleanType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FeedbackRequirementsType();
     }
 }

@@ -16,11 +16,6 @@ class ItemCompatibilityEnabledDefinitionTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ItemCompatibilityEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ItemCompatibilityEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class ItemCompatibilityEnabledDefinitionTypeTest extends \PHPUnit_Framework_Test
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ItemCompatibilityEnabledDefinitionType();
     }
 }

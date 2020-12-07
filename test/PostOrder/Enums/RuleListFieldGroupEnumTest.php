@@ -16,13 +16,13 @@ class RuleListFieldGroupEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RuleListFieldGroupEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\RuleListFieldGroupEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RuleListFieldGroupEnum();
     }
 }

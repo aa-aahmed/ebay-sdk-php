@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Services;
 
-use DTS\eBaySDK\Parser\JsonParser;
+use DTS\eBaySDK as Functions;
 use DTS\eBaySDK\ConfigurationResolver;
+use DTS\eBaySDK\Parser\JsonParser;
 use DTS\eBaySDK\UriResolver;
-use \DTS\eBaySDK as Functions;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Message\ResponseInterface;
 
@@ -62,20 +63,20 @@ abstract class BaseRestService
     {
         return [
             'compressResponse' => [
-                'valid'   => ['bool'],
+                'valid' => ['bool'],
                 'default' => false
             ],
             'debug' => [
-                'valid'   => ['bool', 'array'],
-                'fn'      => 'DTS\eBaySDK\applyDebug',
+                'valid' => ['bool', 'array'],
+                'fn' => 'DTS\eBaySDK\applyDebug',
                 'default' => false
             ],
             'httpHandler' => [
-                'valid'   => ['callable'],
+                'valid' => ['callable'],
                 'default' => 'DTS\eBaySDK\defaultHttpHandler'
             ],
             'httpOptions' => [
-                'valid'   => ['array'],
+                'valid' => ['array'],
                 'default' => [
                     'http_errors' => false
                 ]
@@ -87,40 +88,10 @@ abstract class BaseRestService
                 'valid' => ['string']
             ],
             'sandbox' => [
-                'valid'   => ['bool'],
+                'valid' => ['bool'],
                 'default' => false
             ]
         ];
-    }
-
-    /**
-     * Method to get the service's configuration.
-     *
-     * @param string|null $option The name of the option whos value will be returned.
-     *
-     * @return mixed Returns an associative array of configuration options if no parameters are passed,
-     * otherwise returns the value for the specified configuration option.
-     */
-    public function getConfig($option = null)
-    {
-        return $option === null
-            ? $this->config
-            : (isset($this->config[$option])
-                ? $this->config[$option]
-                : null);
-    }
-
-    /**
-     * Set multiple configuration options.
-     *
-     * @param array $configuration Associative array of configuration options and their values.
-     */
-    public function setConfig(array $configuration)
-    {
-        $this->config = Functions\arrayMergeDeep(
-            $this->config,
-            $this->resolver->resolveOptions($configuration)
-        );
     }
 
     /**
@@ -173,7 +144,7 @@ abstract class BaseRestService
                     $this->debugResponse($json);
                 }
 
-                $response =  new $responseClass(
+                $response = new $responseClass(
                     [],
                     $res->getStatusCode(),
                     $res->getHeaders()
@@ -194,6 +165,36 @@ abstract class BaseRestService
     private function getUrl()
     {
         return $this->getConfig('sandbox') ? static::$endPoints['sandbox'] : static::$endPoints['production'];
+    }
+
+    /**
+     * Method to get the service's configuration.
+     *
+     * @param string|null $option The name of the option whos value will be returned.
+     *
+     * @return mixed Returns an associative array of configuration options if no parameters are passed,
+     * otherwise returns the value for the specified configuration option.
+     */
+    public function getConfig($option = null)
+    {
+        return $option === null
+            ? $this->config
+            : (isset($this->config[$option])
+                ? $this->config[$option]
+                : null);
+    }
+
+    /**
+     * Set multiple configuration options.
+     *
+     * @param array $configuration Associative array of configuration options and their values.
+     */
+    public function setConfig(array $configuration)
+    {
+        $this->config = Functions\arrayMergeDeep(
+            $this->config,
+            $this->resolver->resolveOptions($configuration)
+        );
     }
 
     /**
@@ -252,29 +253,19 @@ abstract class BaseRestService
      * @param string $url API endpoint.
      * @param array $headers Associative array of HTTP headers.
      * @param string $body The JSON body of the request.
-      */
+     */
     private function debugRequest($url, array $headers, $body)
     {
-        $str = $url.PHP_EOL;
+        $str = $url . PHP_EOL;
 
         $str .= array_reduce(array_keys($headers), function ($str, $key) use ($headers) {
-            $str .= $key.': '.$headers[$key].PHP_EOL;
+            $str .= $key . ': ' . $headers[$key] . PHP_EOL;
             return $str;
         }, '');
 
         $str .= $body;
 
         $this->debug($str);
-    }
-
-    /**
-     * Sends a debug string of the response details.
-     *
-     * @param string $body The JSON body of the response.
-      */
-    private function debugResponse($body)
-    {
-        $this->debug($body);
     }
 
     /**
@@ -286,5 +277,15 @@ abstract class BaseRestService
     {
         $debugger = $this->getConfig('debug');
         $debugger($str);
+    }
+
+    /**
+     * Sends a debug string of the response details.
+     *
+     * @param string $body The JSON body of the response.
+     */
+    private function debugResponse($body)
+    {
+        $this->debug($body);
     }
 }

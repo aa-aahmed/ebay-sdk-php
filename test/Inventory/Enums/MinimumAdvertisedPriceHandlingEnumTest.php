@@ -16,13 +16,13 @@ class MinimumAdvertisedPriceHandlingEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MinimumAdvertisedPriceHandlingEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\MinimumAdvertisedPriceHandlingEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MinimumAdvertisedPriceHandlingEnum();
     }
 }

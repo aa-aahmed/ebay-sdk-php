@@ -6,7 +6,7 @@ class FunctionsTest extends \PHPUnit_Framework_TestCase
 {
     public function testArrayMergeDeepArray()
     {
-        $a = ['a'=>'b','c' => ['d' => 'e']];
+        $a = ['a' => 'b', 'c' => ['d' => 'e']];
         $b = ['c' => ['f' => 'g']];
 
         $merged = \DTS\eBaySDK\arrayMergeDeep($a, $b);

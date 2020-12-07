@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 namespace DTS\eBaySDK\JmesPath;
 
 use DTS\eBaySDK\JmesPath\Lexer as T;
@@ -30,50 +31,48 @@ use DTS\eBaySDK\JmesPath\Lexer as T;
  */
 class Parser
 {
+    private static $nullToken = ['type' => T::T_EOF];
+    private static $currentNode = ['type' => T::T_CURRENT];
+    private static $bp = [
+        T::T_EOF => 0,
+        T::T_QUOTED_IDENTIFIER => 0,
+        T::T_IDENTIFIER => 0,
+        T::T_RBRACKET => 0,
+        T::T_RPAREN => 0,
+        T::T_COMMA => 0,
+        T::T_RBRACE => 0,
+        T::T_NUMBER => 0,
+        T::T_CURRENT => 0,
+        T::T_EXPREF => 0,
+        T::T_COLON => 0,
+        T::T_PIPE => 1,
+        T::T_OR => 2,
+        T::T_AND => 3,
+        T::T_COMPARATOR => 5,
+        T::T_FLATTEN => 9,
+        T::T_STAR => 20,
+        T::T_FILTER => 21,
+        T::T_DOT => 40,
+        T::T_NOT => 45,
+        T::T_LBRACE => 50,
+        T::T_LBRACKET => 55,
+        T::T_LPAREN => 60,
+    ];
+    /** @var array Acceptable tokens after a dot token */
+    private static $afterDot = [
+        T::T_IDENTIFIER => true, // foo.bar
+        T::T_QUOTED_IDENTIFIER => true, // foo."bar"
+        T::T_STAR => true, // foo.*
+        T::T_LBRACE => true, // foo[1]
+        T::T_LBRACKET => true, // foo{a: 0}
+        T::T_FILTER => true, // foo.[?bar==10]
+    ];
     /** @var Lexer */
     private $lexer;
     private $tokens;
     private $token;
     private $tpos;
     private $expression;
-    private static $nullToken = ['type' => T::T_EOF];
-    private static $currentNode = ['type' => T::T_CURRENT];
-
-    private static $bp = [
-        T::T_EOF               => 0,
-        T::T_QUOTED_IDENTIFIER => 0,
-        T::T_IDENTIFIER        => 0,
-        T::T_RBRACKET          => 0,
-        T::T_RPAREN            => 0,
-        T::T_COMMA             => 0,
-        T::T_RBRACE            => 0,
-        T::T_NUMBER            => 0,
-        T::T_CURRENT           => 0,
-        T::T_EXPREF            => 0,
-        T::T_COLON             => 0,
-        T::T_PIPE              => 1,
-        T::T_OR                => 2,
-        T::T_AND               => 3,
-        T::T_COMPARATOR        => 5,
-        T::T_FLATTEN           => 9,
-        T::T_STAR              => 20,
-        T::T_FILTER            => 21,
-        T::T_DOT               => 40,
-        T::T_NOT               => 45,
-        T::T_LBRACE            => 50,
-        T::T_LBRACKET          => 55,
-        T::T_LPAREN            => 60,
-    ];
-
-    /** @var array Acceptable tokens after a dot token */
-    private static $afterDot = [
-        T::T_IDENTIFIER        => true, // foo.bar
-        T::T_QUOTED_IDENTIFIER => true, // foo."bar"
-        T::T_STAR              => true, // foo.*
-        T::T_LBRACE            => true, // foo[1]
-        T::T_LBRACKET          => true, // foo{a: 0}
-        T::T_FILTER            => true, // foo.[?bar==10]
-    ];
 
     /**
      * @param Lexer $lexer Lexer used to tokenize expressions
@@ -106,10 +105,28 @@ class Parser
         throw $this->syntax('Did not reach the end of the token stream');
     }
 
+    private function next(array $match = null)
+    {
+        if (!isset($this->tokens[$this->tpos + 1])) {
+            $this->token = self::$nullToken;
+        } else {
+            $this->token = $this->tokens[++$this->tpos];
+        }
+
+        if ($match && !isset($match[$this->token['type']])) {
+            throw $this->syntax($match);
+        }
+    }
+
+    private function syntax($msg)
+    {
+        return new SyntaxErrorException($msg, $this->token, $this->expression);
+    }
+
     /**
      * Parses an expression while rbp < lbp.
      *
-     * @param int   $rbp  Right bound precedence
+     * @param int $rbp Right bound precedence
      *
      * @return array
      */
@@ -121,6 +138,32 @@ class Parser
         }
 
         return $left;
+    }
+
+    /**
+     * @param $method
+     * @param $args
+     * @internal Handles undefined tokens without paying the cost of validation
+     */
+    public function __call($method, $args)
+    {
+        $prefix = substr($method, 0, 4);
+        if ($prefix == 'nud_' || $prefix == 'led_') {
+            $token = substr($method, 4);
+            $message = "Unexpected \"$token\" token ($method). Expected one of"
+                . " the following tokens: "
+                . implode(', ', array_map(function ($i) {
+                    return '"' . substr($i, 4) . '"';
+                }, array_filter(
+                    get_class_methods($this),
+                    function ($i) use ($prefix) {
+                        return strpos($i, $prefix) === 0;
+                    }
+                )));
+            throw $this->syntax($message);
+        }
+
+        throw new \BadMethodCallException("Call to undefined method $method");
     }
 
     private function nud_identifier()
@@ -136,6 +179,13 @@ class Parser
         $this->next();
         $this->assertNotToken(T::T_LPAREN);
         return ['type' => 'field', 'value' => $token['value']];
+    }
+
+    private function assertNotToken($type)
+    {
+        if ($this->token['type'] == $type) {
+            throw $this->syntax("Token {$this->tpos} not allowed to be $type");
+        }
     }
 
     private function nud_current()
@@ -163,7 +213,8 @@ class Parser
         return ['type' => T::T_NOT, 'children' => [$this->expr(self::$bp[T::T_NOT])]];
     }
 
-    private function nud_lparen() {
+    private function nud_lparen()
+    {
         $this->next();
         $result = $this->expr(0);
         if ($this->token['type'] !== T::T_RPAREN) {
@@ -188,7 +239,21 @@ class Parser
 
         $this->next();
 
-        return['type' => 'multi_select_hash', 'children' => $pairs];
+        return ['type' => 'multi_select_hash', 'children' => $pairs];
+    }
+
+    private function parseKeyValuePair()
+    {
+        static $validColon = [T::T_COLON => true];
+        $key = $this->token['value'];
+        $this->next($validColon);
+        $this->next();
+
+        return [
+            'type' => 'key_val_pair',
+            'value' => $key,
+            'children' => [$this->expr()]
+        ];
     }
 
     private function nud_flatten()
@@ -196,154 +261,17 @@ class Parser
         return $this->led_flatten(self::$currentNode);
     }
 
-    private function nud_filter()
-    {
-        return $this->led_filter(self::$currentNode);
-    }
-
-    private function nud_star()
-    {
-        return $this->parseWildcardObject(self::$currentNode);
-    }
-
-    private function nud_lbracket()
-    {
-        $this->next();
-        $type = $this->token['type'];
-        if ($type == T::T_NUMBER || $type == T::T_COLON) {
-            return $this->parseArrayIndexExpression();
-        } elseif ($type == T::T_STAR && $this->lookahead() == T::T_RBRACKET) {
-            return $this->parseWildcardArray();
-        } else {
-            return $this->parseMultiSelectList();
-        }
-    }
-
-    private function led_lbracket(array $left)
-    {
-        static $nextTypes = [T::T_NUMBER => true, T::T_COLON => true, T::T_STAR => true];
-        $this->next($nextTypes);
-        switch ($this->token['type']) {
-            case T::T_NUMBER:
-            case T::T_COLON:
-                return [
-                    'type' => 'subexpression',
-                    'children' => [$left, $this->parseArrayIndexExpression()]
-                ];
-            default:
-                return $this->parseWildcardArray($left);
-        }
-    }
-
     private function led_flatten(array $left)
     {
         $this->next();
 
         return [
-            'type'     => 'projection',
-            'from'     => 'array',
+            'type' => 'projection',
+            'from' => 'array',
             'children' => [
                 ['type' => T::T_FLATTEN, 'children' => [$left]],
                 $this->parseProjection(self::$bp[T::T_FLATTEN])
             ]
-        ];
-    }
-
-    private function led_dot(array $left)
-    {
-        $this->next(self::$afterDot);
-
-        if ($this->token['type'] == T::T_STAR) {
-            return $this->parseWildcardObject($left);
-        }
-
-        return [
-            'type'     => 'subexpression',
-            'children' => [$left, $this->parseDot(self::$bp[T::T_DOT])]
-        ];
-    }
-
-    private function led_or(array $left)
-    {
-        $this->next();
-        return [
-            'type'     => T::T_OR,
-            'children' => [$left, $this->expr(self::$bp[T::T_OR])]
-        ];
-    }
-
-    private function led_and(array $left)
-    {
-        $this->next();
-        return [
-            'type'     => T::T_AND,
-            'children' => [$left, $this->expr(self::$bp[T::T_AND])]
-        ];
-    }
-
-    private function led_pipe(array $left)
-    {
-        $this->next();
-        return [
-            'type'     => T::T_PIPE,
-            'children' => [$left, $this->expr(self::$bp[T::T_PIPE])]
-        ];
-    }
-
-    private function led_lparen(array $left)
-    {
-        $args = [];
-        $this->next();
-
-        while ($this->token['type'] != T::T_RPAREN) {
-            $args[] = $this->expr(0);
-            if ($this->token['type'] == T::T_COMMA) {
-                $this->next();
-            }
-        }
-
-        $this->next();
-
-        return [
-            'type'     => 'function',
-            'value'    => $left['value'],
-            'children' => $args
-        ];
-    }
-
-    private function led_filter(array $left)
-    {
-        $this->next();
-        $expression = $this->expr();
-        if ($this->token['type'] != T::T_RBRACKET) {
-            throw $this->syntax('Expected a closing rbracket for the filter');
-        }
-
-        $this->next();
-        $rhs = $this->parseProjection(self::$bp[T::T_FILTER]);
-
-        return [
-            'type'       => 'projection',
-            'from'       => 'array',
-            'children'   => [
-                $left ?: self::$currentNode,
-                [
-                    'type' => 'condition',
-                    'children' => [$expression, $rhs]
-                ]
-            ]
-        ];
-    }
-
-    private function led_comparator(array $left)
-    {
-        $token = $this->token;
-        $this->next();
-
-        return [
-            'type'     => T::T_COMPARATOR,
-            'value'    => $token['value'],
-            'children' => [$left, $this->expr(self::$bp[T::T_COMPARATOR])]
         ];
     }
 
@@ -372,18 +300,54 @@ class Parser
         return $this->expr($bp);
     }
 
-    private function parseKeyValuePair()
+    private function parseMultiSelectList()
     {
-        static $validColon = [T::T_COLON => true];
-        $key = $this->token['value'];
-        $this->next($validColon);
+        $nodes = [];
+
+        do {
+            $nodes[] = $this->expr();
+            if ($this->token['type'] == T::T_COMMA) {
+                $this->next();
+                $this->assertNotToken(T::T_RBRACKET);
+            }
+        } while ($this->token['type'] !== T::T_RBRACKET);
         $this->next();
 
+        return ['type' => 'multi_select_list', 'children' => $nodes];
+    }
+
+    private function nud_filter()
+    {
+        return $this->led_filter(self::$currentNode);
+    }
+
+    private function led_filter(array $left)
+    {
+        $this->next();
+        $expression = $this->expr();
+        if ($this->token['type'] != T::T_RBRACKET) {
+            throw $this->syntax('Expected a closing rbracket for the filter');
+        }
+
+        $this->next();
+        $rhs = $this->parseProjection(self::$bp[T::T_FILTER]);
+
         return [
-            'type'     => 'key_val_pair',
-            'value'    => $key,
-            'children' => [$this->expr()]
+            'type' => 'projection',
+            'from' => 'array',
+            'children' => [
+                $left ?: self::$currentNode,
+                [
+                    'type' => 'condition',
+                    'children' => [$expression, $rhs]
+                ]
+            ]
         ];
+    }
+
+    private function nud_star()
+    {
+        return $this->parseWildcardObject(self::$currentNode);
     }
 
     private function parseWildcardObject(array $left = null)
@@ -391,8 +355,8 @@ class Parser
         $this->next();
 
         return [
-            'type'     => 'projection',
-            'from'     => 'object',
+            'type' => 'projection',
+            'from' => 'object',
             'children' => [
                 $left ?: self::$currentNode,
                 $this->parseProjection(self::$bp[T::T_STAR])
@@ -400,20 +364,17 @@ class Parser
         ];
     }
 
-    private function parseWildcardArray(array $left = null)
+    private function nud_lbracket()
     {
-        static $getRbracket = [T::T_RBRACKET => true];
-        $this->next($getRbracket);
         $this->next();
-
-        return [
-            'type'     => 'projection',
-            'from'     => 'array',
-            'children' => [
-                $left ?: self::$currentNode,
-                $this->parseProjection(self::$bp[T::T_STAR])
-            ]
-        ];
+        $type = $this->token['type'];
+        if ($type == T::T_NUMBER || $type == T::T_COLON) {
+            return $this->parseArrayIndexExpression();
+        } elseif ($type == T::T_STAR && $this->lookahead() == T::T_RBRACKET) {
+            return $this->parseWildcardArray();
+        } else {
+            return $this->parseMultiSelectList();
+        }
     }
 
     /**
@@ -422,8 +383,8 @@ class Parser
     private function parseArrayIndexExpression()
     {
         static $matchNext = [
-            T::T_NUMBER   => true,
-            T::T_COLON    => true,
+            T::T_NUMBER => true,
+            T::T_COLON => true,
             T::T_RBRACKET => true
         ];
 
@@ -456,34 +417,13 @@ class Parser
 
         // Sliced array from start (e.g., [2:])
         return [
-            'type'     => 'projection',
-            'from'     => 'array',
+            'type' => 'projection',
+            'from' => 'array',
             'children' => [
                 ['type' => 'slice', 'value' => $parts],
                 $this->parseProjection(self::$bp[T::T_STAR])
             ]
         ];
-    }
-
-    private function parseMultiSelectList()
-    {
-        $nodes = [];
-
-        do {
-            $nodes[] = $this->expr();
-            if ($this->token['type'] == T::T_COMMA) {
-                $this->next();
-                $this->assertNotToken(T::T_RBRACKET);
-            }
-        } while ($this->token['type'] !== T::T_RBRACKET);
-        $this->next();
-
-        return ['type' => 'multi_select_list', 'children' => $nodes];
-    }
-
-    private function syntax($msg)
-    {
-        return new SyntaxErrorException($msg, $this->token, $this->expression);
     }
 
     private function lookahead()
@@ -493,49 +433,109 @@ class Parser
             : $this->tokens[$this->tpos + 1]['type'];
     }
 
-    private function next(array $match = null)
+    private function parseWildcardArray(array $left = null)
     {
-        if (!isset($this->tokens[$this->tpos + 1])) {
-            $this->token = self::$nullToken;
-        } else {
-            $this->token = $this->tokens[++$this->tpos];
-        }
+        static $getRbracket = [T::T_RBRACKET => true];
+        $this->next($getRbracket);
+        $this->next();
 
-        if ($match && !isset($match[$this->token['type']])) {
-            throw $this->syntax($match);
+        return [
+            'type' => 'projection',
+            'from' => 'array',
+            'children' => [
+                $left ?: self::$currentNode,
+                $this->parseProjection(self::$bp[T::T_STAR])
+            ]
+        ];
+    }
+
+    private function led_lbracket(array $left)
+    {
+        static $nextTypes = [T::T_NUMBER => true, T::T_COLON => true, T::T_STAR => true];
+        $this->next($nextTypes);
+        switch ($this->token['type']) {
+            case T::T_NUMBER:
+            case T::T_COLON:
+                return [
+                    'type' => 'subexpression',
+                    'children' => [$left, $this->parseArrayIndexExpression()]
+                ];
+            default:
+                return $this->parseWildcardArray($left);
         }
     }
 
-    private function assertNotToken($type)
+    private function led_dot(array $left)
     {
-        if ($this->token['type'] == $type) {
-            throw $this->syntax("Token {$this->tpos} not allowed to be $type");
+        $this->next(self::$afterDot);
+
+        if ($this->token['type'] == T::T_STAR) {
+            return $this->parseWildcardObject($left);
         }
+
+        return [
+            'type' => 'subexpression',
+            'children' => [$left, $this->parseDot(self::$bp[T::T_DOT])]
+        ];
     }
 
-    /**
-     * @internal Handles undefined tokens without paying the cost of validation
-     * @param $method
-     * @param $args
-     */
-    public function __call($method, $args)
+    private function led_or(array $left)
     {
-        $prefix = substr($method, 0, 4);
-        if ($prefix == 'nud_' || $prefix == 'led_') {
-            $token = substr($method, 4);
-            $message = "Unexpected \"$token\" token ($method). Expected one of"
-                . " the following tokens: "
-                . implode(', ', array_map(function ($i) {
-                    return '"' . substr($i, 4) . '"';
-                }, array_filter(
-                    get_class_methods($this),
-                    function ($i) use ($prefix) {
-                        return strpos($i, $prefix) === 0;
-                    }
-                )));
-            throw $this->syntax($message);
+        $this->next();
+        return [
+            'type' => T::T_OR,
+            'children' => [$left, $this->expr(self::$bp[T::T_OR])]
+        ];
+    }
+
+    private function led_and(array $left)
+    {
+        $this->next();
+        return [
+            'type' => T::T_AND,
+            'children' => [$left, $this->expr(self::$bp[T::T_AND])]
+        ];
+    }
+
+    private function led_pipe(array $left)
+    {
+        $this->next();
+        return [
+            'type' => T::T_PIPE,
+            'children' => [$left, $this->expr(self::$bp[T::T_PIPE])]
+        ];
+    }
+
+    private function led_lparen(array $left)
+    {
+        $args = [];
+        $this->next();
+
+        while ($this->token['type'] != T::T_RPAREN) {
+            $args[] = $this->expr(0);
+            if ($this->token['type'] == T::T_COMMA) {
+                $this->next();
+            }
         }
 
-        throw new \BadMethodCallException("Call to undefined method $method");
+        $this->next();
+
+        return [
+            'type' => 'function',
+            'value' => $left['value'],
+            'children' => $args
+        ];
+    }
+
+    private function led_comparator(array $left)
+    {
+        $token = $this->token;
+        $this->next();
+
+        return [
+            'type' => T::T_COMPARATOR,
+            'value' => $token['value'],
+            'children' => [$left, $this->expr(self::$bp[T::T_COMPARATOR])]
+        ];
     }
 }

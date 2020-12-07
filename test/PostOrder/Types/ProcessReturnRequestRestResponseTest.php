@@ -16,11 +16,6 @@ class ProcessReturnRequestRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProcessReturnRequestRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProcessReturnRequestRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class ProcessReturnRequestRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsDecideReturnResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\DecideReturnResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProcessReturnRequestRestResponse();
     }
 }

@@ -16,11 +16,6 @@ class EscalateReturnRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EscalateReturnRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\EscalateReturnRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class EscalateReturnRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsEscalateResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\EscalateResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EscalateReturnRestResponse();
     }
 }

@@ -16,11 +16,6 @@ class GetPoliciesForNegotiatedPriceRestResponseTest extends \PHPUnit_Framework_T
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPoliciesForNegotiatedPriceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetPoliciesForNegotiatedPriceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetPoliciesForNegotiatedPriceRestResponseTest extends \PHPUnit_Framework_T
     public function testExtendsNegotiatedPricePolicyResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\NegotiatedPricePolicyResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPoliciesForNegotiatedPriceRestResponse();
     }
 }

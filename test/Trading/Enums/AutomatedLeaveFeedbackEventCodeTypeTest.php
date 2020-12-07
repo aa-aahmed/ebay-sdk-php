@@ -16,13 +16,13 @@ class AutomatedLeaveFeedbackEventCodeTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new AutomatedLeaveFeedbackEventCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\AutomatedLeaveFeedbackEventCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new AutomatedLeaveFeedbackEventCodeType();
     }
 }

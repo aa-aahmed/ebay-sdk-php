@@ -16,13 +16,13 @@ class InquiryStateEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InquiryStateEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\InquiryStateEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InquiryStateEnum();
     }
 }

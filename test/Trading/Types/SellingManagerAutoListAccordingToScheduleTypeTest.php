@@ -16,11 +16,6 @@ class SellingManagerAutoListAccordingToScheduleTypeTest extends \PHPUnit_Framewo
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerAutoListAccordingToScheduleType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SellingManagerAutoListAccordingToScheduleType', $this->obj);
@@ -29,5 +24,10 @@ class SellingManagerAutoListAccordingToScheduleTypeTest extends \PHPUnit_Framewo
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerAutoListAccordingToScheduleType();
     }
 }

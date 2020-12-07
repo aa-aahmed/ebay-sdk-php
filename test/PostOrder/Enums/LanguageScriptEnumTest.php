@@ -16,13 +16,13 @@ class LanguageScriptEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LanguageScriptEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\LanguageScriptEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LanguageScriptEnum();
     }
 }

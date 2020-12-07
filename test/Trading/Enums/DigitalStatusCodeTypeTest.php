@@ -16,13 +16,13 @@ class DigitalStatusCodeTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DigitalStatusCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\DigitalStatusCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DigitalStatusCodeType();
     }
 }

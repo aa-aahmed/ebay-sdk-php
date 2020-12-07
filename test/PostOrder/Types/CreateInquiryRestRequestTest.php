@@ -16,11 +16,6 @@ class CreateInquiryRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateInquiryRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CreateInquiryRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateInquiryRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCreateInquiryRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CreateInquiryRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateInquiryRestRequest();
     }
 }

@@ -16,13 +16,13 @@ class ReturnRefundInitiatorEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnRefundInitiatorEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\ReturnRefundInitiatorEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnRefundInitiatorEnum();
     }
 }

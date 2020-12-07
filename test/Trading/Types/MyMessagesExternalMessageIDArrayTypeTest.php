@@ -16,11 +16,6 @@ class MyMessagesExternalMessageIDArrayTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MyMessagesExternalMessageIDArrayType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\MyMessagesExternalMessageIDArrayType', $this->obj);
@@ -29,5 +24,10 @@ class MyMessagesExternalMessageIDArrayTypeTest extends \PHPUnit_Framework_TestCa
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MyMessagesExternalMessageIDArrayType();
     }
 }

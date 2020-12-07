@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\MerchantData;
 
 /**
@@ -23,6 +24,16 @@ class MerchantData
     /**
      * @param string $xml
      *
+     * @return \DTS\eBaySDK\MerchantData\Types\ActiveInventoryReportResponseType
+     */
+    public function activeInventoryReport($xml)
+    {
+        return $this->bulkDataExchangeResponses($xml)->ActiveInventoryReport;
+    }
+
+    /**
+     * @param string $xml
+     *
      * @return \DTS\eBaySDK\MerchantData\Types\BulkDataExchangeResponsesType
      */
     public function bulkDataExchangeResponses($xml)
@@ -33,11 +44,11 @@ class MerchantData
     /**
      * @param string $xml
      *
-     * @return \DTS\eBaySDK\MerchantData\Types\ActiveInventoryReportResponseType
+     * @return \DTS\eBaySDK\MerchantData\Types\BulkDataExchangeResponsesType
      */
-    public function activeInventoryReport($xml)
+    private function parseXml($xml)
     {
-        return $this->bulkDataExchangeResponses($xml)->ActiveInventoryReport;
+        return $this->xmlParser->parse($xml);
     }
 
     /**
@@ -198,15 +209,5 @@ class MerchantData
     public function verifyAddItem($xml)
     {
         return $this->bulkDataExchangeResponses($xml)->VerifyAddItemResponse;
-    }
-
-    /**
-     * @param string $xml
-     *
-     * @return \DTS\eBaySDK\MerchantData\Types\BulkDataExchangeResponsesType
-     */
-    private function parseXml($xml)
-    {
-        return $this->xmlParser->parse($xml);
     }
 }

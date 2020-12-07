@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Credentials;
 
 /**
@@ -103,7 +104,7 @@ class CredentialsProvider
             } else {
                 return new \InvalidArgumentException(
                     'Could not find environment variable '
-                    . 'credentials in '. self::ENV_APP_ID . '/'
+                    . 'credentials in ' . self::ENV_APP_ID . '/'
                     . self::ENV_CERT_ID . '/'
                     . self::ENV_DEV_ID
                 );

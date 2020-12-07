@@ -16,11 +16,6 @@ class VerifyAddFixedPriceItemResponseTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new VerifyAddFixedPriceItemResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\VerifyAddFixedPriceItemResponseType', $this->obj);
@@ -29,5 +24,10 @@ class VerifyAddFixedPriceItemResponseTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new VerifyAddFixedPriceItemResponseType();
     }
 }

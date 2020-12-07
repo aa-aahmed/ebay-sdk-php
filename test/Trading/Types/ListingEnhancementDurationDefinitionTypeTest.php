@@ -16,11 +16,6 @@ class ListingEnhancementDurationDefinitionTypeTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ListingEnhancementDurationDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ListingEnhancementDurationDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class ListingEnhancementDurationDefinitionTypeTest extends \PHPUnit_Framework_Te
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ListingEnhancementDurationDefinitionType();
     }
 }

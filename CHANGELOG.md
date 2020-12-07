@@ -49,8 +49,8 @@
 
 ## Fixes
 
-- It appears that PostOrder\Types\UploadFileRequest::data may be a string and not an array as
- stated in the documentation.
+- It appears that PostOrder\Types\UploadFileRequest::data may be a string and not an array as stated in the
+  documentation.
 
 ## 13.0.2 - 2017-08-28
 
@@ -78,9 +78,9 @@
 * Added Get Shipping Rate Tables operation to the Account service. Note that eBay have not officaly released this
   operation so it may be subject to change.
 * Link to forum at https://forum.devbay.net/c/php-sdk
-* Add GalleryURL to Trading\Types\PictureDetailsType.
-  GalleryURL was removed from the Trading API version 997. However it has been seen in the API response. If your project
-  makes use of GalleryURL be aware that eBay may stop returning this information!
+* Add GalleryURL to Trading\Types\PictureDetailsType. GalleryURL was removed from the Trading API version 997. However
+  it has been seen in the API response. If your project makes use of GalleryURL be aware that eBay may stop returning
+  this information!
 
 ### Breaking changes
 
@@ -116,14 +116,14 @@
 
 ### Fixes
 
-* SDK now ignores properties in the JSON response that would normally trigger an DTS\eBaySDK\Exceptions\UnknownPropertyException exception.
+* SDK now ignores properties in the JSON response that would normally trigger an
+  DTS\eBaySDK\Exceptions\UnknownPropertyException exception.
 
 ## 12.0.0 - 2017-05-23
 
 ### Fixes
 
-* Renamed state to cancelState and status to cancelStatus.
-  This matches the properties returned by the API.
+* Renamed state to cancelState and status to cancelStatus. This matches the properties returned by the API.
 * Changed type from integer to string for ItemEligibilityResult::itemId and ItemEligibilityResult::transactionId
 * Added missing subdomain property to PostOrder\Error.
 * Added missing discountAmount property to Fulfillment\DeliveryCost.
@@ -225,14 +225,18 @@
 ### Features
 
 * The SDK now supports asynchronous requests.
-* HTTP options can be passed to the HTTP client via the new configuration option [httpOptions](http://devbay.net/sdk/guides/guide/configuration.html#httpOptions).
+* HTTP options can be passed to the HTTP client via the new configuration
+  option [httpOptions](http://devbay.net/sdk/guides/guide/configuration.html#httpOptions).
 
 ### Breaking changes
 
 * Support Merchant Data API version 965.
 * Support Trading API version 967.
-* The protected method `\DTS\eBaySDK\Services::BaseService::callOperation` has been removed. Code that called this method will now need to call `callOperationAsync(...)->wait()` instead.
-* The `handler` configuration option is now called [httpHandler](http://devbay.net/sdk/guides/guide/configuration.html#httpHandler) and supports the new [httpOptions](http://devbay.net/sdk/guides/guide/configuration.html#httpOptions) configuration option.
+* The protected method `\DTS\eBaySDK\Services::BaseService::callOperation` has been removed. Code that called this
+  method will now need to call `callOperationAsync(...)->wait()` instead.
+* The `handler` configuration option is now
+  called [httpHandler](http://devbay.net/sdk/guides/guide/configuration.html#httpHandler) and supports the
+  new [httpOptions](http://devbay.net/sdk/guides/guide/configuration.html#httpOptions) configuration option.
 * The class `\DTS\eBaySDK\Handler` is now `\DTS\eBaySDK\HttpHandler`.
 
 ## 4.0.1 - 2016-05-25
@@ -269,13 +273,15 @@
 
 ## 1.0.0 - 2016-03-19
 
-As this is version 1.0.0 there are a few breaking changes. A full list can be found in the [migration guide](http://devbay.net/sdk/guides/guide/migration.html).
+As this is version 1.0.0 there are a few breaking changes. A full list can be found in
+the [migration guide](http://devbay.net/sdk/guides/guide/migration.html).
 
 ## 0.5.0 - 2015-11-20
 
 ### Fixes
 
-* Some properties where incorrectly declared as being `DTS\eBaySDK\ResolutionCaseManagement\Types\Integer` instead of `integer`.
+* Some properties where incorrectly declared as being `DTS\eBaySDK\ResolutionCaseManagement\Types\Integer` instead
+  of `integer`.
 * Correct URLs for Resolution Case Management service.
 
 ### API
@@ -307,9 +313,12 @@ SDK can now handle XML that is returned with namespaces.
 
 ### Fixes
 
-Order of object properties now matches the order specified in the service WSDL. Some operations require the elements in the XML to be in the correct order. Since the object properties were originally in alphabetical order the resulting XML would not be valid.
+Order of object properties now matches the order specified in the service WSDL. Some operations require the elements in
+the XML to be in the correct order. Since the object properties were originally in alphabetical order the resulting XML
+would not be valid.
 
-The generated XML is no longer a single string. It was possible to generate XML that was greater than the 20,000 character limit found in the LMS. Each element in the XML is now separated by a line-feed character.
+The generated XML is no longer a single string. It was possible to generate XML that was greater than the 20,000
+character limit found in the LMS. Each element in the XML is now separated by a line-feed character.
 
 ## 0.2.0 - 2015-08-11
 
@@ -322,7 +331,9 @@ The generated XML is no longer a single string. It was possible to generate XML 
 
 ### Feature
 
-Assigning values when instatiating an object has been improved. It is now possible to simply pass an associative array of property names and values. When a property expects an object as its value you can just pass another associative array instead. For example,
+Assigning values when instatiating an object has been improved. It is now possible to simply pass an associative array
+of property names and values. When a property expects an object as its value you can just pass another associative array
+instead. For example,
 
 ```
 $variation = new Types\VariationType(array(

@@ -16,13 +16,13 @@ class CancelCloseReasonEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CancelCloseReasonEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\CancelCloseReasonEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CancelCloseReasonEnum();
     }
 }

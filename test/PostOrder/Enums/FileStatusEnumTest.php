@@ -16,13 +16,13 @@ class FileStatusEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FileStatusEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\FileStatusEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FileStatusEnum();
     }
 }

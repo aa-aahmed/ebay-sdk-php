@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Mocks;
 
-use Psr\Http\Message\RequestInterface;
+use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Promise\FulfilledPromise;
+use Psr\Http\Message\RequestInterface;
 
 class HttpOAuthHandler
 {
@@ -26,7 +27,7 @@ class HttpOAuthHandler
         $this->body = $request->getBody();
 
         // Return a fake json response.
-        $json = file_get_contents(__DIR__.'/../Mocks/OAuthRestResponse.json');
+        $json = file_get_contents(__DIR__ . '/../Mocks/OAuthRestResponse.json');
 
         return new FulfilledPromise(new Response(200, [], Psr7\stream_for($json)));
     }

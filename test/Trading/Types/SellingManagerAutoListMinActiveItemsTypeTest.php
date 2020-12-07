@@ -16,11 +16,6 @@ class SellingManagerAutoListMinActiveItemsTypeTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerAutoListMinActiveItemsType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SellingManagerAutoListMinActiveItemsType', $this->obj);
@@ -29,5 +24,10 @@ class SellingManagerAutoListMinActiveItemsTypeTest extends \PHPUnit_Framework_Te
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerAutoListMinActiveItemsType();
     }
 }

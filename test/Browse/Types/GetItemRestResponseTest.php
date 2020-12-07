@@ -16,11 +16,6 @@ class GetItemRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetItemRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Types\GetItemRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetItemRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsItem()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Types\Item', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetItemRestResponse();
     }
 }

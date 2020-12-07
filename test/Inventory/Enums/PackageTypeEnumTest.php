@@ -16,13 +16,13 @@ class PackageTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new PackageTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Enums\PackageTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new PackageTypeEnum();
     }
 }

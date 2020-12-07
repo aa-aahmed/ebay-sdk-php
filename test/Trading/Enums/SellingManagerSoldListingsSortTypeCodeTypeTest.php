@@ -16,13 +16,13 @@ class SellingManagerSoldListingsSortTypeCodeTypeTest extends \PHPUnit_Framework_
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SellingManagerSoldListingsSortTypeCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\SellingManagerSoldListingsSortTypeCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SellingManagerSoldListingsSortTypeCodeType();
     }
 }

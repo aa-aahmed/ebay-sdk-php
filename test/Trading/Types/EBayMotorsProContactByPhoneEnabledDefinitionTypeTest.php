@@ -16,11 +16,6 @@ class EBayMotorsProContactByPhoneEnabledDefinitionTypeTest extends \PHPUnit_Fram
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new EBayMotorsProContactByPhoneEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\EBayMotorsProContactByPhoneEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class EBayMotorsProContactByPhoneEnabledDefinitionTypeTest extends \PHPUnit_Fram
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new EBayMotorsProContactByPhoneEnabledDefinitionType();
     }
 }

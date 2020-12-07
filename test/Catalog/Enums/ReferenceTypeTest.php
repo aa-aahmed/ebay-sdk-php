@@ -16,13 +16,13 @@ class ReferenceTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReferenceType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Enums\ReferenceType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReferenceType();
     }
 }

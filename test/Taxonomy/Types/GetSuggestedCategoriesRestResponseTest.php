@@ -16,11 +16,6 @@ class GetSuggestedCategoriesRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSuggestedCategoriesRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\GetSuggestedCategoriesRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetSuggestedCategoriesRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCategorySuggestionResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Taxonomy\Types\CategorySuggestionResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSuggestedCategoriesRestResponse();
     }
 }

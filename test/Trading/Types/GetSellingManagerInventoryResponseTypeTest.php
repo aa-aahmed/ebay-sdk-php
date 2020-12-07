@@ -16,11 +16,6 @@ class GetSellingManagerInventoryResponseTypeTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetSellingManagerInventoryResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetSellingManagerInventoryResponseType', $this->obj);
@@ -29,5 +24,10 @@ class GetSellingManagerInventoryResponseTypeTest extends \PHPUnit_Framework_Test
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetSellingManagerInventoryResponseType();
     }
 }

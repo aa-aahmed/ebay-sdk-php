@@ -1,4 +1,5 @@
 <?php
+
 namespace Requirements;
 
 class RequirementsCheck
@@ -21,33 +22,10 @@ class RequirementsCheck
         }
     }
 
-    private function notify($type, $msg)
-    {
-        $this->lines[] = sprintf('<div class="%s">%s</div>', $type, $msg);
-    }
-
-    private function pass($msg)
-    {
-        if ($this->isCli) {
-            $this->lines[] = '[OK] '.$msg;
-        } else {
-            $this->notify('ok', $msg);
-        }
-    }
-
-    private function fail($msg)
-    {
-        if ($this->isCli) {
-            $this->lines[] = '[FAIL] '.$msg;
-        } else {
-            $this->notify('fail', $msg);
-        }
-    }
-
     public function title($title)
     {
         if ($this->isCli) {
-            $this->lines[] = "\n$title\n".str_repeat('=', strlen($title));
+            $this->lines[] = "\n$title\n" . str_repeat('=', strlen($title));
         } else {
             $this->lines[] = "<h1>$title</h1>";
         }
@@ -56,7 +34,7 @@ class RequirementsCheck
     public function header($header)
     {
         if ($this->isCli) {
-            $this->lines[] = "\n$header\n".str_repeat('-', strlen($header));
+            $this->lines[] = "\n$header\n" . str_repeat('-', strlen($header));
         } else {
             $this->lines[] = "<h2>$header</h2>";
         }
@@ -68,6 +46,29 @@ class RequirementsCheck
             $this->pass("You have PHP $version or greater");
         } else {
             $this->fail("You need PHP $version or greater");
+        }
+    }
+
+    private function pass($msg)
+    {
+        if ($this->isCli) {
+            $this->lines[] = '[OK] ' . $msg;
+        } else {
+            $this->notify('ok', $msg);
+        }
+    }
+
+    private function notify($type, $msg)
+    {
+        $this->lines[] = sprintf('<div class="%s">%s</div>', $type, $msg);
+    }
+
+    private function fail($msg)
+    {
+        if ($this->isCli) {
+            $this->lines[] = '[FAIL] ' . $msg;
+        } else {
+            $this->notify('fail', $msg);
         }
     }
 
@@ -105,13 +106,13 @@ class RequirementsCheck
     {
         ob_start();
         phpinfo(INFO_GENERAL);
-        $this->lines[]= ob_get_clean();
+        $this->lines[] = ob_get_clean();
     }
 
     public function endCheck()
     {
         $text = implode("\n", $this->lines);
-        echo $this->isCli ? $text."\n\n" : "<!doctype html><html><body>$text</body></html>";
+        echo $this->isCli ? $text . "\n\n" : "<!doctype html><html><body>$text</body></html>";
     }
 }
 

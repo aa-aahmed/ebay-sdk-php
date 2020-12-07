@@ -16,11 +16,6 @@ class ViolationAspectValuesTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ViolationAspectValues();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Types\ViolationAspectValues', $this->obj);
@@ -29,5 +24,10 @@ class ViolationAspectValuesTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ViolationAspectValues();
     }
 }

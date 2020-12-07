@@ -16,11 +16,6 @@ class CloseInquiryRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CloseInquiryRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CloseInquiryRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CloseInquiryRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBuyerCloseInquiryRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\BuyerCloseInquiryRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CloseInquiryRestRequest();
     }
 }

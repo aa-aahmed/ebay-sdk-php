@@ -16,13 +16,13 @@ class ReturnTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\ReturnType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnType();
     }
 }

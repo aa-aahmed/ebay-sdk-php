@@ -16,11 +16,6 @@ class ProvidesReturnAddressRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvidesReturnAddressRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ProvidesReturnAddressRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class ProvidesReturnAddressRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsReturnAddressRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ReturnAddressRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvidesReturnAddressRestRequest();
     }
 }

@@ -16,11 +16,6 @@ class BuyerGuaranteeEnabledDefinitionTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BuyerGuaranteeEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\BuyerGuaranteeEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class BuyerGuaranteeEnabledDefinitionTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BuyerGuaranteeEnabledDefinitionType();
     }
 }

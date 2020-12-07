@@ -16,11 +16,6 @@ class CreateOrReplaceProductCompatibilityRestRequestTest extends \PHPUnit_Framew
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateOrReplaceProductCompatibilityRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\CreateOrReplaceProductCompatibilityRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateOrReplaceProductCompatibilityRestRequestTest extends \PHPUnit_Framew
     public function testExtendsCompatibility()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\Compatibility', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateOrReplaceProductCompatibilityRestRequest();
     }
 }

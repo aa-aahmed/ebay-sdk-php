@@ -16,11 +16,6 @@ class MerchandisingServiceProductResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MerchandisingServiceProductResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Types\MerchandisingServiceProductResponse', $this->obj);
@@ -29,5 +24,10 @@ class MerchandisingServiceProductResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBaseMerchandisingServiceResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Merchandising\Types\BaseMerchandisingServiceResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MerchandisingServiceProductResponse();
     }
 }

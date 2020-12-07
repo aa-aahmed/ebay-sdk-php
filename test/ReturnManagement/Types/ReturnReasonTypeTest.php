@@ -16,11 +16,6 @@ class ReturnReasonTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnReasonType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\ReturnReasonType', $this->obj);
@@ -29,5 +24,10 @@ class ReturnReasonTypeTest extends \PHPUnit_Framework_TestCase
     public function testExtendsEnumerationDetailType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Types\EnumerationDetailType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnReasonType();
     }
 }

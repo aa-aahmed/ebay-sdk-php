@@ -16,13 +16,13 @@ class ChangeRequestStatusTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ChangeRequestStatus();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Enums\ChangeRequestStatus', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ChangeRequestStatus();
     }
 }

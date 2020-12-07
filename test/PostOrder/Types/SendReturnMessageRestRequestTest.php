@@ -16,11 +16,6 @@ class SendReturnMessageRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SendReturnMessageRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SendReturnMessageRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class SendReturnMessageRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsSendMessageRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\SendMessageRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SendReturnMessageRestRequest();
     }
 }

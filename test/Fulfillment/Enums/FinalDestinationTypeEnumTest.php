@@ -16,13 +16,13 @@ class FinalDestinationTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new FinalDestinationTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Fulfillment\Enums\FinalDestinationTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new FinalDestinationTypeEnum();
     }
 }

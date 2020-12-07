@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Browse\Services;
 
 use DTS\eBaySDK\Browse\Services\BrowseBaseService;
@@ -31,7 +32,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('authorization', $d);
         $this->assertEquals([
-            'valid'   => ['string'],
+            'valid' => ['string'],
             'required' => true
         ], $d['authorization']);
 
@@ -83,6 +84,6 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey(BrowseBaseService::HDR_MARKETPLACE_ID, $h->headers);
         $this->assertEquals('123', $h->headers[BrowseBaseService::HDR_MARKETPLACE_ID]);
-        $this->assertEquals('affiliateCampaignId=foo,affiliateReferenceId=bar,contextualLocation=baz', $h->headers[BrowseBaseService::HDR_END_USER_CTX ]);
+        $this->assertEquals('affiliateCampaignId=foo,affiliateReferenceId=bar,contextualLocation=baz', $h->headers[BrowseBaseService::HDR_END_USER_CTX]);
     }
 }

@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Trading\Services;
 
+use DTS\eBaySDK\Test\Mocks\HttpHandler;
+use DTS\eBaySDK\Test\Trading\Mocks\Service;
 use DTS\eBaySDK\Trading\Services\TradingBaseService;
 use DTS\eBaySDK\Trading\Services\TradingService;
-use DTS\eBaySDK\Test\Trading\Mocks\Service;
-use DTS\eBaySDK\Test\Mocks\HttpHandler;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +22,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('authorization', $d);
         $this->assertEquals([
-            'valid'   => ['string']
+            'valid' => ['string']
         ], $d['authorization']);
 
         $this->assertArrayHasKey('authToken', $d);

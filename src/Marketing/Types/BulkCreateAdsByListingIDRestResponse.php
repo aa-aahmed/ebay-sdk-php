@@ -10,8 +10,8 @@
 
 namespace DTS\eBaySDK\Marketing\Types;
 
-use DTS\eBaySDK\StatusCodeTrait;
 use DTS\eBaySDK\HttpHeadersTrait;
+use DTS\eBaySDK\StatusCodeTrait;
 
 /**
  *

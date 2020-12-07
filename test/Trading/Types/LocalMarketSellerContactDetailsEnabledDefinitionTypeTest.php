@@ -16,11 +16,6 @@ class LocalMarketSellerContactDetailsEnabledDefinitionTypeTest extends \PHPUnit_
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LocalMarketSellerContactDetailsEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\LocalMarketSellerContactDetailsEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class LocalMarketSellerContactDetailsEnabledDefinitionTypeTest extends \PHPUnit_
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LocalMarketSellerContactDetailsEnabledDefinitionType();
     }
 }

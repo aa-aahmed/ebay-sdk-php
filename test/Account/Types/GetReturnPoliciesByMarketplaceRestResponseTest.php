@@ -16,11 +16,6 @@ class GetReturnPoliciesByMarketplaceRestResponseTest extends \PHPUnit_Framework_
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnPoliciesByMarketplaceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetReturnPoliciesByMarketplaceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetReturnPoliciesByMarketplaceRestResponseTest extends \PHPUnit_Framework_
     public function testExtendsReturnPolicyResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\ReturnPolicyResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnPoliciesByMarketplaceRestResponse();
     }
 }

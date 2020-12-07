@@ -16,13 +16,13 @@ class ReturnStatusInputTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnStatusInputType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\ReturnStatusInputType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnStatusInputType();
     }
 }

@@ -16,11 +16,6 @@ class NegotiatedPricePolicyTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new NegotiatedPricePolicy();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\NegotiatedPricePolicy', $this->obj);
@@ -29,5 +24,10 @@ class NegotiatedPricePolicyTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new NegotiatedPricePolicy();
     }
 }

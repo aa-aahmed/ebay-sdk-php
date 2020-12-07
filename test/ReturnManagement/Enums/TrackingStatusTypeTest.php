@@ -16,13 +16,13 @@ class TrackingStatusTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new TrackingStatusType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ReturnManagement\Enums\TrackingStatusType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new TrackingStatusType();
     }
 }

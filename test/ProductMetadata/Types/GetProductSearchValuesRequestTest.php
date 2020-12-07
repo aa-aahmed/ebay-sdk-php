@@ -16,11 +16,6 @@ class GetProductSearchValuesRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetProductSearchValuesRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\GetProductSearchValuesRequest', $this->obj);
@@ -29,5 +24,10 @@ class GetProductSearchValuesRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsGetProductSearchValuesBaseRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ProductMetadata\Types\GetProductSearchValuesBaseRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetProductSearchValuesRequest();
     }
 }

@@ -16,13 +16,13 @@ class GetReturnFieldGroupEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetReturnFieldGroupEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\GetReturnFieldGroupEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetReturnFieldGroupEnum();
     }
 }

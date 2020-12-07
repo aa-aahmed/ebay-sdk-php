@@ -16,11 +16,6 @@ class RejectCancellationRequestRestRequestTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new RejectCancellationRequestRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\RejectCancellationRequestRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class RejectCancellationRequestRestRequestTest extends \PHPUnit_Framework_TestCa
     public function testExtendsRejectCancelRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\RejectCancelRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new RejectCancellationRequestRestRequest();
     }
 }

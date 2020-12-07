@@ -16,13 +16,13 @@ class ProgramEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProgramEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Analytics\Enums\ProgramEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProgramEnum();
     }
 }

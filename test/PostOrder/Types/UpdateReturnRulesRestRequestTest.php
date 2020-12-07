@@ -16,11 +16,6 @@ class UpdateReturnRulesRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new UpdateReturnRulesRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\UpdateReturnRulesRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class UpdateReturnRulesRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsModifyDispositionRuleRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\ModifyDispositionRuleRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new UpdateReturnRulesRestRequest();
     }
 }

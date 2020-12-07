@@ -16,11 +16,6 @@ class ExtendSiteHostedPicturesResponseTypeTest extends \PHPUnit_Framework_TestCa
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ExtendSiteHostedPicturesResponseType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\ExtendSiteHostedPicturesResponseType', $this->obj);
@@ -29,5 +24,10 @@ class ExtendSiteHostedPicturesResponseTypeTest extends \PHPUnit_Framework_TestCa
     public function testExtendsAbstractResponseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractResponseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ExtendSiteHostedPicturesResponseType();
     }
 }

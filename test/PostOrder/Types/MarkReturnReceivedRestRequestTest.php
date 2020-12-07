@@ -16,11 +16,6 @@ class MarkReturnReceivedRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MarkReturnReceivedRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\MarkReturnReceivedRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class MarkReturnReceivedRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsMarkAsReceivedRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\MarkAsReceivedRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MarkReturnReceivedRestRequest();
     }
 }

@@ -16,11 +16,6 @@ class GetPoliciesForAutoPartsCompatibilityRestResponseTest extends \PHPUnit_Fram
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetPoliciesForAutoPartsCompatibilityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\GetPoliciesForAutoPartsCompatibilityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetPoliciesForAutoPartsCompatibilityRestResponseTest extends \PHPUnit_Fram
     public function testExtendsAutomotivePartsCompatibilityPolicyResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Metadata\Types\AutomotivePartsCompatibilityPolicyResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetPoliciesForAutoPartsCompatibilityRestResponse();
     }
 }

@@ -16,11 +16,6 @@ class GetAFulfillmentPolicyByIDRestResponseTest extends \PHPUnit_Framework_TestC
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAFulfillmentPolicyByIDRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetAFulfillmentPolicyByIDRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAFulfillmentPolicyByIDRestResponseTest extends \PHPUnit_Framework_TestC
     public function testExtendsFulfillmentPolicy()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\FulfillmentPolicy', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAFulfillmentPolicyByIDRestResponse();
     }
 }

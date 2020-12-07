@@ -16,13 +16,13 @@ class DiscountTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new DiscountTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\RelatedItemsManagement\Enums\DiscountTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new DiscountTypeEnum();
     }
 }

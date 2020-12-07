@@ -16,11 +16,6 @@ class CreateAdByListingIDRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CreateAdByListingIDRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CreateAdByListingIDRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CreateAdByListingIDRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCreateAdRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CreateAdRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CreateAdByListingIDRestRequest();
     }
 }

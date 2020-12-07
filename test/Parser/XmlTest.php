@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Parser\Test;
 
 use DTS\eBaySDK\Parser\XmlParser;
@@ -8,7 +9,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     public function testCanParseXml()
     {
         $xmlParser = new XmlParser('\DTS\eBaySDK\Test\Mocks\ComplexClass');
-        $xml = file_get_contents(__DIR__.'/../Mocks/Response.xml');
+        $xml = file_get_contents(__DIR__ . '/../Mocks/Response.xml');
         $xml = preg_replace('/[\n\r]/', '', $xml);
         $xml = preg_replace('/>\s+/', '>', $xml);
         $obj = $xmlParser->parse($xml);
@@ -63,7 +64,7 @@ class XmlTest extends \PHPUnit_Framework_TestCase
     public function testCanParseXmlWithNamespace()
     {
         $xmlParser = new XmlParser('\DTS\eBaySDK\Test\Mocks\ComplexClass');
-        $xml = file_get_contents(__DIR__.'/../Mocks/ResponseNS.xml');
+        $xml = file_get_contents(__DIR__ . '/../Mocks/ResponseNS.xml');
         $xml = preg_replace('/[\n\r]/', '', $xml);
         $xml = preg_replace('/>\s+/', '>', $xml);
         $obj = $xmlParser->parse($xml);

@@ -16,11 +16,6 @@ class InternationalShippingServiceOptionsTypeTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new InternationalShippingServiceOptionsType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\MerchantData\Types\InternationalShippingServiceOptionsType', $this->obj);
@@ -29,5 +24,10 @@ class InternationalShippingServiceOptionsTypeTest extends \PHPUnit_Framework_Tes
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new InternationalShippingServiceOptionsType();
     }
 }

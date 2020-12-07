@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Test\Compliance\Services;
 
 use DTS\eBaySDK\Compliance\Services\ComplianceBaseService;
@@ -21,7 +22,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('authorization', $d);
         $this->assertEquals([
-            'valid'   => ['string'],
+            'valid' => ['string'],
             'required' => true
         ], $d['authorization']);
 

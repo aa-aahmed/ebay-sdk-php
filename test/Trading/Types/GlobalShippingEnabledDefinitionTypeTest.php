@@ -16,11 +16,6 @@ class GlobalShippingEnabledDefinitionTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GlobalShippingEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GlobalShippingEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class GlobalShippingEnabledDefinitionTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GlobalShippingEnabledDefinitionType();
     }
 }

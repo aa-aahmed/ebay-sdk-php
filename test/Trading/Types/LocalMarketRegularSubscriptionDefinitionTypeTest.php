@@ -16,11 +16,6 @@ class LocalMarketRegularSubscriptionDefinitionTypeTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new LocalMarketRegularSubscriptionDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\LocalMarketRegularSubscriptionDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class LocalMarketRegularSubscriptionDefinitionTypeTest extends \PHPUnit_Framewor
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new LocalMarketRegularSubscriptionDefinitionType();
     }
 }

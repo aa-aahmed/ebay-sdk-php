@@ -16,13 +16,13 @@ class MoneyMovementTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MoneyMovementTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\MoneyMovementTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MoneyMovementTypeEnum();
     }
 }

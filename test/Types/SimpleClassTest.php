@@ -1,12 +1,13 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
-use DTS\eBaySDK\Test\Mocks\SimpleClass;
 use DTS\eBaySDK\Test\Mocks\Base64BinaryType;
 use DTS\eBaySDK\Test\Mocks\BooleanType;
 use DTS\eBaySDK\Test\Mocks\DecimalType;
 use DTS\eBaySDK\Test\Mocks\DoubleType;
 use DTS\eBaySDK\Test\Mocks\IntegerType;
+use DTS\eBaySDK\Test\Mocks\SimpleClass;
 use DTS\eBaySDK\Test\Mocks\StringType;
 use DTS\eBaySDK\Test\Mocks\TokenType;
 use DTS\eBaySDK\Test\Mocks\URIType;
@@ -14,11 +15,6 @@ use DTS\eBaySDK\Test\Mocks\URIType;
 class SimpleClassTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new SimpleClass();
-    }
 
     public function testCanBeCreated()
     {
@@ -247,5 +243,10 @@ class SimpleClassTest extends \PHPUnit_Framework_TestCase
         $meta->strData = '';
 
         $this->assertEquals($meta, $this->obj->elementMeta('SimpleClass'));
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SimpleClass();
     }
 }

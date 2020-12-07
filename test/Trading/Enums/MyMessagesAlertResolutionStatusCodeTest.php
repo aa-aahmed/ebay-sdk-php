@@ -16,13 +16,13 @@ class MyMessagesAlertResolutionStatusCodeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new MyMessagesAlertResolutionStatusCode();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\MyMessagesAlertResolutionStatusCode', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new MyMessagesAlertResolutionStatusCode();
     }
 }

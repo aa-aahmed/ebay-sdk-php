@@ -16,13 +16,13 @@ class ProductAttributeNameTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProductAttributeName();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Catalog\Enums\ProductAttributeName', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProductAttributeName();
     }
 }

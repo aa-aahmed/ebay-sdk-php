@@ -16,11 +16,6 @@ class SkypeMeNonTransactionalEnabledDefinitionTypeTest extends \PHPUnit_Framewor
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new SkypeMeNonTransactionalEnabledDefinitionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\SkypeMeNonTransactionalEnabledDefinitionType', $this->obj);
@@ -29,5 +24,10 @@ class SkypeMeNonTransactionalEnabledDefinitionTypeTest extends \PHPUnit_Framewor
     public function testExtendsBaseType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Types\BaseType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new SkypeMeNonTransactionalEnabledDefinitionType();
     }
 }

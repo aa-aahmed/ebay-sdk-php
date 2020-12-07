@@ -16,11 +16,6 @@ class BulkMigrateListingsRestResponseTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new BulkMigrateListingsRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\BulkMigrateListingsRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class BulkMigrateListingsRestResponseTest extends \PHPUnit_Framework_TestCase
     public function testExtendsBulkMigrateListingResponse()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Inventory\Types\BulkMigrateListingResponse', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new BulkMigrateListingsRestResponse();
     }
 }

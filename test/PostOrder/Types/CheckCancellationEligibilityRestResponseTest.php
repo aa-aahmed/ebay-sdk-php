@@ -16,11 +16,6 @@ class CheckCancellationEligibilityRestResponseTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CheckCancellationEligibilityRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\CheckCancellationEligibilityRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class CheckCancellationEligibilityRestResponseTest extends \PHPUnit_Framework_Te
     public function testExtendsOrderEligibilityResult()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Types\OrderEligibilityResult', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CheckCancellationEligibilityRestResponse();
     }
 }

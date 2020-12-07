@@ -16,11 +16,6 @@ class CloneCampaignRestRequestTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new CloneCampaignRestRequest();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CloneCampaignRestRequest', $this->obj);
@@ -29,5 +24,10 @@ class CloneCampaignRestRequestTest extends \PHPUnit_Framework_TestCase
     public function testExtendsCloneCampaignRequest()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\CloneCampaignRequest', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new CloneCampaignRestRequest();
     }
 }

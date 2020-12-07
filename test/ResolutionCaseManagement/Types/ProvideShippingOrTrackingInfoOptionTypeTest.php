@@ -16,11 +16,6 @@ class ProvideShippingOrTrackingInfoOptionTypeTest extends \PHPUnit_Framework_Tes
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ProvideShippingOrTrackingInfoOptionType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\ProvideShippingOrTrackingInfoOptionType', $this->obj);
@@ -29,5 +24,10 @@ class ProvideShippingOrTrackingInfoOptionTypeTest extends \PHPUnit_Framework_Tes
     public function testExtendsBaseActivityOptionType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\ResolutionCaseManagement\Types\BaseActivityOptionType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ProvideShippingOrTrackingInfoOptionType();
     }
 }

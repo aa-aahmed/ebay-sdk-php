@@ -16,13 +16,13 @@ class ReturnUserRoleEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ReturnUserRoleEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\PostOrder\Enums\ReturnUserRoleEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ReturnUserRoleEnum();
     }
 }

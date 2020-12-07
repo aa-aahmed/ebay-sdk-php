@@ -16,11 +16,6 @@ class GetVeROReasonCodeDetailsRequestTypeTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetVeROReasonCodeDetailsRequestType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\GetVeROReasonCodeDetailsRequestType', $this->obj);
@@ -29,5 +24,10 @@ class GetVeROReasonCodeDetailsRequestTypeTest extends \PHPUnit_Framework_TestCas
     public function testExtendsAbstractRequestType()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Types\AbstractRequestType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetVeROReasonCodeDetailsRequestType();
     }
 }

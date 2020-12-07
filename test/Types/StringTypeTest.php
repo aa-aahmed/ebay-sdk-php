@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Types\StringType;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\Types\StringType;
 class StringTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new StringType();
-    }
 
     public function testCanBeCreated()
     {
@@ -27,5 +23,10 @@ class StringTypeTest extends \PHPUnit_Framework_TestCase
         $this->obj->value = 'foo';
         $this->assertEquals('foo', $this->obj->value);
         $this->assertInternalType('string', $this->obj->value);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new StringType();
     }
 }

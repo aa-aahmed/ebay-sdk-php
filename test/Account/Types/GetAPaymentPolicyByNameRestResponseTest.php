@@ -16,11 +16,6 @@ class GetAPaymentPolicyByNameRestResponseTest extends \PHPUnit_Framework_TestCas
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAPaymentPolicyByNameRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\GetAPaymentPolicyByNameRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAPaymentPolicyByNameRestResponseTest extends \PHPUnit_Framework_TestCas
     public function testExtendsPaymentPolicy()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Account\Types\PaymentPolicy', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAPaymentPolicyByNameRestResponse();
     }
 }

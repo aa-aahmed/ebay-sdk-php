@@ -1,11 +1,12 @@
 <?php
+
 namespace DTS\eBaySDK\Test\OAuth\Services;
 
-use DTS\eBaySDK\Test\TestTraits\ManageEnv;
-use DTS\eBaySDK\OAuth\Services\OAuthService;
-use DTS\eBaySDK\Test\Mocks\HttpOAuthHandler;
 use DTS\eBaySDK\Credentials\Credentials;
 use DTS\eBaySDK\Credentials\CredentialsProvider;
+use DTS\eBaySDK\OAuth\Services\OAuthService;
+use DTS\eBaySDK\Test\Mocks\HttpOAuthHandler;
+use DTS\eBaySDK\Test\TestTraits\ManageEnv;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,45 +18,45 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         $this->assertArrayHasKey('credentials', $d);
         $this->assertEquals([
-            'valid'   => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
-            'fn'      => 'DTS\eBaySDK\applyCredentials',
+            'valid' => ['DTS\eBaySDK\Credentials\CredentialsInterface', 'array', 'callable'],
+            'fn' => 'DTS\eBaySDK\applyCredentials',
             'default' => [CredentialsProvider::class, 'defaultProvider']
         ], $d['credentials']);
 
         $this->assertArrayHasKey('debug', $d);
         $this->assertEquals([
-            'valid'   => ['bool', 'array'],
-            'fn'      => 'DTS\eBaySDK\applyDebug',
+            'valid' => ['bool', 'array'],
+            'fn' => 'DTS\eBaySDK\applyDebug',
             'default' => false
         ], $d['debug']);
 
         $this->assertArrayHasKey('httpHandler', $d);
         $this->assertEquals([
-            'valid'   => ['callable'],
+            'valid' => ['callable'],
             'default' => 'DTS\eBaySDK\defaultHttpHandler'
         ], $d['httpHandler']);
 
         $this->assertArrayHasKey('httpOptions', $d);
         $this->assertEquals([
-            'valid'   => ['array'],
+            'valid' => ['array'],
             'default' => ['http_errors' => false]
         ], $d['httpOptions']);
 
         $this->assertArrayHasKey('profile', $d);
         $this->assertEquals([
             'valid' => ['string'],
-            'fn'    => 'DTS\eBaySDK\applyProfile',
+            'fn' => 'DTS\eBaySDK\applyProfile',
         ], $d['profile']);
 
         $this->assertArrayHasKey('ruName', $d);
         $this->assertEquals([
-            'valid'   => ['string'],
+            'valid' => ['string'],
             'required' => true
         ], $d['ruName']);
 
         $this->assertArrayHasKey('sandbox', $d);
         $this->assertEquals([
-            'valid'   => ['bool'],
+            'valid' => ['bool'],
             'default' => false
         ], $d['sandbox']);
     }
@@ -64,17 +65,17 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'baz',
-            'sandbox'     => true
+            'ruName' => 'baz',
+            'sandbox' => true
         ]);
         $url = 'https://auth.sandbox.ebay.com/oauth2/authorize?client_id=foo&redirect_uri=baz&response_type=code&state=111&scope=https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.account%20https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.inventory';
 
         $this->assertEquals($url, $s->redirectUrlForUser([
-            'state'  => '111',
+            'state' => '111',
             'scope' => [
                 'https://api.ebay.com/oauth/api_scope/sell.account',
                 'https://api.ebay.com/oauth/api_scope/sell.inventory'
@@ -86,16 +87,16 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'baz'
+            'ruName' => 'baz'
         ]);
         $url = 'https://auth.ebay.com/oauth2/authorize?client_id=foo&redirect_uri=baz&response_type=code&state=111&scope=https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.account%20https%3A%2F%2Fapi.ebay.com%2Foauth%2Fapi_scope%2Fsell.inventory';
 
         $this->assertEquals($url, $s->redirectUrlForUser([
-            'state'  => '111',
+            'state' => '111',
             'scope' => [
                 'https://api.ebay.com/oauth/api_scope/sell.account',
                 'https://api.ebay.com/oauth/api_scope/sell.inventory'
@@ -111,11 +112,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'baz'
+            'ruName' => 'baz'
         ]);
 
         $s->redirectUrlForUser([
@@ -131,28 +132,29 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'baz'
+            'ruName' => 'baz'
         ]);
 
         $s->redirectUrlForUser([
             'state' => ''
         ]);
     }
+
     public function testProductionUrlIsUsed()
     {
         // By default sandbox will be false.
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => '',
+                'appId' => '',
                 'certId' => '',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
+            'ruName' => 'foo',
             'httpHandler' => $h
         ]);
         $s->getAppToken();
@@ -165,12 +167,12 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => '',
+                'appId' => '',
                 'certId' => '',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
-            'sandbox'     => true,
+            'ruName' => 'foo',
+            'sandbox' => true,
             'httpHandler' => $h
         ]);
         $s->getAppToken();
@@ -183,11 +185,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
+            'ruName' => 'foo',
             'httpHandler' => $h
         ]);
         $s->getAppToken();
@@ -195,14 +197,14 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('Accept', $h->headers);
         $this->assertEquals('application/json', $h->headers['Accept']);
         $this->assertArrayHasKey('Authorization', $h->headers);
-        $this->assertEquals('Basic '.base64_encode('foo:bar'), $h->headers['Authorization']);
+        $this->assertEquals('Basic ' . base64_encode('foo:bar'), $h->headers['Authorization']);
         $this->assertArrayHasKey('Content-Type', $h->headers);
         $this->assertEquals('application/x-www-form-urlencoded', $h->headers['Content-Type']);
         $this->assertArrayHasKey('Content-Length', $h->headers);
         $this->assertEquals(strlen(http_build_query([
-            'grant_type'   => 'client_credentials',
+            'grant_type' => 'client_credentials',
             'redirect_uri' => 'foo',
-            'scope'        => 'https://api.ebay.com/oauth/api_scope'
+            'scope' => 'https://api.ebay.com/oauth/api_scope'
         ])), $h->headers['Content-Length']);
     }
 
@@ -211,18 +213,18 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
+            'ruName' => 'foo',
             'httpHandler' => $h
         ]);
         $s->getAppToken();
         $this->assertEquals(http_build_query([
-            'grant_type'   => 'client_credentials',
+            'grant_type' => 'client_credentials',
             'redirect_uri' => 'foo',
-            'scope'        => 'https://api.ebay.com/oauth/api_scope'
+            'scope' => 'https://api.ebay.com/oauth/api_scope'
         ]), $h->body);
     }
 
@@ -231,11 +233,11 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
+            'ruName' => 'foo',
             'httpHandler' => $h
         ]);
         $r = $s->getAppToken();
@@ -254,25 +256,25 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
             $str .= $value;
         };
         $body = http_build_query([
-            'grant_type'   => 'client_credentials',
+            'grant_type' => 'client_credentials',
             'redirect_uri' => 'foo',
-            'scope'        => 'https://api.ebay.com/oauth/api_scope'
+            'scope' => 'https://api.ebay.com/oauth/api_scope'
         ]);
 
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => 'foo',
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
-            'debug'       => ['logfn' => $logfn],
+            'ruName' => 'foo',
+            'debug' => ['logfn' => $logfn],
             'httpHandler' => new HttpOAuthHandler()
         ]);
         $r = $s->getAppToken();
 
         $this->assertContains('Content-Type: application/x-www-form-urlencoded', $str);
-        $this->assertContains('Content-Length: '.strlen($body), $str);
+        $this->assertContains('Content-Length: ' . strlen($body), $str);
         $this->assertContains('foo', $str);
         $this->assertContains('bar', $str);
     }
@@ -281,7 +283,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
     {
         $s = new OAuthService([
             'credentials' => new Credentials('111', '222', '333'),
-            'ruName'      => 'foo'
+            'ruName' => 'foo'
         ]);
 
         $c = $s->getCredentials();
@@ -298,7 +300,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
                 'certId' => '222',
                 'devId' => '333'
             ],
-            'ruName'      => 'foo'
+            'ruName' => 'foo'
         ]);
 
         $c = $s->getCredentials();
@@ -313,7 +315,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
             'credentials' => function () {
                 return new Credentials('111', '222', '333');
             },
-            'ruName'      => 'foo'
+            'ruName' => 'foo'
         ]);
 
         $c = $s->getCredentials();
@@ -337,7 +339,7 @@ EOT;
 
         $s = new OAuthService([
             'profile' => 'foo',
-            'ruName'  => 'foo'
+            'ruName' => 'foo'
         ]);
         $c = $s->getCredentials();
 
@@ -364,7 +366,7 @@ EOT;
 
         $s = new OAuthService([
             'profile' => 'foo',
-            'ruName'      => 'foo'
+            'ruName' => 'foo'
         ]);
 
         try {
@@ -385,7 +387,7 @@ EOT;
             'credentials' => function () {
                 return new \InvalidArgumentException('Cannot locate credentials');
             },
-            'ruName'      => 'foo'
+            'ruName' => 'foo'
         ]);
     }
 
@@ -393,23 +395,23 @@ EOT;
     {
         $h = new HttpOAuthHandler();
         $s = new OAuthService([
-            'credentials'  => [
-                'appId'  => 'foo',
+            'credentials' => [
+                'appId' => 'foo',
                 'certId' => 'bar',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'       => 'foo',
+            'ruName' => 'foo',
             'sandbox' => true,
-            'httpHandler'  => $h,
+            'httpHandler' => $h,
             'httpOptions' => []
         ]);
 
         $this->assertEquals([
-            'apiVersion'  => 'v1',
+            'apiVersion' => 'v1',
             'credentials' => new Credentials('foo', 'bar', ''),
-            'ruName'      => 'foo',
-            'sandbox'     => true,
-            'debug'       => false,
+            'ruName' => 'foo',
+            'sandbox' => true,
+            'debug' => false,
             'httpHandler' => $h,
             'httpOptions' => []
         ], $s->getConfig());
@@ -419,11 +421,11 @@ EOT;
         ]);
 
         $this->assertEquals([
-            'apiVersion'  => 'v1',
+            'apiVersion' => 'v1',
             'credentials' => new Credentials('foo', 'bar', ''),
-            'ruName'      => 'foo',
-            'sandbox'     => false,
-            'debug'       => false,
+            'ruName' => 'foo',
+            'sandbox' => false,
+            'debug' => false,
             'httpHandler' => $h,
             'httpOptions' => []
         ], $s->getConfig());
@@ -437,12 +439,12 @@ EOT;
     {
         $s = new OAuthService([
             'credentials' => [
-                'appId'  => '',
+                'appId' => '',
                 'certId' => '',
-                'devId'  => ''
+                'devId' => ''
             ],
-            'ruName'      => 'foo',
-            'x'           => 1
+            'ruName' => 'foo',
+            'x' => 1
         ]);
 
         $s->setConfig(['sandbox' => -1]);

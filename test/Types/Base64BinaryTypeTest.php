@@ -1,4 +1,5 @@
 <?php
+
 namespace DTS\eBaySDK\Types\Test;
 
 use DTS\eBaySDK\Types\Base64BinaryType;
@@ -6,11 +7,6 @@ use DTS\eBaySDK\Types\Base64BinaryType;
 class Base64BinaryTypeTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
-
-    protected function setUp()
-    {
-        $this->obj = new Base64BinaryType();
-    }
 
     public function testCanBeCreated()
     {
@@ -27,5 +23,10 @@ class Base64BinaryTypeTest extends \PHPUnit_Framework_TestCase
         $this->obj->value = 'foo';
         $this->assertEquals('foo', $this->obj->value);
         $this->assertInternalType('string', $this->obj->value);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new Base64BinaryType();
     }
 }

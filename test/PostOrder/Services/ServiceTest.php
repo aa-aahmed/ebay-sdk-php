@@ -1,10 +1,11 @@
 <?php
+
 namespace DTS\eBaySDK\Test\PostOrder\Services;
 
 use DTS\eBaySDK\PostOrder\Services\PostOrderBaseService;
 use DTS\eBaySDK\PostOrder\Services\PostOrderService;
-use DTS\eBaySDK\Test\PostOrder\Mocks\Service;
 use DTS\eBaySDK\Test\Mocks\HttpRestHandler;
+use DTS\eBaySDK\Test\PostOrder\Mocks\Service;
 
 class ServiceTest extends \PHPUnit_Framework_TestCase
 {
@@ -44,7 +45,7 @@ class ServiceTest extends \PHPUnit_Framework_TestCase
 
         // Test required headers first.
         $this->assertArrayHasKey(PostOrderBaseService::HDR_AUTH_TOKEN, $h->headers);
-        $this->assertEquals('TOKEN 321', $h->headers[PostOrderBaseService::HDR_AUTH_TOKEN ]);
+        $this->assertEquals('TOKEN 321', $h->headers[PostOrderBaseService::HDR_AUTH_TOKEN]);
 
         // Test that optional headers have not been set until they have been configured.
         $this->assertArrayNotHasKey(PostOrderBaseService::HDR_MARKETPLACE_ID, $h->headers);

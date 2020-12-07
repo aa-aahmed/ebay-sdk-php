@@ -16,13 +16,13 @@ class ClassifiedAdPaymentMethodEnabledCodeTypeTest extends \PHPUnit_Framework_Te
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ClassifiedAdPaymentMethodEnabledCodeType();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Trading\Enums\ClassifiedAdPaymentMethodEnabledCodeType', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ClassifiedAdPaymentMethodEnabledCodeType();
     }
 }

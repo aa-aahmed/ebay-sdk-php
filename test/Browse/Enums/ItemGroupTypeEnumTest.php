@@ -16,13 +16,13 @@ class ItemGroupTypeEnumTest extends \PHPUnit_Framework_TestCase
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new ItemGroupTypeEnum();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Browse\Enums\ItemGroupTypeEnum', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new ItemGroupTypeEnum();
     }
 }

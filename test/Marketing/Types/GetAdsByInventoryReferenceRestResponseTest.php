@@ -16,11 +16,6 @@ class GetAdsByInventoryReferenceRestResponseTest extends \PHPUnit_Framework_Test
 {
     private $obj;
 
-    protected function setUp()
-    {
-        $this->obj = new GetAdsByInventoryReferenceRestResponse();
-    }
-
     public function testCanBeCreated()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\GetAdsByInventoryReferenceRestResponse', $this->obj);
@@ -29,5 +24,10 @@ class GetAdsByInventoryReferenceRestResponseTest extends \PHPUnit_Framework_Test
     public function testExtendsAds()
     {
         $this->assertInstanceOf('\DTS\eBaySDK\Marketing\Types\Ads', $this->obj);
+    }
+
+    protected function setUp()
+    {
+        $this->obj = new GetAdsByInventoryReferenceRestResponse();
     }
 }
