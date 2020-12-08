@@ -12,13 +12,13 @@
             "homepage": "http://davidtsadler.com"
         },
         {
-            "name": "Michael Spahn",
-            "email": "misha@polargold.de",
-            "homepage": "http://polargold.de"
+            "name": "Ahmed Ateeq",
+            "email": "ahmed@on5.io",
+            "homepage": "https://on5.io"
         }
     ],
     "support": {
-        "issues": "https://github.com/polargold/ebay-sdk-php/issues"
+        "issues": "https://github.com/aa-aahmed/ebay-sdk-php/issues"
     },
     "require": {
         "php": ">=5.5",
