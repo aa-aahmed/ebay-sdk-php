@@ -1,6 +1,6 @@
 {
-    "name": "polargold/ebay-sdk-php",
-    "description": "An eBay SDK for PHP. Use the eBay API in your PHP projects.",
+    "name": "aa-aahmed/ebay-sdk-php",
+    "description": "An eBay SDK for PHP. Use the eBay API in your PHP projects. Compatible with PHP 7",
     "keywords": ["ebay", "api", "sdk"],
     "homepage": "http://devbay.net/",
     "type": "library",
